@@ -1,10 +1,5 @@
 angular.module('myApp', ['ui.router', 'ngCookies']).config(function($stateProvider, $urlRouterProvider){
-  var initState = function() {
-    $state.go('page1');
-  };
-
-  $urlRouterProvider.otherwise('note');
-
+  $urlRouterProvider.otherwise('page1');
   $stateProvider
     .state('page1', {
       url: '/page1',
@@ -23,9 +18,9 @@ angular.module('myApp', ['ui.router', 'ngCookies']).config(function($stateProvid
         console.log("-----enter page2------");
       }
     })
-    .state('note', {
-      url: '/note',
-      templateUrl:"view/note.html",
+    .state('page3', {
+      url: '/page3',
+      templateUrl:"view/page3.html",
       cache: true,
       controller: 'NoteController'
     });

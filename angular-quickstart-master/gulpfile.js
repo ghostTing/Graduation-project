@@ -145,7 +145,8 @@ gulp.task('sync', function () {
 
     browserSync.init(files, {
         server: {
-            baseDir: './'
+            baseDir: './',
+            index:'/login.html'
         }
     })
 });
