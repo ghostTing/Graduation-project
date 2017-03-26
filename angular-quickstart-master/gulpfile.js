@@ -140,14 +140,14 @@ gulp.task('sync', function () {
         './view/*.html',
         './style/**/*.css',
         './js/**/*.js',
-        './static_pages/*.html'
+        './static_pages/*.html',
     ];
 
     browserSync.init(files, {
         server: {
             baseDir: './',
             index:'/login.html'
-        }
+        },
     })
 });
 
@@ -159,6 +159,7 @@ gulp.task('sass', function () {
 });
 
 //watch
+gulp.watch("*.html").on('change', browserSync.reload);
 gulp.task('watch', function () {
     gulp.watch('src/sass/*.scss', ['sass']);
 });
