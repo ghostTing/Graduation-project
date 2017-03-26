@@ -1,6 +1,6 @@
 angular.module('myApp', ['ui.router', 'ngCookies']).config(function($stateProvider, $urlRouterProvider){
   var initState = function() {
-    $state.go('note');
+    $state.go('page1');
   };
 
   $urlRouterProvider.otherwise('note');
