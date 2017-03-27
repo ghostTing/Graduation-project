@@ -1,0 +1,10 @@
+.container{
+    padding: 20px;
+}
+.upload-area{
+    width: 250px;
+    border: 1px solid #e3e3ed;
+    margin: 0 auto;
+}
+input[type=file]{
+}

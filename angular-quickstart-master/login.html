@@ -9,54 +9,57 @@
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.css">
     <link rel="stylesheet" href="style/common/common.css">
     <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/underscore/underscore.js"></script>
     <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
-    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="bower_components/angular-cookies/angular-cookies.js"></script>
 </head>
 <body >
-    <div class="login-container p-10 br-4 card-shadow">
-        <div class="logo"></div>
-        <!--切换登录和注册tab页-->
-        <ul class="nav nav-tabs">
-            <li role="presentation" class="login-tab active"><a href="javascript:">登录</a></li>
-            <li role="presentation" class="register-tab"><a href="javascript:">注册</a></li>
-        </ul>
-        <!--登录表单-->
-        <form class="login-form pb-10">
-            <div class="form-group">
-                <label for="userName">用户名</label>
-                <input type="email" class="form-control" id="userName" placeholder="Email">
-            </div>
-            <div class="form-group">
-                <label for="password">密码</label>
-                <input type="password" class="form-control" id="password" placeholder="Password">
-            </div>
-            <div class="checkbox">
-                <label>
-                    <input type="checkbox"> 记住我
-                </label>
-            </div>
-            <div class="btn btn-block btn-primary login-btn">登录</div>
-        </form>
-        <!--注册表单-->
-        <form class="register-form pb-10 dn">
-            <div class="form-group">
-                <label for="userName">用户名</label>
-                <input type="email" class="form-control" id="resUserName" placeholder="Email">
-            </div>
-            <div class="form-group">
-                <label for="password">密码</label>
-                <input type="password" class="form-control" id="resPassword" placeholder="Password">
-            </div>
-            <div class="form-group">
-                <label for="password">确认密码</label>
-                <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm Password">
-            </div>
-            <div class="btn btn-block btn-primary register-btn">完成注册</div>
-        </form>
+    <div class="cover">
+        <div class="login-container p-10 br-4 card-shadow">
+            <div class="logo"></div>
+            <!--切换登录和注册tab页-->
+            <ul class="nav nav-tabs">
+                <li role="presentation" class="login-tab active"><a href="javascript:">登录</a></li>
+                <li role="presentation" class="register-tab"><a href="javascript:">注册</a></li>
+            </ul>
+            <!--登录表单-->
+            <form class="login-form pb-10">
+                <div class="form-group">
+                    <label for="userName">用户名</label>
+                    <input type="email" class="form-control" id="userName" placeholder="Email">
+                </div>
+                <div class="form-group">
+                    <label for="password">密码</label>
+                    <input type="password" class="form-control" id="password" placeholder="Password">
+                </div>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox"> 记住我
+                    </label>
+                </div>
+                <div class="btn btn-block btn-primary login-btn">登录</div>
+            </form>
+            <!--注册表单-->
+            <form class="register-form pb-10 dn">
+                <div class="form-group">
+                    <label for="userName">用户名</label>
+                    <input type="email" class="form-control" id="resUserName" placeholder="Email">
+                </div>
+                <div class="form-group">
+                    <label for="password">密码</label>
+                    <input type="password" class="form-control" id="resPassword" placeholder="Password">
+                </div>
+                <div class="form-group">
+                    <label for="password">确认密码</label>
+                    <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm Password">
+                </div>
+                <div class="btn btn-block btn-primary register-btn">完成注册</div>
+            </form>
+        </div>
     </div>
+
     <script type="text/javascript" src="js/login.js"></script>
 </body>
 </html>
