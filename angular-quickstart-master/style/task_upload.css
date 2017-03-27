@@ -1,10 +1,21 @@
 .container{
     padding: 20px;
+    background: url("../img/task_upload/task_upload_bg.jpg") no-repeat #eeeeee;
 }
+/*上传文件部分*/
 .upload-area{
-    width: 250px;
-    border: 1px solid #e3e3ed;
-    margin: 0 auto;
+    padding: 20px 40px;
 }
-input[type=file]{
+.file-type-tip{
+    background: #eeeeee;
+}
+.card-container{
+    margin: 0 auto;
+    width: 500px;
+    background-color: #FFFFFF;
+    border-radius: 4px;
+}
+.card-b-bar{
+    width: 100%;
+    background: #2980B9;
 }
