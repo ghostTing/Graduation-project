@@ -258,6 +258,9 @@
 .bg-ccc{
     background-color:#cccccc;
 }
+.bg-d7{
+    background-color: #d7d7d7;
+}
 /*字体大小 */
 .fs-12{
     font-size: 12px;
@@ -342,6 +345,9 @@
 .fc-fe0000{
     color:#fe0000;
 }
+.fc-9c9c9c{
+    color: #9c9c9c;
+}
 /*【垂直居中】，在position：absolute;float:left(right);下失效，故reset*/
 .vertical-middle{position: static !important;float: none !important; display: table-cell;vertical-align: middle;}
 /*use for angular*/
@@ -383,6 +389,31 @@ select, textarea, input[type="text"],input[type="tel"],input[type="number"]{
     outline: none;
     resize: none;
 }
+/*边框圆角*/
+.br-4{
+    border-radius: 4px;
+}
+.br-2{
+    border-radius: 2px;
+}
+/*边框样式*/
+.b-s-c7{
+    border: 1px solid #c7c7c7;
+}
+.b-d-c7{
+    border: 1px dashed #c7c7c7;
+}
+/*字体加粗*/
+.fw-700{
+    font-weight: 700;
+}
+.fw-600{
+    font-weight: 600;
+}
+.fw-500{
+    font-weight: 500;
+}
+/*以下是本项目定制的样式*/
 .card-shadow{
     -webkit-box-shadow: 6px 6px 5px rgba(150,150,150,0.5);
     -moz-box-shadow:  6px 6px 5px rgba(150,150,150,0.5);
@@ -393,9 +424,32 @@ select, textarea, input[type="text"],input[type="tel"],input[type="number"]{
     -moz-box-shadow:  0px 6px 5px #cacacc;
     box-shadow: 0px 6px 5px #cacacc;
 }
-.br-4{
+/*苹果窗口样式*/
+.apple-card-container{
+    background-color: #FFFFFF;
     border-radius: 4px;
+    border: 1px solid #c7c7c7;
 }
-.br-2{
-    border-radius: 2px;
+.apple-card-t-bar{
+    width: 100%;
+    background: #d7d7d7;
+    height: 30px;
+    line-height: 30px;
 }
+.apple-circle{
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-left: 6px;
+}
+.apple-circle-red{
+    background-color: #f5745d;
+}
+.apple-circle-yellow{
+    background-color: #f8f856;
+}
+.apple-circle-green{
+    background-color: #3fe395;
+}
+/*苹果窗口样式end*/

@@ -19,7 +19,8 @@
                 templateUrl:"view/content_produce.html",
                 controller: 'contentProduceController'
             }
-        }
+        },
+        API_URL:' http://localhost:3000'
     };
     window.BASIC_DATA=BASIC_DATA;
 })();
