@@ -1,7 +1,6 @@
 .container{
+    padding-top: 20px;
     width: 100%;
-    padding: 20px;
-    background:#eeeeee;
 }
 /*上传文件部分*/
 .upload-area{
@@ -30,6 +29,33 @@
     width: 100%;
     height: 100%;
     background-color: #c7c7c7;
+}
+/*进入任务上传页面导航*/
+.enter-upload{
+    width: 250px;
+    height: 60px;
+    line-height: 60px;
+    font-size: 24px;
+    margin-bottom: 20px;
+    margin-top: 10px;
+    cursor: pointer;
+    text-align: center;
+    padding: 0 10px;
+    display: inline-block;
+    color: #fff;
+    border: 1px solid #0cbe93;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    background: #0bd2a1;
+    background: linear-gradient(#21dcae 0,#0bd2a1 55%,#0cbe93 100%);
+    background: -webkit-linear-gradient(#21dcae 0,#0bd2a1 55%,#0cbe93 100%);
+}
+.enter-upload:hover{
+    color: #fff;
+    background: #0bd2a1;
+    background: linear-gradient(#0bd2a1 0,#0bc89a 55%,#0cbf93 100%);
+    background: -webkit-linear-gradient(#0bd2a1 0,#0bc89a 55%,#0cbf93 100%);
 }
 /*任务列表*/
 .task-list thead{

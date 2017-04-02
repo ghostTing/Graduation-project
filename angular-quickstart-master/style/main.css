@@ -7,7 +7,7 @@ body {
     height: 100%;
     width: 100%;
     background: #f7f7f7;
-    line-height: 1.4em;
+    line-height: 1.5em;
     margin: 0 auto;
     padding-top: 50px;
 }
@@ -17,10 +17,18 @@ body {
     background: url("../img/login/logo.png") no-repeat center center;
     background-size: contain;
 }
+.navbar-container{
+    width: 1000px;
+    margin: 0 auto;
+}
+.module-name{
+    font-size: 14px;
+    font-weight: bold;
+    color: #666666;
+    font-family: "华文楷体","Helvetica Neue", Helvetica, Arial, sans-serif;
+}
 /*子页面容器*/
 .view-container{
     width: 1000px;
     margin: 0 auto 20px;
-    padding: 20px;
-    background: #FFFFFF;
 }

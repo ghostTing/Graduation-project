@@ -1,0 +1,51 @@
+<link rel="stylesheet" href="../style/task_upload.css">
+<link href="../bower_components/jquery.filer/css/jquery.filer.css" type="text/css" rel="stylesheet" />
+<link href="../bower_components/jquery.filer/css/themes/jquery.filer-dragdropbox-theme.css" type="text/css" rel="stylesheet" />
+    <div class="container">
+        <div class="apple-card-container item-shadow upload-container">
+            <div class="apple-card-t-bar">
+                <i class="apple-circle apple-circle-red"></i>
+                <i class="apple-circle apple-circle-yellow"></i>
+                <i class="apple-circle apple-circle-green"></i>
+            </div>
+            <div class="upload-area">
+                <h4 class="upload-tip fc-555">
+                    <span class="glyphicon glyphicon-folder-open mr-15"></span>点击下面输入框上传源文件
+                </h4>
+                <p class="file-type-tip p-10 br-4 fc-666">
+                    <span class="glyphicon glyphicon-exclamation-sign mr-5"></span>温馨提示：支持word，JPG，JPEG，PNG，RAR，ZIP文件类型的上传，可多选。选择要上传的所有文件后点击提交按钮完成上传
+                </p>
+                <form action="" method="post" enctype="multipart/form-data">
+                    <input type="file" name="files[]" id="filer_input" multiple="multiple">
+                    <input type="submit" value="Submit" class="btn btn-success">
+                </form>
+            </div>
+
+        </div>
+        <div class="resources-preview mt-20">
+            <ul class="tc">
+                <li class="resources-item dib">
+                    <div class="resources-img">
+
+                    </div>
+                </li>
+                <li class="resources-item dib">
+                    <div class="resources-img">
+
+                    </div>
+                </li>
+                <li class="resources-item dib">
+                    <div class="resources-img">
+
+                    </div>
+                </li>
+                <li class="resources-item dib">
+                    <div class="resources-img">
+
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+<!--injiect:plugJS-->
+<script src="../bower_components/jquery.filer/js/jquery.filer.min.js"></script>

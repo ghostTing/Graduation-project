@@ -1,7 +1,3 @@
-body{
-    background:url("../img/login/login_simple_bg.jpg") no-repeat;
-    background-size: cover;
-}
 .login-container{
     margin:100px auto 0;
     width: 340px;
@@ -23,3 +19,11 @@ body{
 .login-form,.register-form{
     overflow: hidden;
 }
+
+/*hover样式*/
+/*
+ color: #259;
+    background: #eff6fa;
+    border-radius: 3px;
+    text-decoration: none;
+    */

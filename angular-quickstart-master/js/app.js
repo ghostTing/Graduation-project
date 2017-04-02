@@ -8,6 +8,12 @@
                 cache: true,
                 controller: BASIC_DATA.routerConfig.taskUpload.controller
             })
+            .state(BASIC_DATA.routerConfig.taskUpload.childrenPage.resourceUpload.state, {
+                url: BASIC_DATA.routerConfig.taskUpload.childrenPage.resourceUpload.url,
+                templateUrl: BASIC_DATA.routerConfig.taskUpload.childrenPage.resourceUpload.templateUrl,
+                cache:true,
+                controller: BASIC_DATA.routerConfig.taskUpload.childrenPage.resourceUpload.controller
+            })
             .state(BASIC_DATA.routerConfig.contentProduce.state, {
                 url: BASIC_DATA.routerConfig.contentProduce.url,
                 templateUrl:BASIC_DATA.routerConfig.contentProduce.templateUrl,
