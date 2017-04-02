@@ -1,8 +1,4 @@
 /********************元素展示**************************/
-/*a标签hover*/
-a:hover{
-    text-decoration: none;
-}
 /*隐藏不占位*/
 .dn {
     display: none !important;
@@ -364,7 +360,7 @@ a:hover{
     display: -moz-box;		 /* OLD - Firefox 19- (buggy but mostly works) */
     display: -ms-flexbox;	  /* TWEENER - IE 10 */
     display: -webkit-flex;	 /* NEW - Chrome */
-    display: box;			  /* OLD - Android 4.4- */
+    	  /* OLD - Android 4.4- */
 }
 .flex-box-auto{
     -webkit-box-flex: 1;	  /* OLD - iOS 6-, Safari 3.1-6 */

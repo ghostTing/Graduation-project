@@ -22,7 +22,7 @@
             </div>
 
         </div>
-        <div class="resources-preview mt-20">
+        <div class="resources-preview dn mt-20">
             <ul class="tc">
                 <li class="resources-item dib">
                     <div class="resources-img">
@@ -45,6 +45,23 @@
                     </div>
                 </li>
             </ul>
+        </div>
+        <div class="apple-card-container mt-20">
+            <div class="apple-card-t-bar">
+                <i class="apple-circle apple-circle-red"></i>
+                <i class="apple-circle apple-circle-yellow"></i>
+                <i class="apple-circle apple-circle-green"></i>
+            </div>
+            <div class="paper-info">
+                <label for="paperType" class="label-for-select">试题类型：</label>
+                <select name="paperType" class="paper-basic-data" id="paperType" ng-init="selectedType=paperType[0]" ng-options="item.value for item in paperType" ng-model="selectedType" ng-change="viewController.paperType_change(selectedType)"></select>
+                <label for="year" class="label-for-select">年份：</label>
+                <select name="year" class="paper-basic-data" id="year" ng-init="selectedYear=year[0]" ng-options="item for item in year" ng-model="selectedYear" ng-change="viewController.year_change(selectedYear)"></select>
+                <label for="subject" class="label-for-select">科目：</label>
+                <select name="subject" class="paper-basic-data" id="subject" ng-init="selectedSubject=subject[0]" ng-options="item.value for item in subject" ng-model="selectedSubject" ng-change="viewController.subject_change(selectedSubject)"></select>
+                <label for="grade" class="label-for-select">年级：</label>
+                <select name="grade" class="paper-basic-data" id="grade" ng-init="selectedGrade=grade[0]" ng-options="item.value for item in grade" ng-model="selectedGrade" ng-change="viewController.grade_change(selectedGrade)"></select>
+            </div>
         </div>
     </div>
 <!--injiect:plugJS-->

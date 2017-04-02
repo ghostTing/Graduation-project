@@ -4,3 +4,10 @@ a{
 *{
     box-sizing: border-box;
 }
+/*a标签hover*/
+a:hover{
+    text-decoration: none;
+}
+label{
+    font-weight: normal;
+}

@@ -61,3 +61,16 @@
 .task-list thead{
     font-size: 16px;
 }
+/*资源上传页*/
+.paper-info{
+    padding: 20px;
+}
+.paper-basic-data{
+    padding: 2px 10px;
+    border-radius: 4px;
+    font-size: 14px;
+}
+.label-for-select{
+    font-size: 16px;
+    font-weight: 500;
+}
