@@ -1,0 +1,116 @@
+/*以下是本项目定制的样式*/
+.card-shadow{
+    -webkit-box-shadow: 6px 6px 5px rgba(150,150,150,0.5);
+    -moz-box-shadow:  6px 6px 5px rgba(150,150,150,0.5);
+    box-shadow:  6px 6px 5px rgba(150,150,150,0.5);
+}
+.item-shadow{
+    -webkit-box-shadow: 0px 6px 5px#cacacc;
+    -moz-box-shadow:  0px 6px 5px #cacacc;
+    box-shadow: 0px 6px 5px #cacacc;
+}
+/*苹果窗口样式*/
+.apple-card-container{
+    background-color: #FFFFFF;
+    border-radius: 4px;
+    border: 1px solid #c7c7c7;
+}
+.apple-card-t-bar{
+    width: 100%;
+    background: #d7d7d7;
+    height: 30px;
+    line-height: 30px;
+}
+.apple-circle{
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-left: 6px;
+}
+.apple-circle-red{
+    background-color: #f5745d;
+}
+.apple-circle-yellow{
+    background-color: #f8f856;
+}
+.apple-circle-green{
+    background-color: #3fe395;
+}
+/*苹果窗口样式end*/
+/*滚动条样式*/
+::-webkit-scrollbar{
+    width: 5px;
+    height: 10px;
+}
+::-webkit-scrollbar-track-piece{
+    background-color: #e3e3e3;
+    border-radius: 6px;
+}
+::-webkit-scrollbar-thumb:vertical,::-webkit-scrollbar-thumb:horizontal{
+    background-color: #666666;
+    border-radius: 6px;
+}
+/*滚动条样式end*/
+/*定制的按钮样式*/
+.c-btn-normal{
+    border: 0;
+    cursor: pointer;
+    text-align: center;
+    padding: 0 20px;
+    height: 30px;
+    line-height: 30px;
+    display: inline-block;
+    color: #fff;
+    border: 1px solid #0cbe93;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -o-border-radius: 3px;
+    background: #0bd2a1;
+    background: linear-gradient(#21dcae 0,#0bd2a1 55%,#0cbe93 100%);
+    background: -webkit-linear-gradient(#21dcae 0,#0bd2a1 55%,#0cbe93 100%);
+    background: -moz-linear-gradient(#21dcae 0,#0bd2a1 55%,#0cbe93 100%);
+    background: -o-linear-gradient(#21dcae 0,#0bd2a1 55%,#0cbe93 100%);
+    background: -ms-linear-gradient(#21dcae 0,#0bd2a1 55%,#0cbe93 100%);
+}
+.c-btn-normal:hover{
+    color: #fff;
+    background: #0bd2a1;
+    background: linear-gradient(#0bd2a1 0,#0bc89a 55%,#0cbf93 100%);
+    background: -webkit-linear-gradient(#0bd2a1 0,#0bc89a 55%,#0cbf93 100%);
+    background: -moz-linear-gradient(#0bd2a1 0,#0bc89a 55%,#0cbf93 100%);
+    background: -o-linear-gradient(#0bd2a1 0,#0bc89a 55%,#0cbf93 100%);
+    background: -ms-linear-gradient(#0bd2a1 0,#0bc89a 55%,#0cbf93 100%);
+}
+.c-btn-normal-org {
+    border: 0;
+    cursor: pointer;
+    text-align: center;
+    padding: 0 20px;
+    display: inline-block;
+    color: #fff;
+    height: 30px;
+    line-height: 30px;
+    border: 1px solid #f19100;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -o-border-radius: 3px;
+    background: #ffa51d;
+    background: linear-gradient(#ffa51d 0,#ff9a02 50%,#ff9f0e 100%);
+    background: -webkit-linear-gradient(#ffa51d 0,#ff9a02 50%,#ff9f0e 100%);
+    background: -moz-linear-gradient(#ffa51d 0,#ff9a02 50%,#ff9f0e 100%);
+    background: -ms-linear-gradient(#ffa51d 0,#ff9a02 50%,#ff9f0e 100%);
+    background: -o-linear-gradient(#ffa51d 0,#ff9a02 50%,#ff9f0e 100%);
+}
+.c-btn-normal-org:hover {
+    color: #fff;
+    background: #f99f16;
+    background: linear-gradient(#f99f16 0,#ef9918 100%);
+    background: -webkit-linear-gradient(#f99f16 0,#ef9918 100%);
+    background: -moz-linear-gradient(#f99f16 0,#ef9918 100%);
+    background: -ms-linear-gradient(#f99f16 0,#ef9918 100%);
+    background: -o-linear-gradient(#f99f16 0,#ef9918 100%);
+}
+/*定制的按钮样式end*/

@@ -19,6 +19,9 @@
 .login-form,.register-form{
     overflow: hidden;
 }
+.login-btn,.register-btn{
+    width: 100%;
+}
 
 /*hover样式*/
 /*
