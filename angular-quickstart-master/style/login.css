@@ -1,5 +1,5 @@
 .login-container{
-    margin:100px auto 0;
+    margin:50px auto 0;
     width: 340px;
     background-color: #FFFFFF;
     border: 1px solid #eeeeee;
@@ -21,6 +21,34 @@
 }
 .login-btn,.register-btn{
     width: 100%;
+}
+.role-select{
+    display: inline-block;
+    width: 70px;
+    height: 28px;
+    line-height: 28px;
+    text-align: center;
+    border: 1px solid #c7c7c7;
+    border-radius: 4px;
+    cursor: pointer;
+    color: #f99f16;
+}
+.role-select:hover{
+    color: #FFFFFF;
+    background-color: #f99f16;
+    border: 1px solid #f99f16;
+}
+.role-select.active{
+    color: #FFFFFF;
+    background-color: #0bc89a;
+    border: 1px solid #0bc89a;
+}
+.role-select-tip{
+    color: #f99f16;
+}
+#userName,#regUserName{
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
 }
 
 /*hover样式*/

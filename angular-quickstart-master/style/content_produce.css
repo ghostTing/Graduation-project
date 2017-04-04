@@ -1,0 +1,27 @@
+.container{
+    padding-top: 20px;
+    width: 100%;
+}
+.paper-file-container,.paper-info-container,.editor-area{
+    width: 750px;
+}
+.resources-preview{
+    width: 100%;
+}
+.resources-item{
+    width: 120px;
+    height: 160px;
+    padding: 8px;
+    background-color: #FFFFFF;
+    margin-right: 40px;
+    border-radius: 2px;
+}
+.resources-img{
+    width: 100%;
+    height: 100%;
+    background-color: #c7c7c7;
+}
+/*试卷基础信息*/
+.paper-info-table{
+    margin: 0 auto;
+}

@@ -1,5 +1,5 @@
 (function () {
-    angular.module('myApp', ['ui.router', 'ngCookies']).config(function($stateProvider, $urlRouterProvider){
+    angular.module('myApp', ['ui.router', 'ngCookies','oitozero.ngSweetAlert']).config(function($stateProvider, $urlRouterProvider){
         $urlRouterProvider.otherwise(BASIC_DATA.routerConfig.taskUpload.state);
         $stateProvider
             .state(BASIC_DATA.routerConfig.taskUpload.state, {
