@@ -64,16 +64,24 @@
                     <label for="subject" class="label-for-select">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;科目：</label>
                     <select name="subject" class="paper-basic-data" id="subject" ng-init="selectedSubject=subject[0]" ng-options="item.value for item in subject" ng-model="selectedSubject" ng-change="viewController.subject_change(selectedSubject)"></select>
                 </div>
-                <div class="select-container">
-                    <label for="grade" class="label-for-select">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;年级：</label>
+                <div class="select-container" ng-if="showGradeSelect">
+                    <label for="grade" class="label-for-select" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;年级：</label>
                     <select name="grade" class="paper-basic-data" id="grade" ng-init="selectedGrade=grade[0]" ng-options="item.value for item in grade" ng-model="selectedGrade" ng-change="viewController.grade_change(selectedGrade)"></select>
                 </div>
                 <div class="select-container">
+                    <label for="province" class="label-for-select">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;地区：</label>
+                    <select name="province" class="paper-basic-data" id="province"
+                            ng-options="item.province for item in province" ng-model="selectedProvince" ng-change="viewController.province_change(selectedProvince)"></select>
+                    <select name="city" class="paper-basic-data" id="city" ng-show="ProvinceIsSelected"
+                            ng-options="item.city for item in city" ng-model="selectedCity" ng-change="viewController.city_change(selectedCity)"></select>
+                </div>
+                <div class="select-container" ng-if="showSchoolInput">
                     <label for="school" class="label-for-select">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;学校：</label>
-                    <input type="text" name="school" id="school" class="form-control dib" placeholder="请输入学校全称">
+                    <input type="text" name="school" id="school" class="form-control dib" placeholder="请输入学校全称"
+                           ng-model="paperInfo.school">
                 </div>
                 <div class="bottom-btn">
-                    <button class="c-btn-normal fr fs-14 mt-10">
+                    <button class="c-btn-normal fr fs-14 mt-10" ng-click="viewController.sumitPaperBasicInfo()">
                         进入制作
                     </button>
                 </div>

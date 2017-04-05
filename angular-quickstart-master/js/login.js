@@ -5,21 +5,30 @@ setTimeout(function () {
 (function () {
     var loginApp=angular.module('loginApp',['oitozero.ngSweetAlert']);
     angular.module('loginApp').controller('loginController',['$scope','SweetAlert',function ($scope,SweetAlert) {
+        declareModel($scope);
         declare($scope,SweetAlert);
         init($scope);
     }]);
+    /*声明和页面交互的model*/
+    function declareModel($scope) {
+        $scope.enterSelected=false;
+        $scope.auditSelected=false;
+        $scope.confirmPassword='';
+        $scope.resUserName='';
+        $scope.regPassword='';
+    }
     function declare($scope,SweetAlert) {
         $scope.viewController={
             /*完成注册*/
             finishReg:function () {
-                if(($scope.enterSelected||$scope.auditSelected)&&$scope.resUserName&&$scope.regPassword&&$scope.confirmPassword){
+                if(($scope.enterSelected||$scope.auditSelected)&&$scope.resUserName.length>=3&&$scope.regPassword.length>=3&&$scope.confirmPassword>=3){
                     if ($scope.regPassword!=$scope.confirmPassword){
                         SweetAlert.swal("两次密码输入不一致", "温馨提示：密码区分大小写！");
                     }
-                }else if(!$scope.resUserName){
-                    SweetAlert.swal("请输入用户名");
-                }else if(!$scope.regPassword){
-                    SweetAlert.swal("请输入密码");
+                }else if(!$scope.resUserName||$scope.resUserName.length<3){
+                    SweetAlert.swal("请输入3位以上的用户名");
+                }else if(!$scope.regPassword||$scope.regPassword.length<3){
+                    SweetAlert.swal("请输入3位以上的密码");
                 }else if(!$scope.confirmPassword){
                     SweetAlert.swal("请确认密码");
                 }else if(!($scope.enterSelected||$scope.auditSelected)){
@@ -45,8 +54,7 @@ setTimeout(function () {
                 window.location='/index.html';
             });
         });
-        $scope.enterSelected=false;
-        $scope.auditSelected=false;
+
     }
 })();
 

@@ -31,7 +31,7 @@
                 controller: 'contentProduceController'
             }
         },
-        API_URL:' http://localhost:3000',
+        API_URL:' http://localhost:8080/question',
         PAPER_TYPE:[
             {
                 code:'',
@@ -39,26 +39,22 @@
             },
             {
                 code:'11',
-                value:'高考真题'
-            },
-            {
-                code:'12',
                 value:'中考真题'
             },
             {
-                code:'13',
+                code:'12',
                 value:'期中考试'
             },
             {
-                code:'14',
+                code:'13',
                 value:'期末考试'
             },
             {
-                code:'15',
+                code:'14',
                 value:'月考'
             },
             {
-                code:'16',
+                code:'15',
                 value:'单元测试'
             }
             ],
