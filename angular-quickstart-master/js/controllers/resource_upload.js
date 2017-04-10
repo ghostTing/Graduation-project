@@ -64,14 +64,36 @@
                     $scope.paperInfo.paperName=$scope.paperInfo.year+$scope.paperInfo.region+$scope.paperInfo.school+$scope.paperInfo.grade.value+$scope.paperInfo.subject.value+$scope.paperInfo.paperType.value;
                 }
                 console.log($scope.paperInfo);
+            },
+            removeConfirm:function () {
+                swal({
+                        title: "Are you sure?",
+                        text: "You will not be able to recover this imaginary file!",
+                        type: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#DD6B55",
+                        confirmButtonText: "Yes, delete it!",
+                        closeOnConfirm: false
+                    },
+                    function(){
+                        swal("Deleted!", "Your imaginary file has been deleted.", "success");
+                    });
             }
         }
     }
     function init($scope,$http) {
         //配置jQuery文件上传插件
-        $('#filer_input').filer({
-            showThumbs:true,
-            addMore:true
+        $('input[name="files"]').fileuploader({
+            extensions:['jpg','jpeg','docx','pdf'],
+            removeConfirmation: false,
+            onSuccess: function(data, item, listEl, parentEl, newInputEl, inputEl, textStatus, jqXHR) {
+                item.html.find('.column-actions').append(
+                    '<a class="fileuploader-action fileuploader-action-remove fileuploader-action-success" title="Remove"><i></i></a>'
+                );
+                setTimeout(function() {
+                    item.html.find('.progress-bar2').fadeOut(400);
+                }, 400);
+            },
         });
         /*获取省份*/
         $http.get(BASIC_DATA.API_URL+'/provinces').then(function (data) {

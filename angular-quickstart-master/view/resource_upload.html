@@ -1,6 +1,5 @@
 <link rel="stylesheet" href="../style/task_upload.css">
-<link href="../bower_components/jquery.filer/css/jquery.filer.css" type="text/css" rel="stylesheet" />
-<link href="../bower_components/jquery.filer/css/themes/jquery.filer-dragdropbox-theme.css" type="text/css" rel="stylesheet" />
+<link rel="stylesheet" href="../plug/fileUploader/jquery.fileuploader.css">
     <div class="container">
         <div class="apple-card-container item-shadow upload-container">
             <div class="apple-card-t-bar">
@@ -15,9 +14,9 @@
                 <p class="file-type-tip p-10 br-4 fc-666">
                     <span class="glyphicon glyphicon-exclamation-sign mr-5"></span>温馨提示：支持word，JPG，JPEG，PNG，RAR，ZIP文件类型的上传，可多选。选择要上传的所有文件后点击提交按钮完成上传
                 </p>
-                <form action="" method="post" enctype="multipart/form-data">
-                    <input type="file" name="files[]" id="filer_input" multiple="multiple">
-                    <input type="submit" value="Submit" class="c-btn-normal">
+                <form action="http://localhost:8080/question" method="post" enctype="multipart/form-data">
+                    <input type="file" name="files">
+                    <input type="submit" class="fileuploader-input-button" style="border: none;">
                 </form>
             </div>
         </div>
@@ -89,4 +88,4 @@
         </div>
     </div>
 <!--injiect:plugJS-->
-<script src="../bower_components/jquery.filer/js/jquery.filer.min.js"></script>
+<script src="../plug/fileUploader/jquery.fileuploader.js"></script>
