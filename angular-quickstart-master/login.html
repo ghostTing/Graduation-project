@@ -27,28 +27,28 @@
                 <div class="logo"></div>
                 <!--切换登录和注册tab页-->
                 <ul class="nav nav-tabs">
-                    <li role="presentation" class="login-tab active"><a href="javascript:">登录</a></li>
-                    <li role="presentation" class="register-tab"><a href="javascript:">注册</a></li>
+                    <li role="presentation" class="login-tab"  ng-class="{'active':whenLogin}" ng-click="whenLogin=true;whenRegister=false;showLoginform=true;showRegisterForm=false;"><a href="javascript:">登录</a></li>
+                    <li role="presentation" class="register-tab" ng-class="{'active':whenRegister}" ng-click="whenRegister=true;whenLogin=false;showRegisterForm=true;showLoginform=false;"><a href="javascript:">注册</a></li>
                 </ul>
                 <!--登录表单-->
-                <form class="login-form pb-10">
+                <form class="login-form pb-10" ng-show="showLoginform">
                     <div class="input-group mb-20 mt-10">
                         <span class="input-group-addon glyphicon glyphicon-user" id="basic-addon1" style="top: 0;"></span>
-                        <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1" id="userName">
+                        <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1" id="userName" ng-model="username">
                     </div>
                     <div class="input-group mb-10">
                         <span class="input-group-addon glyphicon glyphicon-lock" id="basic-addon2" style="top: 0;"></span>
-                        <input type="password" class="form-control" placeholder="Password" aria-describedby="basic-addon2">
+                        <input type="password" class="form-control" placeholder="Password" aria-describedby="basic-addon2" ng-model="password">
                     </div>
                     <div class="checkbox">
                         <label>
                             <input type="checkbox"> 记住我
                         </label>
                     </div>
-                    <div class="c-btn-normal login-btn">登录</div>
+                    <div class="c-btn-normal login-btn" ng-click="viewController.login()">登录</div>
                 </form>
                 <!--注册表单-->
-                <form class="register-form pb-10 dn">
+                <form class="register-form pb-10 ng-hide" ng-show="showRegisterForm">
                     <div class="input-group mb-30 mt-10">
                         <span class="input-group-addon glyphicon glyphicon-user" id="basic-addon3" style="top: 0;"></span>
                         <input type="text" class="form-control" id="regUserName" placeholder="Username" ng-model="resUserName" aria-describedby="basic-addon3">
@@ -64,8 +64,8 @@
                     <div class="form-group">
                         <p class="role-select-tip">请在以下两个角色中选择一个作为你账户的标识</p>
                         <div class="tc">
-                            <span class="role-select mr-30" ng-class="{'active':enterSelected}" ng-click="enterSelected=true;auditSelected=false;">题目录入</span>
-                            <span class="role-select" ng-class="{'active':auditSelected}" ng-click="auditSelected=true;enterSelected=false;">题目审核</span>
+                            <span class="role-select mr-30" ng-class="{'active':enterSelected}" ng-click="enterSelected=true;auditSelected=false;roleCode=1;">题目录入</span>
+                            <span class="role-select" ng-class="{'active':auditSelected}" ng-click="auditSelected=true;enterSelected=false;roleCode=2;">题目审核</span>
                         </div>
                     </div>
                     <div class="c-btn-normal-org register-btn" ng-click="viewController.finishReg()">完成注册</div>

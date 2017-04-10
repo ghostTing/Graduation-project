@@ -35,7 +35,6 @@
             province_change:function (selectedProvince) {
                 if (selectedProvince.id){
                     $scope.paperInfo.region=selectedProvince.province;
-                    $scope.ProvinceIsSelected=true;
                     this.getCities(selectedProvince);
                 }else {
                     $scope.ProvinceIsSelected=false;
@@ -46,7 +45,7 @@
             },
             /*获取城市*/
             getCities:function (selectedProvince) {
-                $http.get(BASIC_DATA.API_URL+'/citis/'+selectedProvince.provinceId).then(function (data) {
+                $http.get(BASIC_DATA.API_URL+'/cities/'+selectedProvince.provinceId).then(function (data) {
                     data.data.unshift({
                         id:'',
                         cityId:'',
@@ -54,6 +53,7 @@
                     });
                     $scope.city=data.data;
                     $scope.selectedCity=$scope.city[0];
+                    $scope.ProvinceIsSelected=true;
                 })
             },
             /*提交试卷基础信息*/
@@ -75,6 +75,7 @@
         });
         /*获取省份*/
         $http.get(BASIC_DATA.API_URL+'/provinces').then(function (data) {
+            console.log(data);
             data.data.unshift({
                 id:'',
                 provinceId:'',
