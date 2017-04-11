@@ -4,9 +4,9 @@ setTimeout(function () {
 },2000)*/
 (function () {
     var loginApp=angular.module('loginApp',['oitozero.ngSweetAlert']);
-    angular.module('loginApp').controller('loginController',['$scope','SweetAlert','$http',function ($scope,SweetAlert,$http) {
+    angular.module('loginApp').controller('loginController',['$scope','SweetAlert','$http','$location',function ($scope,SweetAlert,$http,$location) {
         declareModel($scope);
-        declare($scope,SweetAlert,$http);
+        declare($scope,SweetAlert,$http,$location);
         init($scope);
     }]);
     /*声明和页面交互的model*/
@@ -17,9 +17,9 @@ setTimeout(function () {
         $scope.resUserName='';
         $scope.regPassword='';
     }
-    function declare($scope,SweetAlert,$http) {
+    function declare($scope,SweetAlert,$http,$location) {
         $scope.viewController={
-            /*完成注册*/
+            /*注册前端校验*/
             finishReg:function () {
                 if(($scope.enterSelected||$scope.auditSelected)&&$scope.resUserName.length>=3&&$scope.regPassword.length>=3&&$scope.confirmPassword.length>=3){
                     if ($scope.regPassword!==$scope.confirmPassword){
@@ -37,6 +37,7 @@ setTimeout(function () {
                     SweetAlert.swal("请选择一个角色");
                 }
             },
+            /*注册请求*/
             regRequest:function () {
                 $http({
                     method:'post',
@@ -52,6 +53,7 @@ setTimeout(function () {
                     swal("用户名已存在");
                 })
             },
+            /*登录*/
             login:function () {
                 $http({
                     method:'post',
@@ -60,9 +62,19 @@ setTimeout(function () {
                         password:$scope.password
                     },
                     url:'http://localhost:8080/question/login'
-                }).then(function () {
-
+                }).then(function (data) {
+                    if(data.data=='success'){
+                        window.location='/index.html';
+                    }
+                },function () {
+                    swal("用户名或者密码错误！！");
                 })
+            },
+            /*回车键登录*/
+            keyDownLogin:function ($event) {
+                if ($event.keyCode==13){
+                    $scope.viewController.login();
+                }
             }
         }
     }

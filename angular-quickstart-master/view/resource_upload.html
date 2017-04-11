@@ -14,35 +14,34 @@
                 <p class="file-type-tip p-10 br-4 fc-666">
                     <span class="glyphicon glyphicon-exclamation-sign mr-5"></span>温馨提示：支持word，JPG，JPEG，PNG，RAR，ZIP文件类型的上传，可多选。选择要上传的所有文件后点击提交按钮完成上传
                 </p>
-                <form action="http://localhost:8080/question" method="post" enctype="multipart/form-data">
+                <form name="fileForm"  method="post" action="http://localhost:8080/question/fileupload" enctype="multipart/form-data" target="noJump" ng-submit="viewController.onFileSubmit()">
                     <input type="file" name="files">
                     <input type="submit" class="fileuploader-input-button" style="border: none;">
+                    <iframe  id="noJump" name="noJump" style="display: none;">
+                    </iframe>
                 </form>
             </div>
         </div>
-        <div class="resources-preview dn mt-20">
-            <ul class="tc">
-                <li class="resources-item dib">
-                    <div class="resources-img">
-
-                    </div>
-                </li>
-                <li class="resources-item dib">
-                    <div class="resources-img">
-
-                    </div>
-                </li>
-                <li class="resources-item dib">
-                    <div class="resources-img">
-
-                    </div>
-                </li>
-                <li class="resources-item dib">
-                    <div class="resources-img">
-
-                    </div>
-                </li>
-            </ul>
+        <div class="apple-card-container paper-file-container mt-20 mb-20">
+            <div class="apple-card-t-bar pl-20 fs-14">
+                试卷信息源
+            </div>
+            <div class="resources-preview por">
+                <ul class="images tc">
+                    <li class="resources-item dib">
+                        <img src="../img/login/login_simple_bg.jpg" class="resources-img">
+                    </li>
+                    <li class="resources-item dib">
+                        <img src="../img/login/login_simple_bg.jpg" class="resources-img">
+                    </li>
+                    <li class="resources-item dib">
+                        <img src="../img/login/login_simple_bg.jpg" class="resources-img">
+                    </li>
+                    <li class="resources-item dib">
+                        <img src="../img/login/login_simple_bg.jpg" class="resources-img">
+                    </li>
+                </ul>
+            </div>
         </div>
         <div class="apple-card-container mt-20">
             <div class="apple-card-t-bar">
@@ -86,6 +85,5 @@
                 </div>
             </div>
         </div>
-    </div>
 <!--injiect:plugJS-->
 <script src="../plug/fileUploader/jquery.fileuploader.js"></script>

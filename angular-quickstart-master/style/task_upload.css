@@ -16,6 +16,9 @@
 /*源文件预览*/
 .resources-preview{
     width: 100%;
+    background: url("../img/task_upload/fileCheck_bg.jpg") no-repeat center;
+    background-size: cover;
+    padding: 20px;
 }
 .resources-item{
     width: 140px;
@@ -24,11 +27,11 @@
     background-color: #FFFFFF;
     margin-right: 40px;
     border-radius: 2px;
+    text-align: center;
 }
 .resources-img{
-    width: 100%;
-    height: 100%;
-    background-color: #c7c7c7;
+    width: 126px;
+    height: 166px;
 }
 /*进入任务上传页面导航*/
 .enter-upload{
@@ -85,4 +88,14 @@
 }
 .bottom-btn{
     height: 40px;
+}
+/*插件的订制样式*/
+.viewer-container{
+    width: 1000px;
+    height: 400px;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.viewer-transition{
 }

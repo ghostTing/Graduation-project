@@ -2,12 +2,12 @@
  * Created by Administrator on 2017/4/2.
  */
 (function () {
-    angular.module('myApp').controller('resourceUploadController',['$scope','$http','$location',function ($scope,$http,$location) {
-        declare($scope,$http);
+    angular.module('myApp').controller('resourceUploadController',['$scope','$http','$location','$timeout',function ($scope,$http,$location,$timeout) {
+        declare($scope,$http,$timeout);
         declareModel($scope);
         init($scope,$http);
     }]);
-    function declare($scope,$http) {
+    function declare($scope,$http,$timeout) {
         $scope.viewController={
             paperType_change:function (selectedType) {
                 if (selectedType.code==11){
@@ -65,35 +65,23 @@
                 }
                 console.log($scope.paperInfo);
             },
-            removeConfirm:function () {
-                swal({
-                        title: "Are you sure?",
-                        text: "You will not be able to recover this imaginary file!",
-                        type: "warning",
-                        showCancelButton: true,
-                        confirmButtonColor: "#DD6B55",
-                        confirmButtonText: "Yes, delete it!",
-                        closeOnConfirm: false
-                    },
-                    function(){
-                        swal("Deleted!", "Your imaginary file has been deleted.", "success");
-                    });
+            /*文件提交后*/
+            onFileSubmit:function () {
+
             }
         }
     }
     function init($scope,$http) {
         //配置jQuery文件上传插件
         $('input[name="files"]').fileuploader({
-            extensions:['jpg','jpeg','docx','pdf'],
+            extensions:['jpg','jpeg','docx','pdf','png'],
             removeConfirmation: false,
-            onSuccess: function(data, item, listEl, parentEl, newInputEl, inputEl, textStatus, jqXHR) {
-                item.html.find('.column-actions').append(
-                    '<a class="fileuploader-action fileuploader-action-remove fileuploader-action-success" title="Remove"><i></i></a>'
-                );
-                setTimeout(function() {
-                    item.html.find('.progress-bar2').fadeOut(400);
-                }, 400);
-            },
+        });
+        /*配置查看图片大图插件*/
+        $('.images').viewer({
+            navbar:false,
+            rotatable:false,
+
         });
         /*获取省份*/
         $http.get(BASIC_DATA.API_URL+'/provinces').then(function (data) {
