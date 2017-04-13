@@ -2,9 +2,9 @@
  * Created by Administrator on 2017/3/27.
  */
 (function () {
-    angular.module('myApp').controller('indexController',['$scope','$location','SweetAlert',function ($scope,$location,SweetAlert) {
+    angular.module('myApp').controller('indexController',['$scope','$location','SweetAlert','$cookieStore',function ($scope,$location,SweetAlert,$cookieStore) {
         declare($scope,$location);
-        init($scope,SweetAlert);
+        init($scope,SweetAlert,$cookieStore);
     }]);
         function declare($scope,$location) {
             $scope.viewController={
@@ -17,7 +17,7 @@
             }
             }
         }
-        function init($scope,SweetAlert) {
+        function init($scope,SweetAlert,$cookieStore) {
             $scope.module=BASIC_DATA.routerConfig;
             $scope.module.taskUpload.isCurrentPage=true;
         }

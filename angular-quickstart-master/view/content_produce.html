@@ -6,26 +6,18 @@
             试卷信息源
         </div>
         <div class="resources-preview">
-            <ul class="tc">
+            <ul class="images tc">
                 <li class="resources-item dib">
-                    <div class="resources-img">
-
-                    </div>
+                    <img src="../img/task_upload/mmexport1492095894396.jpg" class="resources-img">
                 </li>
                 <li class="resources-item dib">
-                    <div class="resources-img">
-
-                    </div>
+                    <img src="../img/login/login_simple_bg.jpg" class="resources-img">
                 </li>
                 <li class="resources-item dib">
-                    <div class="resources-img">
-
-                    </div>
+                    <img src="../img/login/login_simple_bg.jpg" class="resources-img">
                 </li>
                 <li class="resources-item dib">
-                    <div class="resources-img">
-
-                    </div>
+                    <img src="../img/login/login_simple_bg.jpg" class="resources-img">
                 </li>
             </ul>
         </div>
@@ -36,9 +28,9 @@
             试卷基础信息
         </div>
         <div class="paper-basic-info tc p-10">
-            <div class="paper-name fs-16 mb-10">2013-2014东莞市八年级数学上学期期末统考试题</div>
-            <table class="paper-info-table" width="500">
-                <tr class="tl mb-10">
+            <div class="paper-name fs-20 mb-20">2013-2014东莞市八年级数学上学期期末统考试题</div>
+            <table class="paper-info-table fs-16" width="700">
+                <tr class="tl mb-20">
                     <td>年份：</td>
                     <td>2015</td>
                     <td>地区：</td>
@@ -58,7 +50,20 @@
         </div>
     </div>
     <!--试卷编辑区-->
-    <div class="editor-area b-s-c7">
-
+    <div class="editor-area">
+        <div class="question-headline">
+            <div class="headline-title">
+                <div class="input-group">
+                    <span class="input-group-addon " id="basic-addon4" style="top: 0;border-radius: 0;">一</span>
+                    <input type="text" class="form-control" placeholder="请输入标题，如：选择题" aria-describedby="basic-addon4">
+                </div>
+            </div>
+            <div class="question-item por" style="min-height:200px;width:800px" ng-click="viewController.showUeditor($event)">
+                <span class="question-index poa">1</span>
+                <div id="showContent" ng-bind-html="html" ng-show="!isEditing"></div>
+                <script id="container" name="content" type="text/plain" style="height:144px;width:100%;">
+                </script>
+            </div>
+        </div>
     </div>
 </div>

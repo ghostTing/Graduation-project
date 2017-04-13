@@ -3,9 +3,18 @@
     width: 100%;
 }
 .paper-file-container,.paper-info-container,.editor-area{
-    width: 750px;
+    width: 800px;
+}
+.paper-info-container{
+    margin-top: 270px;
+}
+.paper-file-container{
+    position: fixed;
+    height: 250px;
+    background: url("../img/task_upload/fileCheck_bg.jpg") no-repeat center;
 }
 .resources-preview{
+    padding-top: 20px;
     width: 100%;
 }
 .resources-item{
@@ -15,6 +24,7 @@
     background-color: #FFFFFF;
     margin-right: 40px;
     border-radius: 2px;
+    position: relative;
 }
 .resources-img{
     width: 100%;
@@ -24,4 +34,42 @@
 /*试卷基础信息*/
 .paper-info-table{
     margin: 0 auto;
+}
+.paper-info-table td{
+    padding: 5px;
+}
+/*试卷编辑区*/
+.question-item.noBorder{
+    border: none;
+}
+.question-item{
+    background-color: #ffffff;
+    border: 1px solid #c7c7c7;
+    border-top: none;
+}
+.question-index{
+    right: 0;
+    bottom: 0;
+    display: inline-block;
+    width: 35px;
+    height: 30px;
+    line-height: 30px;
+    font-size: 16px;
+    border-left: 1px solid #c7c7c7;
+    border-top: 1px solid #c7c7c7;
+    text-align: center;
+    background: #0cbe93;
+    color: #fff;
+    z-index: 1000;
+}
+#showContent{
+    padding: 20px;
+}
+/*插件的订制样式*/
+.viewer-container{
+    width: 800px;
+    height: 300px;
+    position: absolute;
+    top: 0;
+    left: 0;
 }

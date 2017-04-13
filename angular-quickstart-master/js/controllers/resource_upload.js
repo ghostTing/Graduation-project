@@ -67,7 +67,11 @@
             },
             /*文件提交后*/
             onFileSubmit:function () {
-
+                $timeout(function(){
+                    $http.get(BASIC_DATA.API_URL+'/getFileUpload').then(function (data) {
+                        console.log(data.data);
+                    })
+                },3000)
             }
         }
     }
@@ -75,13 +79,12 @@
         //配置jQuery文件上传插件
         $('input[name="files"]').fileuploader({
             extensions:['jpg','jpeg','docx','pdf','png'],
-            removeConfirmation: false,
+            removeConfirmation: false
         });
         /*配置查看图片大图插件*/
         $('.images').viewer({
             navbar:false,
-            rotatable:false,
-
+            rotatable:false
         });
         /*获取省份*/
         $http.get(BASIC_DATA.API_URL+'/provinces').then(function (data) {

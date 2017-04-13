@@ -3,11 +3,11 @@ setTimeout(function () {
     window.location='/index.html'
 },2000)*/
 (function () {
-    var loginApp=angular.module('loginApp',['oitozero.ngSweetAlert']);
-    angular.module('loginApp').controller('loginController',['$scope','SweetAlert','$http','$location',function ($scope,SweetAlert,$http,$location) {
+    var loginApp=angular.module('loginApp',['oitozero.ngSweetAlert','ngCookies']);
+    angular.module('loginApp').controller('loginController',['$scope','SweetAlert','$http','$location','$cookieStore',function ($scope,SweetAlert,$http,$location,$cookieStore) {
         declareModel($scope);
-        declare($scope,SweetAlert,$http,$location);
-        init($scope);
+        declare($scope,SweetAlert,$http,$location,$cookieStore);
+        init($scope,$cookieStore);
     }]);
     /*声明和页面交互的model*/
     function declareModel($scope) {
@@ -17,7 +17,7 @@ setTimeout(function () {
         $scope.resUserName='';
         $scope.regPassword='';
     }
-    function declare($scope,SweetAlert,$http,$location) {
+    function declare($scope,SweetAlert,$http,$location,$cookieStore) {
         $scope.viewController={
             /*注册前端校验*/
             finishReg:function () {
@@ -64,6 +64,8 @@ setTimeout(function () {
                     url:'http://localhost:8080/question/login'
                 }).then(function (data) {
                     if(data.data=='success'){
+                        $cookieStore.put("username",$scope.username );
+                        $cookieStore.put("password",$scope.password );
                         window.location='/index.html';
                     }
                 },function () {
@@ -78,7 +80,7 @@ setTimeout(function () {
             }
         }
     }
-    function init($scope) {
+    function init($scope,$cookieStore) {
         $scope.whenLogin=true;
         $scope.showLoginform=true;
     }

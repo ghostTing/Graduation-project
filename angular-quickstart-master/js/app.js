@@ -1,5 +1,7 @@
 (function () {
-    angular.module('myApp', ['ui.router', 'ngCookies','oitozero.ngSweetAlert']).config(function($stateProvider, $urlRouterProvider){
+    angular.module('myApp', ['ui.router', 'ngCookies','oitozero.ngSweetAlert'])
+    .config(function($stateProvider, $urlRouterProvider,$httpProvider){
+        $httpProvider.interceptors.push('authInterceptor');
         $urlRouterProvider.otherwise(BASIC_DATA.routerConfig.taskUpload.state);
         $stateProvider
             .state(BASIC_DATA.routerConfig.taskUpload.state, {
