@@ -3,6 +3,7 @@
  */
 (function () {
     var BASIC_DATA={
+        cnNum:['一','二','三','四','五','六','七','八','九','十'],
         TOP_ROUTER:'index.html#!/',
         routerConfig:{
             /*任务列表页*/

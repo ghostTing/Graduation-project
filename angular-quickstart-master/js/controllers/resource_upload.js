@@ -69,7 +69,7 @@
             onFileSubmit:function () {
                 $timeout(function(){
                     $http.get(BASIC_DATA.API_URL+'/getFileUpload').then(function (data) {
-                        console.log(data.data);
+                        console.log(data);
                     })
                 },3000)
             }

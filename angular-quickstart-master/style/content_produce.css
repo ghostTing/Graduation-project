@@ -1,8 +1,9 @@
 .container{
-    padding-top: 20px;
     width: 100%;
 }
 .paper-file-container,.paper-info-container,.editor-area{
+    margin-top: 1px;
+    border: none;
     width: 800px;
 }
 .paper-info-container{
@@ -11,6 +12,7 @@
 .paper-file-container{
     position: fixed;
     height: 250px;
+    z-index: 10000;
     background: url("../img/task_upload/fileCheck_bg.jpg") no-repeat center;
 }
 .resources-preview{
@@ -45,11 +47,14 @@
 .question-item{
     background-color: #ffffff;
     border: 1px solid #c7c7c7;
-    border-top: none;
+    margin-bottom: 50px;
+}
+.question-item:hover{
+    border: 1px solid #92b65c;
 }
 .question-index{
-    right: 0;
-    bottom: 0;
+    left: -1px;
+    top: -1px;
     display: inline-block;
     width: 35px;
     height: 30px;
@@ -58,12 +63,18 @@
     border-left: 1px solid #c7c7c7;
     border-top: 1px solid #c7c7c7;
     text-align: center;
-    background: #0cbe93;
+    background: #3c763d;
     color: #fff;
     z-index: 1000;
 }
-#showContent{
-    padding: 20px;
+.showContent{
+    padding: 35px;
+    white-space: normal;
+    overflow-wrap: break-word;
+}
+.save-button{
+    bottom: -40px;
+    right: 0;
 }
 /*插件的订制样式*/
 .viewer-container{
@@ -72,4 +83,8 @@
     position: absolute;
     top: 0;
     left: 0;
+}
+/*隐藏销毁Ueditor后的textarea*/
+.question-item textarea{
+    display: none;
 }

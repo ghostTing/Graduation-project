@@ -28,23 +28,23 @@
     height: 28px;
     line-height: 28px;
     text-align: center;
-    border: 1px solid #c7c7c7;
+    border: 1px solid #92b65c;
     border-radius: 4px;
     cursor: pointer;
-    color: #f99f16;
+    color: #92b65c;
 }
 .role-select:hover{
     color: #FFFFFF;
-    background-color: #f99f16;
-    border: 1px solid #f99f16;
+    background-color: #92b65c;
+    border: 1px solid #92b65c;
 }
 .role-select.active{
     color: #FFFFFF;
-    background-color: #0bc89a;
-    border: 1px solid #0bc89a;
+    background-color: #729044;
+    border: 1px solid #729044;
 }
 .role-select-tip{
-    color: #f99f16;
+    color: #666;
 }
 #userName,#regUserName{
     border-top-right-radius: 4px;

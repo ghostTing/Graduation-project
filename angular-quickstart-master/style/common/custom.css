@@ -54,34 +54,27 @@
 /*滚动条样式end*/
 /*定制的按钮样式*/
 .c-btn-normal{
-    border: 0;
     cursor: pointer;
     text-align: center;
     padding: 0 20px;
     height: 30px;
     line-height: 30px;
     display: inline-block;
-    color: #fff;
-    border: 1px solid #0cbe93;
+    border: 1px solid #92b65c;
     border-radius: 3px;
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
-    -o-border-radius: 3px;
-    background: #0bd2a1;
-    background: linear-gradient(#21dcae 0,#0bd2a1 55%,#0cbe93 100%);
-    background: -webkit-linear-gradient(#21dcae 0,#0bd2a1 55%,#0cbe93 100%);
-    background: -moz-linear-gradient(#21dcae 0,#0bd2a1 55%,#0cbe93 100%);
-    background: -o-linear-gradient(#21dcae 0,#0bd2a1 55%,#0cbe93 100%);
-    background: -ms-linear-gradient(#21dcae 0,#0bd2a1 55%,#0cbe93 100%);
+    background: #FFFFFF;
+    color:#92b65c;
+}
+.c-btn-normal.active{
+    color: #fff;
+    background: #729044;
+    border: none;
 }
 .c-btn-normal:hover{
     color: #fff;
-    background: #0bd2a1;
-    background: linear-gradient(#0bd2a1 0,#0bc89a 55%,#0cbf93 100%);
-    background: -webkit-linear-gradient(#0bd2a1 0,#0bc89a 55%,#0cbf93 100%);
-    background: -moz-linear-gradient(#0bd2a1 0,#0bc89a 55%,#0cbf93 100%);
-    background: -o-linear-gradient(#0bd2a1 0,#0bc89a 55%,#0cbf93 100%);
-    background: -ms-linear-gradient(#0bd2a1 0,#0bc89a 55%,#0cbf93 100%);
+    background: #92b65c;
 }
 .c-btn-normal-org {
     border: 0;
@@ -114,3 +107,9 @@
     background: -o-linear-gradient(#f99f16 0,#ef9918 100%);
 }
 /*定制的按钮样式end*/
+/*订制的文本框样式*/
+.form-control:focus{
+    border-color: #92b65c;
+    outline: 0;
+}
+/*订制的文本框样式end*/

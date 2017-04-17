@@ -40,7 +40,7 @@
                         <span class="input-group-addon glyphicon glyphicon-lock" id="basic-addon2" style="top: 0;"></span>
                         <input type="password" class="form-control" placeholder="Password" aria-describedby="basic-addon2" ng-model="password">
                     </div>
-                    <div class="c-btn-normal login-btn" ng-click="viewController.login()">登录</div>
+                    <div class="c-btn-normal active login-btn" ng-click="viewController.login()">登录</div>
                 </form>
                 <!--注册表单-->
                 <form class="register-form pb-10 ng-hide" ng-show="showRegisterForm">
@@ -63,7 +63,7 @@
                             <span class="role-select" ng-class="{'active':auditSelected}" ng-click="auditSelected=true;enterSelected=false;roleCode=2;">题目审核</span>
                         </div>
                     </div>
-                    <div class="c-btn-normal-org register-btn" ng-click="viewController.finishReg()">完成注册</div>
+                    <div class="c-btn-normal active register-btn" ng-click="viewController.finishReg()">完成注册</div>
                 </form>
             </div>
 

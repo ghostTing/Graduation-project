@@ -1,7 +1,8 @@
 <link rel="stylesheet" href="../style/content_produce.css">
-<div class="container">
+<div class="container" id="contentProduceContainer">
     <!--试卷信息源-->
     <div class="apple-card-container paper-file-container mb-20">
+        <div style="height: 20px;width: 100%;background:#f7f7f7;"></div>
         <div class="apple-card-t-bar pl-20 fs-14">
             试卷信息源
         </div>
@@ -51,19 +52,35 @@
     </div>
     <!--试卷编辑区-->
     <div class="editor-area">
-        <div class="question-headline">
-            <div class="headline-title">
+        <!--大标题-->
+        <div class="question-headline" ng-repeat="questionHeadline in paper.questionHeadline">
+            <div class="headline-title mb-10">
                 <div class="input-group">
-                    <span class="input-group-addon " id="basic-addon4" style="top: 0;border-radius: 0;">一</span>
-                    <input type="text" class="form-control" placeholder="请输入标题，如：选择题" aria-describedby="basic-addon4">
+                    <span class="input-group-addon fs-18" ng-bind="BASIC_DATA.cnNum[$index]" id="basic-addon4" style="top: 0;border-radius: 0;"></span>
+                    <input type="text" class="form-control fs-18" ng-model="questionHeadline.questionType" placeholder="请输入标题，如：选择题" aria-describedby="basic-addon4">
                 </div>
             </div>
-            <div class="question-item por" style="min-height:200px;width:800px" ng-click="viewController.showUeditor($event)">
-                <span class="question-index poa">1</span>
-                <div id="showContent" ng-bind-html="html" ng-show="!isEditing"></div>
-                <script id="container" name="content" type="text/plain" style="height:144px;width:100%;">
-                </script>
+            <!--题目-->
+            <div class="question-item por" style="min-height:200px;width:800px" ng-repeat="question in questionHeadline.questionList">
+                <span class="question-index poa" ng-bind="viewController.questionIndexCom($parent,$index)+1"></span>
+                <div class="showContent fs-14" ng-bind-html="question.stem" ng-click="viewController.newUeditor($event,viewController.questionIndexCom($parent,$index),question)"></div>
+                <script id="{{'Ueditor'+questionIndex}}" style="height:144px;width:100%"></script>
+                <div class="save-button poa">
+                    <button class="c-btn-normal fr fs-14 mt-10" ng-class="{'active':btnOnSave[viewController.questionIndexCom($parent,$index)]}" ng-click="viewController.saveQuestion($event,$parent,$index,viewController.questionIndexCom($parent,$index))" style="outline: none;">
+                        保&nbsp;&nbsp;存
+                    </button>
+                </div>
             </div>
+            <!--<div class="question-item por" style="min-height:200px;width:800px" ng-click="viewController.newUeditor($event,1)">
+                <span class="question-index poa">10</span>
+                <div class="showContent" ng-bind-html=""></div>
+                <script id="{{'Ueditor'+10}}" style="height:144px;width:100%"></script>
+                <div class="save-button poa">
+                    <button class="c-btn-normal fr fs-14 mt-10" ng-click="viewController.saveQuestion($event,1)" >
+                        保&nbsp;&nbsp;存
+                    </button>
+                </div>
+            </div>-->
         </div>
     </div>
 </div>
