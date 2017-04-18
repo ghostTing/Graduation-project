@@ -5,19 +5,20 @@
  * Created by Administrator on 2017/4/2.
  */
 (function () {
-    angular.module('myApp').controller('contentProduceController',['$scope','$http','$location','$sce',function ($scope,$http,$location,$sce) {
+    angular.module('myApp').controller('contentProduceController',['$scope','$http','$location','$sce','$state','$stateParams',function ($scope,$http,$location,$sce,$state,$stateParams) {
         declareModel($scope);
-        declare($scope,$sce);
+        declare($scope,$sce,$state);
         init($scope,$http,$sce);
     }]);
     function declareModel($scope) {
         $scope.btnOnSave=[];
+        $scope.hideExplain=[];
         $scope.BASIC_DATA=window.BASIC_DATA;
     }
-    function declare($scope,$sce) {
+    function declare($scope,$sce,$state) {
         $scope.viewController={
             newUeditor:function ($event,$index,question) {
-                var showContentNode,questionItemNode;
+                var showContentNode,questionItemNode,examPointNode;
                 //判断是否点击的同一个
                 if ($scope.pre==$index){
                     return false
@@ -30,9 +31,13 @@
                 $scope.isEditing=true;
                 showContentNode=document.getElementsByClassName('showContent');
                 questionItemNode=document.getElementsByClassName('question-item');
+                angular.forEach($scope.hideExplain,function (i) {
+                    i=false;
+                });
+                $scope.hideExplain[$index]=true;
                 for (var i=0;i<showContentNode.length;i++){
-                    showContentNode[i].style="display:block";
-                    questionItemNode[i].style="border:1px solid #c7c7c7;";
+                    showContentNode[i].style="display:block;";
+                    questionItemNode[i].style="border:1px solid #dcdcdc;";
                 }
                 showContentNode[$index].style="display:none";
                 questionItemNode[$index].style="border:1px solid #92b65c;";
@@ -61,7 +66,8 @@
             saveQuestion:function ($event,$parent,$index,questionIndex) {
                 if ($scope.ue){
                     $event.stopPropagation();
-                    $scope.btnOnSave[$index]=true;/*保存按钮激活*/
+                    $scope.hideExplain[questionIndex]=false;
+                    $scope.btnOnSave[questionIndex]=true;/*保存按钮激活*/
                     $scope.svaeHtml=$scope.ue.getContent();
                     $scope.paper.questionHeadline[$parent.$index].questionList[$index].stem=$sce.trustAsHtml($scope.svaeHtml);
                     var jumpToElementId='#Ueditor'+(questionIndex+1);
@@ -79,6 +85,20 @@
                 }
                 $scope.questionIndex=tempLength+$index;
                 return $scope.questionIndex;
+            },
+            /*跳转至解析录入界面*/
+            answerProduce:function ($parent,$index) {
+                var questionIndex,parentIndex,childIndex;
+                questionIndex =this.questionIndexCom($parent,$index);
+                parentIndex=$parent.$index;
+                childIndex=$index;
+                $state.go('answerProduce',{
+                    args:{
+                        parentIndex:parentIndex,
+                        childIndex:childIndex,
+                        questionIndex:questionIndex
+                    }
+                })
             }
         }
     }
@@ -93,7 +113,10 @@
                     questionType:'选择题',
                     questionList: [
                         {
-                        stem:$sce.trustAsHtml('<p><span style="font-family:&#39;Times New Roman&#39;,&#39;serif&#39;">4</span><span style="font-family:宋体">．如图，五边形</span><em><span style=";font-family:&#39;Times New Roman&#39;,&#39;serif&#39;">ABCDE</span></em><span style="font-family:宋体">中，</span><em><span style=";font-family:&#39;Times New Roman&#39;,&#39;serif&#39;">AB</span></em><span style="font-family:&#39;Times New Roman&#39;,&#39;serif&#39;">∥</span><em><span style=";font-family:&#39;Times New Roman&#39;,&#39;serif&#39;">CD</span></em><span style="font-family:宋体">，</span><span style="font-family:&#39;Times New Roman&#39;,&#39;serif&#39;">∠1</span><span style="font-family:宋体">、</span><span style="font-family:&#39;Times New Roman&#39;,&#39;serif&#39;">∠2</span><span style="font-family:宋体">、</span><span style="font-family:&#39;Times New Roman&#39;,&#39;serif&#39;">∠3</span><span style="font-family:宋体">分别是</span><span style="font-family:&#39;Times New Roman&#39;,&#39;serif&#39;">∠</span><em><span style=";font-family:&#39;Times New Roman&#39;,&#39;serif&#39;">BAE</span></em><span style="font-family:宋体">、</span><span style="font-family:&#39;Times New Roman&#39;,&#39;serif&#39;">∠</span><em><span style=";font-family:&#39;Times New Roman&#39;,&#39;serif&#39;">AED</span></em><span style="font-family:宋体">、</span><span style="font-family:&#39;Times New Roman&#39;,&#39;serif&#39;">∠</span><em><span style=";font-family:&#39;Times New Roman&#39;,&#39;serif&#39;">EDC</span></em><span style="font-family:宋体">的外角，则</span><span style="font-family:&#39;Times New Roman&#39;,&#39;serif&#39;">∠1+∠2+∠3</span><span style="font-family:宋体">等于（</span><span style="font-family:&#39;Times New Roman&#39;,&#39;serif&#39;">&nbsp;&nbsp; </span><span style="font-family:宋体">）．</span></p><p><span style="font-family:&#39;Times New Roman&#39;,&#39;serif&#39;">&nbsp;</span></p><p style="text-indent:28px"><span style="font-family:&#39;Times New Roman&#39;,&#39;serif&#39;">A</span><span style="font-family:宋体">．</span><span style="font-family:&#39;Times New Roman&#39;,&#39;serif&#39;">90°&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; B</span><span style="font-family: 宋体">．</span><span style="font-family:&#39;Times New Roman&#39;,&#39;serif&#39;">180°&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; C</span><span style="font-family: 宋体">．</span><span style="font-family:&#39;Times New Roman&#39;,&#39;serif&#39;">210°&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;D</span><span style="font-family:宋体">．</span><span style="font-family:&#39;Times New Roman&#39;,&#39;serif&#39;">270°</span></p><p><br/></p>')
+                            stem:$sce.trustAsHtml('<p><span style="font-family:&#39;Times New Roman&#39;,&#39;serif&#39;">4</span><span style="font-family:宋体">．如图，五边形</span><em><span style=";font-family:&#39;Times New Roman&#39;,&#39;serif&#39;">ABCDE</span></em><span style="font-family:宋体">中，</span><em><span style=";font-family:&#39;Times New Roman&#39;,&#39;serif&#39;">AB</span></em><span style="font-family:&#39;Times New Roman&#39;,&#39;serif&#39;">∥</span><em><span style=";font-family:&#39;Times New Roman&#39;,&#39;serif&#39;">CD</span></em><span style="font-family:宋体">，</span><span style="font-family:&#39;Times New Roman&#39;,&#39;serif&#39;">∠1</span><span style="font-family:宋体">、</span><span style="font-family:&#39;Times New Roman&#39;,&#39;serif&#39;">∠2</span><span style="font-family:宋体">、</span><span style="font-family:&#39;Times New Roman&#39;,&#39;serif&#39;">∠3</span><span style="font-family:宋体">分别是</span><span style="font-family:&#39;Times New Roman&#39;,&#39;serif&#39;">∠</span><em><span style=";font-family:&#39;Times New Roman&#39;,&#39;serif&#39;">BAE</span></em><span style="font-family:宋体">、</span><span style="font-family:&#39;Times New Roman&#39;,&#39;serif&#39;">∠</span><em><span style=";font-family:&#39;Times New Roman&#39;,&#39;serif&#39;">AED</span></em><span style="font-family:宋体">、</span><span style="font-family:&#39;Times New Roman&#39;,&#39;serif&#39;">∠</span><em><span style=";font-family:&#39;Times New Roman&#39;,&#39;serif&#39;">EDC</span></em><span style="font-family:宋体">的外角，则</span><span style="font-family:&#39;Times New Roman&#39;,&#39;serif&#39;">∠1+∠2+∠3</span><span style="font-family:宋体">等于（</span><span style="font-family:&#39;Times New Roman&#39;,&#39;serif&#39;">&nbsp;&nbsp; </span><span style="font-family:宋体">）．</span></p><p><span style="font-family:&#39;Times New Roman&#39;,&#39;serif&#39;">&nbsp;</span></p><p style="text-indent:28px"><span style="font-family:&#39;Times New Roman&#39;,&#39;serif&#39;">A</span><span style="font-family:宋体">．</span><span style="font-family:&#39;Times New Roman&#39;,&#39;serif&#39;">90°&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; B</span><span style="font-family: 宋体">．</span><span style="font-family:&#39;Times New Roman&#39;,&#39;serif&#39;">180°&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; C</span><span style="font-family: 宋体">．</span><span style="font-family:&#39;Times New Roman&#39;,&#39;serif&#39;">210°&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;D</span><span style="font-family:宋体">．</span><span style="font-family:&#39;Times New Roman&#39;,&#39;serif&#39;">270°</span></p><p><br/></p>'),
+                            examPoint:'整数的加法和减法；整数的乘法及应用',
+                            answer:'A',
+                            solution:'解：假设这两个数是0与3； 3×0=0，3+0=3，0＜3，积比和小了；所以，两个不同自然数的和，不一定比这两个自然数的积小．【分析】根据题意，假设这两个数是0与3，分别求出它们的和与积，然后再判断．'
                         },
                         {
                             stem:$sce.trustAsHtml('<p style="line-height: 25px;background: white"><span style="font-family: 宋体;letter-spacing: 1px">在</span><em><span style="font-family: 宋体;letter-spacing: 1px">□</span></em><em><span style="font-family: &#39;Times New Roman&#39;, serif;letter-spacing: 1px">ABCD</span></em><span style="font-family: 宋体;letter-spacing: 1px">中，</span><em><span style="font-family: &#39;Times New Roman&#39;, serif;letter-spacing: 1px">AB</span></em><span style="font-family: &#39;Times New Roman&#39;, serif;letter-spacing: 1px">=10</span><span style="font-family: 宋体;letter-spacing: 1px">，</span><em><span style="font-family: &#39;Times New Roman&#39;, serif;letter-spacing: 1px">BC</span></em><span style="font-family: &#39;Times New Roman&#39;, serif;letter-spacing: 1px">=14</span><span style="font-family: 宋体;letter-spacing: 1px">，</span><em><span style="font-family: &#39;Times New Roman&#39;, serif;letter-spacing: 1px">E</span></em><span style="font-family: 宋体;letter-spacing: 1px">，</span><em><span style="font-family: &#39;Times New Roman&#39;, serif;letter-spacing: 1px">F</span></em><span style="font-family: 宋体;letter-spacing: 1px">分别为边</span><em><span style="font-family: &#39;Times New Roman&#39;, serif;letter-spacing: 1px">BC</span></em><span style="font-family: 宋体;letter-spacing: 1px">，</span><em><span style="font-family: &#39;Times New Roman&#39;, serif;letter-spacing: 1px">AD</span></em><span style="font-family: 宋体;letter-spacing: 1px">上的点，若四边形</span><em><span style="font-family: &#39;Times New Roman&#39;, serif;letter-spacing: 1px">AECF</span></em><span style="font-family: 宋体;letter-spacing: 1px">为正方形，则</span><em><span style="font-family: &#39;Times New Roman&#39;, serif;letter-spacing: 1px">AE</span></em><span style="font-family: 宋体;letter-spacing: 1px">的长为（　　）</span></p><p style="line-height: 16px;vertical-align: middle"><span style=";font-family:&#39;Times New Roman&#39;,&#39;serif&#39;">&nbsp;&nbsp;&nbsp; A</span><span style=";font-family:宋体">．</span><span style=";font-family:&#39;Times New Roman&#39;,&#39;serif&#39;">7&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; B</span><span style=";font-family:宋体">．</span><span style=";font-family:&#39;Times New Roman&#39;,&#39;serif&#39;">4</span><span style=";font-family:宋体">或</span><span style=";font-family:&#39;Times New Roman&#39;,&#39;serif&#39;">10&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; C</span><span style=";font-family:宋体">．</span><span style=";font-family:&#39;Times New Roman&#39;,&#39;serif&#39;">5</span><span style=";font-family:宋体">或</span><span style=";font-family:&#39;Times New Roman&#39;,&#39;serif&#39;">9&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; D</span><span style=";font-family:宋体">．</span><span style=";font-family:&#39;Times New Roman&#39;,&#39;serif&#39;">6</span><span style=";font-family:宋体">或</span><span style=";font-family:&#39;Times New Roman&#39;,&#39;serif&#39;">8</span></p><p><br/></p>')

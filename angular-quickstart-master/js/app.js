@@ -22,11 +22,12 @@
                 cache: true,
                 controller: BASIC_DATA.routerConfig.contentProduce.controller
             })
-            .state('page3', {
-                url: '/page3',
-                templateUrl:"view/page3.html",
-                cache: true,
-                controller: 'NoteController'
-            });
+            .state(BASIC_DATA.routerConfig.contentProduce.childrenPage.answerProduce.state, {
+                url: BASIC_DATA.routerConfig.contentProduce.childrenPage.answerProduce.url,
+                templateUrl: BASIC_DATA.routerConfig.contentProduce.childrenPage.answerProduce.templateUrl,
+                cache:true,
+                controller: BASIC_DATA.routerConfig.contentProduce.childrenPage.answerProduce.controller,
+                params:{args:{}}
+            })
     });
 })();

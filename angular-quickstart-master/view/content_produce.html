@@ -56,18 +56,37 @@
         <div class="question-headline" ng-repeat="questionHeadline in paper.questionHeadline">
             <div class="headline-title mb-10">
                 <div class="input-group">
-                    <span class="input-group-addon fs-18" ng-bind="BASIC_DATA.cnNum[$index]" id="basic-addon4" style="top: 0;border-radius: 0;"></span>
-                    <input type="text" class="form-control fs-18" ng-model="questionHeadline.questionType" placeholder="请输入标题，如：选择题" aria-describedby="basic-addon4">
+                    <span class="input-group-addon fs-18 fw-600" ng-bind="BASIC_DATA.cnNum[$index]" id="basic-addon4" style="top: 0;border-radius: 0;"></span>
+                    <input type="text" class="form-control fs-18 fw-600" ng-model="questionHeadline.questionType" placeholder="请输入标题，如：选择题" aria-describedby="basic-addon4">
                 </div>
             </div>
             <!--题目-->
             <div class="question-item por" style="min-height:200px;width:800px" ng-repeat="question in questionHeadline.questionList">
                 <span class="question-index poa" ng-bind="viewController.questionIndexCom($parent,$index)+1"></span>
                 <div class="showContent fs-14" ng-bind-html="question.stem" ng-click="viewController.newUeditor($event,viewController.questionIndexCom($parent,$index),question)"></div>
+                <div class="explain fs-14 input-group p-20" ng-hide="hideExplain[questionIndex]">
+                    <table class="explain-table">
+                        <tr>
+                            <td width="120" class="explain-title">【考 点】</td>
+                            <td ng-bind="question.examPoint"></td>
+                        </tr>
+                        <tr>
+                            <td class="explain-title">【答 案】</td>
+                            <td ng-bind="question.answer">A</td>
+                        </tr>
+                        <tr>
+                            <td class="explain-title">【思路启发】</td>
+                            <td ng-bind="question.solution"></td>
+                        </tr>
+                    </table>
+                </div>
                 <script id="{{'Ueditor'+questionIndex}}" style="height:144px;width:100%"></script>
                 <div class="save-button poa">
                     <button class="c-btn-normal fr fs-14 mt-10" ng-class="{'active':btnOnSave[viewController.questionIndexCom($parent,$index)]}" ng-click="viewController.saveQuestion($event,$parent,$index,viewController.questionIndexCom($parent,$index))" style="outline: none;">
                         保&nbsp;&nbsp;存
+                    </button>
+                    <button class="c-btn-normal fr fs-14 mt-10 mr-10"  style="outline: none;" ng-click="viewController.answerProduce($parent,$index)">
+                        解析录入
                     </button>
                 </div>
             </div>

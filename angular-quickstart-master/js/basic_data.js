@@ -24,12 +24,21 @@
                     }
 
             },
+            /*内容制作页*/
             contentProduce:{
                 state:"contentProduce",
                 moduleName:'内容制作',
                 url: '/contentProduce',
                 templateUrl:"view/content_produce.html",
-                controller: 'contentProduceController'
+                controller: 'contentProduceController',
+                childrenPage:{
+                    answerProduce:{
+                        state:"answerProduce",
+                        url: '/answerProduce',
+                        templateUrl:"view/answer_produce.html",
+                        controller: 'answerProduceController'
+                    }
+                }
             }
         },
         API_URL:' http://localhost:8080/question',
