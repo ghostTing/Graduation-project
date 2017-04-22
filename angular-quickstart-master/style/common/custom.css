@@ -1,8 +1,8 @@
 /*以下是本项目定制的样式*/
 .card-shadow{
-    -webkit-box-shadow: 6px 6px 5px rgba(150,150,150,0.5);
-    -moz-box-shadow:  6px 6px 5px rgba(150,150,150,0.5);
-    box-shadow:  6px 6px 5px rgba(150,150,150,0.5);
+    -webkit-box-shadow: 6px 6px 5px rgba(128,128,128,0.2);
+    -moz-box-shadow:  6px 6px 5px rgba(128,128,128,0.2);
+    box-shadow:  6px 6px 5px rgba(128,128,128,0.2);
 }
 .item-shadow{
     -webkit-box-shadow: 0px 6px 5px#cacacc;
@@ -54,6 +54,7 @@
 /*滚动条样式end*/
 /*定制的按钮样式*/
 .c-btn-normal{
+    outline: none;
     cursor: pointer;
     text-align: center;
     padding: 0 20px;

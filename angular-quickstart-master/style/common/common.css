@@ -372,7 +372,7 @@
 
 /*custom*/
 body{
-    font-family: "微软雅黑","Microsoft Yahei", Helvetica,"Hiragino Sans GB",STHeiTi, sans-serif;
+    font-family: "微软雅黑",'Lato',sans-serif;
     line-height: 1.5;
     font-size: 12px;
 }

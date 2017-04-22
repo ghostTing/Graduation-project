@@ -23,7 +23,7 @@
                 controller: BASIC_DATA.routerConfig.contentProduce.controller
             })
             .state(BASIC_DATA.routerConfig.contentProduce.childrenPage.answerProduce.state, {
-                url: BASIC_DATA.routerConfig.contentProduce.childrenPage.answerProduce.url,
+                url: BASIC_DATA.routerConfig.contentProduce.childrenPage.answerProduce.url+'/:parentIndex/'+':childIndex/'+':questionIndex',
                 templateUrl: BASIC_DATA.routerConfig.contentProduce.childrenPage.answerProduce.templateUrl,
                 cache:true,
                 controller: BASIC_DATA.routerConfig.contentProduce.childrenPage.answerProduce.controller,

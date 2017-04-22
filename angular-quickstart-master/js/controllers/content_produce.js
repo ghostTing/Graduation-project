@@ -7,7 +7,7 @@
 (function () {
     angular.module('myApp').controller('contentProduceController',['$scope','$http','$location','$sce','$state','$stateParams',function ($scope,$http,$location,$sce,$state,$stateParams) {
         declareModel($scope);
-        declare($scope,$sce,$state);
+        declare($scope,$sce,$state,$location);
         init($scope,$http,$sce);
     }]);
     function declareModel($scope) {
@@ -15,7 +15,7 @@
         $scope.hideExplain=[];
         $scope.BASIC_DATA=window.BASIC_DATA;
     }
-    function declare($scope,$sce,$state) {
+    function declare($scope,$sce,$state,$location) {
         $scope.viewController={
             newUeditor:function ($event,$index,question) {
                 var showContentNode,questionItemNode,examPointNode;
@@ -92,13 +92,18 @@
                 questionIndex =this.questionIndexCom($parent,$index);
                 parentIndex=$parent.$index;
                 childIndex=$index;
-                $state.go('answerProduce',{
+                /*$state.go('answerProduce',{
                     args:{
                         parentIndex:parentIndex,
                         childIndex:childIndex,
                         questionIndex:questionIndex
                     }
-                })
+                });*/
+                $state.go('answerProduce',{
+                    parentIndex:parentIndex,
+                    childIndex:childIndex,
+                    questionIndex:questionIndex
+                });
             }
         }
     }

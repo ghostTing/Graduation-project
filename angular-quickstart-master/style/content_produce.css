@@ -2,7 +2,6 @@
     width: 100%;
 }
 .paper-file-container,.paper-info-container,.editor-area{
-    margin-top: 1px;
     border: none;
     width: 800px;
 }
