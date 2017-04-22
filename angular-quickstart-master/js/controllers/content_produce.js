@@ -13,6 +13,8 @@
     function declareModel($scope) {
         $scope.btnOnSave=[];
         $scope.hideExplain=[];
+        /*控制操作区active类名的model*/
+        $scope.currentQuestion=[];
         $scope.BASIC_DATA=window.BASIC_DATA;
     }
     function declare($scope,$sce,$state,$location) {
@@ -23,6 +25,8 @@
                 if ($scope.pre==$index){
                     return false
                 }
+                $scope.currentQuestion[$scope.pre]=false;
+                $scope.currentQuestion[$index]=true;
                 $scope.pre=$index;
                 $event.stopPropagation();
                if ($scope.isEditing){
@@ -104,6 +108,21 @@
                     childIndex:childIndex,
                     questionIndex:questionIndex
                 });
+            },
+            /*操作区快速导航*/
+            shortcutJump:function ($event,$parent,$index) {
+                var questionIndex,jumpToElementId;
+                questionIndex =this.questionIndexCom($parent,$index);
+                /*控制操作区题号active属性*/
+                for(var i=0;i<$scope.currentQuestion.length;i++){
+                    $scope.currentQuestion[i]=false;
+                }
+                $scope.currentQuestion[questionIndex]=true;
+                jumpToElementId='#Ueditor'+questionIndex;
+                $scope.viewController.newUeditor($event,questionIndex);
+                $('body').animate({
+                    scrollTop: $(jumpToElementId).offset().top-600
+                }, 1000);
             }
         }
     }

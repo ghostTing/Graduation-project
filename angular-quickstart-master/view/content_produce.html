@@ -89,16 +89,29 @@
                     </button>
                 </div>
             </div>
-            <!--<div class="question-item por" style="min-height:200px;width:800px" ng-click="viewController.newUeditor($event,1)">
-                <span class="question-index poa">10</span>
-                <div class="showContent" ng-bind-html=""></div>
-                <script id="{{'Ueditor'+10}}" style="height:144px;width:100%"></script>
-                <div class="save-button poa">
-                    <button class="c-btn-normal fr fs-14 mt-10" ng-click="viewController.saveQuestion($event,1)" >
-                        保&nbsp;&nbsp;存
-                    </button>
-                </div>
-            </div>-->
+        </div>
+    </div>
+</div>
+<!--操作台-->
+<div class="shortcut apple-card-container">
+    <div class="shortcut-header apple-card-t-bar">
+        <i class="apple-circle apple-circle-red"></i>
+        <i class="apple-circle apple-circle-yellow"></i>
+        <i class="apple-circle apple-circle-green"></i>
+        <span class="shortcut-title">
+            操作区
+        </span>
+    </div>
+    <div class="shortcut-body p-10">
+        <div ng-repeat="questionHeadline in paper.questionHeadline" class="shortcut-question-headline mb-5">
+            <div class="input-group">
+                <span class="input-group-addon fs-14" ng-bind="BASIC_DATA.cnNum[$index]" id="basic-addon20" style="top: 0;border-radius: 0;"></span>
+                <input type="text" class="form-control fs-14 shortcut-form-control" ng-model="questionHeadline.questionType" placeholder="请输入标题，如：选择题" aria-describedby="basic-addon20">
+            </div>
+            <ul class="shortcut-question-list">
+                <li ng-repeat="quesiton in questionHeadline.questionList"><i class="question-index-circle" ng-click="viewController.shortcutJump($event,$parent,$index)" ng-class="{'active':currentQuestion[viewController.questionIndexCom($parent,$index)]}" ng-bind="viewController.questionIndexCom($parent,$index)+1"></i></li>
+                <li class="shortcut-add"><i class="shortcut-add-circle glyphicon glyphicon-plus "></i></li>
+            </ul>
         </div>
     </div>
 </div>

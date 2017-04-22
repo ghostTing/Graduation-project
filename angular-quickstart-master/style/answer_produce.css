@@ -21,7 +21,7 @@
     text-align: right;
     vertical-align: top;
 }
-.exam-point-input,.answer-input{
+.exam-point-input,.answer-input,.solution-input{
     width: 100%;
     border: none;
     outline: none;

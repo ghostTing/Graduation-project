@@ -103,3 +103,79 @@
 .question-item textarea{
     display: none;
 }
+/*操作区*/
+.shortcut{
+    width: 240px;
+    position: fixed;
+    top: 50px;
+    right: 150px;
+    z-index: 10001;
+}
+@media all and (max-width:1400px) {
+    .shortcut{
+        right: 50px;
+    }
+}
+@media all and (max-width:1200px) {
+    .shortcut{
+        right: 10px;
+    }
+}
+@media all and (max-width:1000px) {
+    .shortcut{
+        display: none;
+    }
+}
+.shortcut-title{
+    font-size: 16px;
+    float: right;
+    margin-right: 20px;
+}
+.shortcut-form-control{
+    height: 28px;
+    padding: 4px 12px;
+}
+.shortcut-question-list{
+    padding:  10px 0 10px 15px;
+    text-align: left;
+}
+.shortcut-question-list li{
+    display: inline-block;
+    margin-right: 15px;
+    margin-bottom: 10px;
+}
+.question-index-circle{
+    cursor: pointer;
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    border: 1px solid #92b65c;
+    color: #92b65c;
+    border-radius: 50%;
+    text-align: center;
+    font-style: normal;
+    line-height: 22px;
+    font-size: 16px;
+}
+.shortcut-add{
+    margin-left: -5px;
+}
+.shortcut-add-circle{
+    cursor: pointer;
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    border: 1px solid #92b65c;
+    color: #92b65c;
+    border-radius: 50%;
+    text-align: center;
+    padding-top: 5px;
+}
+.question-index-circle:hover,.shortcut-add-circle:hover{
+    background-color: #92b65c;
+    color: #FFFFFF;
+}
+.question-index-circle.active,.shortcut-add-circle.active{
+    background-color: #92b65c;
+    color: #FFFFFF;
+}

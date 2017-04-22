@@ -5,15 +5,15 @@
     angular.module('myApp').controller('answerProduceController',['$scope','$http','$location','$sce','$state','$stateParams',function ($scope,$http,$location,$sce,$state,$stateParams){
         declareModel($scope,$stateParams);
         declare($scope,$sce);
-        init($scope,$http,$sce,$stateParams);
-
+        init($scope,$http,$sce,$stateParams)
     }]);
     function declareModel($scope,$stateParams) {
-
+        $scope.showPlaceholder=true;
     }
     function declare($scope,$sce) {
         $scope.viewController={
             initUeditor:function () {
+                $scope.showPlaceholder=false;
                 $scope.ue = UE.getEditor('solution-edit',{
                     elementPathEnabled : false,
                     lang:'zh-cn',

@@ -24,6 +24,7 @@
                         <td class="explain-title">【解 析】</td>
                         <td class="solution-edit" ng-click="viewController.initUeditor()">
                             <script id="solution-edit" style="height:144px;width:100%"></script>
+                            <input type="text" class="solution-input" placeholder="点击编辑答案" readonly ng-show="showPlaceholder"></td>
                         </td>
                     </tr>
                 </table>
@@ -32,6 +33,9 @@
         <div class="answer-edit-bottom">
             <button class="c-btn-normal fr fs-14 mt-10 mr-20"  style="outline: none;">
                 保&nbsp;&nbsp;存
+            </button>
+            <button class="c-btn-normal fr fs-14 mt-10 mr-20"  style="outline: none;">
+                返回题干制作
             </button>
         </div>
     </div>
