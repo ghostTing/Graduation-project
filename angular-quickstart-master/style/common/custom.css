@@ -5,9 +5,9 @@
     box-shadow:  6px 6px 5px rgba(128,128,128,0.2);
 }
 .item-shadow{
-    -webkit-box-shadow: 0px 6px 5px#cacacc;
-    -moz-box-shadow:  0px 6px 5px #cacacc;
-    box-shadow: 0px 6px 5px #cacacc;
+    -webkit-box-shadow: 0px 6px 5px rgba(0,0,0,0.2);
+    -moz-box-shadow:  0px 6px 5px rgba(0,0,0,0.2);
+    box-shadow: 0px 6px 5px rgba(0,0,0,0.2);
 }
 /*苹果窗口样式*/
 .apple-card-container{
@@ -57,9 +57,9 @@
     outline: none;
     cursor: pointer;
     text-align: center;
-    padding: 0 20px;
-    height: 30px;
-    line-height: 30px;
+    padding: 0 10px;
+    height: 26px;
+    line-height: 26px;
     display: inline-block;
     border: 1px solid #92b65c;
     border-radius: 3px;

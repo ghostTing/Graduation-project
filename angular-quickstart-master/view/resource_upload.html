@@ -23,22 +23,35 @@
             </div>
         </div>
         <div class="apple-card-container paper-file-container mt-20 mb-20">
-            <div class="apple-card-t-bar pl-20 fs-14">
+            <div class="apple-card-t-bar pl-10 fs-14 resources-preview-header">
+                <span class="glyphicon glyphicon-picture"></span>
                 试卷信息源
             </div>
             <div class="resources-preview por">
                 <ul class="images tc">
-                    <li class="resources-item dib">
-                        <img src="../img/login/login_simple_bg.jpg" class="resources-img">
+                    <li class="resources-item dib item-shadow" ng-mouseover="mouseOver=true;" ng-mouseleave="mouseOver=false;">
+                        <div class="img-cover poa" ng-hide="mouseOver">
+                            <span class="glyphicon glyphicon-fullscreen fs-16 poa fullscreen-icon"></span>
+                        </div>
+                        <img src="../img/sample_paper/0001.jpg" class="resources-img">
                     </li>
-                    <li class="resources-item dib">
-                        <img src="../img/login/login_simple_bg.jpg" class="resources-img">
+                    <li class="resources-item dib item-shadow" ng-mouseover="mouseOver=true;" ng-mouseleave="mouseOver=false;">
+                        <div class="img-cover poa" ng-hide="mouseOver">
+                            <span class="glyphicon glyphicon-fullscreen fs-16 poa fullscreen-icon"></span>
+                        </div>
+                        <img src="../img/sample_paper/0002.jpg" class="resources-img">
                     </li>
-                    <li class="resources-item dib">
-                        <img src="../img/login/login_simple_bg.jpg" class="resources-img">
+                    <li class="resources-item dib item-shadow" ng-mouseover="mouseOver=true;" ng-mouseleave="mouseOver=false;">
+                        <div class="img-cover poa" ng-hide="mouseOver">
+                            <span class="glyphicon glyphicon-fullscreen fs-16 poa fullscreen-icon"></span>
+                        </div>
+                        <img src="../img/sample_paper/0003.jpg" class="resources-img">
                     </li>
-                    <li class="resources-item dib">
-                        <img src="../img/login/login_simple_bg.jpg" class="resources-img">
+                    <li class="resources-item dib item-shadow" ng-mouseover="mouseOver=true;" ng-mouseleave="mouseOver=false;">
+                        <div class="img-cover poa" ng-hide="mouseOver">
+                            <span class="glyphicon glyphicon-fullscreen fs-16 poa fullscreen-icon"></span>
+                        </div>
+                        <img src="../img/sample_paper/0004.jpg" class="resources-img">
                     </li>
                 </ul>
             </div>
@@ -80,6 +93,7 @@
                 </div>
                 <div class="bottom-btn">
                     <button class="c-btn-normal fr fs-14 mt-10" ng-click="viewController.sumitPaperBasicInfo()">
+                        <span class="glyphicon glyphicon-edit"></span>
                         进入制作
                     </button>
                 </div>
