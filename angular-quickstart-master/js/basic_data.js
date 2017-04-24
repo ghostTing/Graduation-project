@@ -39,6 +39,13 @@
                         controller: 'answerProduceController'
                     }
                 }
+            },
+            paperPreview:{
+                state:"paperPreview",
+                moduleName:'整卷预览',
+                url: '/paperPreview',
+                templateUrl:"view/paper_preview.html",
+                controller: 'paperPreviewController'
             }
         },
         API_URL:' http://localhost:8080/question',

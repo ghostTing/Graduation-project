@@ -26,6 +26,7 @@
                 if ($scope.pre == $index) {
                     return false
                 }
+                $scope.hideExplain[$scope.pre]=false;
                 $scope.currentQuestion[$scope.pre] = false;
                 $scope.currentQuestion[$index] = true;
                 $scope.pre = $index;
@@ -167,14 +168,23 @@
                         }
                     ]
                 });
-            }
+            }/*,
+            /!*初始化图片预览插件*!/
+            initViewer:function () {
+                $('.images').viewer('build');
+            },
+            /!*销毁图片预览插件*!/
+            destroyViewer:function () {
+                $('.images').viewer('hidden');
+            }*/
         }
     }
 
     function init($scope, $http, $sce, $rootScope, $timeout) {
         $('.images').viewer({
             navbar: false,
-            rotatable: false
+            rotatable: false,
+            zoomRatio:0.2
         });
         $scope.paper = {
             questionHeadline: [

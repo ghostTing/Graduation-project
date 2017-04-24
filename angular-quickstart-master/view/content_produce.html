@@ -2,37 +2,46 @@
 <div class="container" id="contentProduceContainer">
     <!--试卷信息源-->
     <div class="apple-card-container paper-file-container mb-20">
-        <div class="apple-card-t-bar pl-10 fs-14 resources-preview-header">
+        <div class="apple-card-t-bar pl-10 fs-14 resources-preview-header"  ng-click="viewController.destroyViewer()">
             <span class="glyphicon glyphicon-picture"></span>
             试卷信息源
             <span class="fr glyphicon glyphicon-pushpin resources-preview-tag"></span>
         </div>
         <div class="resources-preview">
             <ul class="images tc">
-                <li class="resources-item dib item-shadow" ng-mouseover="mouseOver=true;" ng-mouseleave="mouseOver=false;">
+                <li class="resources-item dib item-shadow" ng-mouseover="mouseOver=true;"
+                    ng-mouseleave="mouseOver=false;"
+                    ng-click="viewController.initViewer(0)">
                     <div class="img-cover poa" ng-hide="mouseOver">
                         <span class="glyphicon glyphicon-fullscreen fs-16 poa fullscreen-icon"></span>
                     </div>
                     <img src="../img/sample_paper/0001.jpg" class="resources-img">
                 </li>
-                <li class="resources-item dib item-shadow" ng-mouseover="mouseOver=true;" ng-mouseleave="mouseOver=false;">
+                <li class="resources-item dib item-shadow" ng-mouseover="mouseOver=true;"
+                    ng-mouseleave="mouseOver=false;"
+                    ng-click="viewController.initViewer(1)">
                     <div class="img-cover poa" ng-hide="mouseOver">
                         <span class="glyphicon glyphicon-fullscreen fs-16 poa fullscreen-icon"></span>
                     </div>
                     <img src="../img/sample_paper/0002.jpg" class="resources-img">
                 </li>
-                <li class="resources-item dib item-shadow" ng-mouseover="mouseOver=true;" ng-mouseleave="mouseOver=false;">
+                <li class="resources-item dib item-shadow" ng-mouseover="mouseOver=true;"
+                    ng-mouseleave="mouseOver=false;"
+                    ng-click="viewController.initViewer(2)">
                     <div class="img-cover poa" ng-hide="mouseOver">
                         <span class="glyphicon glyphicon-fullscreen fs-16 poa fullscreen-icon"></span>
                     </div>
                     <img src="../img/sample_paper/0003.jpg" class="resources-img">
                 </li>
-                <li class="resources-item dib item-shadow" ng-mouseover="mouseOver=true;" ng-mouseleave="mouseOver=false;">
+                <li class="resources-item dib item-shadow" ng-mouseover="mouseOver=true;"
+                    ng-mouseleave="mouseOver=false;"
+                    ng-click="viewController.initViewer(3)">
                     <div class="img-cover poa" ng-hide="mouseOver">
                         <span class="glyphicon glyphicon-fullscreen fs-16 poa fullscreen-icon"></span>
                     </div>
                     <img src="../img/sample_paper/0004.jpg" class="resources-img">
                 </li>
+
 
             </ul>
         </div>
@@ -126,14 +135,15 @@
         <i class="apple-circle apple-circle-yellow"></i>
         <i class="apple-circle apple-circle-green"></i>
         <button class="c-btn-normal fr add-question-headline" style="outline: none;"
-            ng-click="viewController.addQuestionHeadline()">
-            <span class="glyphicon glyphicon-plus"></span>  添加大题
+                ng-click="viewController.addQuestionHeadline()">
+            <span class="glyphicon glyphicon-plus"></span> 添加大题
         </button>
     </div>
     <div class="shortcut-body p-10">
         <div ng-repeat="questionHeadline in paper.questionHeadline" class="shortcut-question-headline mb-5">
             <div class="input-group">
-                <span class="input-group-addon shortcut-input-group-addon fs-14" ng-bind="BASIC_DATA.cnNum[$index]" id="basic-addon20"
+                <span class="input-group-addon shortcut-input-group-addon fs-14" ng-bind="BASIC_DATA.cnNum[$index]"
+                      id="basic-addon20"
                       style="top: 0;border-radius: 0;"></span>
                 <input type="text" class="form-control fs-14 shortcut-form-control"
                        ng-model="questionHeadline.questionType" placeholder="请输入标题，如：选择题"
@@ -154,11 +164,11 @@
     <div class="shortcut-footer p-10">
         <button class="c-btn-normal submit-paper fs-14 fr" style="outline: none;"
                 ng-click="viewController.submitPaper()">
-            <span class="glyphicon glyphicon-saved"></span>  提&nbsp;交
+            <span class="glyphicon glyphicon-saved"></span> 提&nbsp;交
         </button>
         <button class="c-btn-normal submit-paper fs-14 fr mr-10" style="outline: none;"
                 ng-click="viewController.preview()">
-            <span class="glyphicon glyphicon-floppy-saved"></span>  保存预览
+            <span class="glyphicon glyphicon-floppy-saved"></span> 保存预览
         </button>
     </div>
 </div>

@@ -29,6 +29,13 @@
                 controller: BASIC_DATA.routerConfig.contentProduce.childrenPage.answerProduce.controller,
                 params:{args:{}}
             })
+            .state(BASIC_DATA.routerConfig.paperPreview.state, {
+                url: BASIC_DATA.routerConfig.paperPreview.url,
+                templateUrl: BASIC_DATA.routerConfig.paperPreview.templateUrl,
+                cache:true,
+                controller: BASIC_DATA.routerConfig.paperPreview.controller,
+                params:{args:{}}
+            })
     })
         .run(function($rootScope, $state, $stateParams) {
         $rootScope.$state = $state;
