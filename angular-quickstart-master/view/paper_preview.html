@@ -1,1 +1,36 @@
 <link rel="stylesheet" href="../style/paper_preview.css">
+<div class="paper-preview-container">
+    <!--试卷内容-->
+    <div class="paper-content card-shadow">
+        <!--试卷名称-->
+        <div class="paper-name mb-15">
+            2015 年第九届北京学而思综合能力测评（学而思杯）
+        </div>
+        <!--试卷题目-->
+        <div class="question">
+            <div class="quesiton-headline" ng-repeat="questionHeadline in paper.questionHeadline">
+                <div class="question-type-wrapper tl">
+                    <span class="glyphicon glyphicon-hand-down fs-16 question-type-icon"></span>
+                    <span class="headline-index fs-16 fw-600" ng-bind="BASIC_DATA.cnNum[$index]+'.'"></span>
+                    <span class="question-type fs-16 fw-600" ng-bind="questionHeadline.questionType"></span>
+                </div>
+                <div class="question-item tl por" ng-repeat="question in questionHeadline.questionList" >
+                    <span class="glyphicon glyphicon-filter question-index-tag poa"></span>
+                    <span class="poa question-index" ng-bind="viewController.questionIndexCom($parent,$index)+1"></span>
+                    <div class="pl-20" ng-bind-html="question.stem"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="button-right">
+        <button class="c-btn-normal fs-14 mt-10 mr-10" style="outline: none;"
+                ng-click="viewController.backToContentProduce($event);">
+            <span class="glyphicon glyphicon-hand-left"></span>
+            返回题干制作
+        </button>
+        <button class="c-btn-normal submit-paper mr-10 fs-14" style="outline: none;"
+                ng-click="viewController.submitPaper()">
+            <span class="glyphicon glyphicon-saved"></span> 提交
+        </button>
+    </div>
+</div>

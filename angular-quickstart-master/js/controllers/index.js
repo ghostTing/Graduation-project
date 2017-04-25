@@ -14,7 +14,13 @@
                     i.isCurrentPage=false;
                 });
                 item.isCurrentPage=true;
-            }
+                },
+                /*返回顶部*/
+                backToTop:function () {
+                    $('body').animate({
+                        scrollTop: 0
+                    });
+                }
             }
         }
         function init($scope,SweetAlert,$cookieStore) {

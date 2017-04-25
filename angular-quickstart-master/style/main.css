@@ -65,3 +65,8 @@ body {
     width: 1000px;
     margin: 0 auto 20px;
 }
+.back-to-top{
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+}
