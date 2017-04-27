@@ -4,9 +4,9 @@ angular.module('myApp')
     return {
         request: function(config){
             config.headers = config.headers || {};
-            if($cookies.get('username')){
-                config.headers.authorization = 'Bearer ' + $cookies.get('username');
-            }
+                if($cookies.get('token')){
+                    config.headers.authorization =$cookies.get('token') ;
+                }
             return config;
         }
     };

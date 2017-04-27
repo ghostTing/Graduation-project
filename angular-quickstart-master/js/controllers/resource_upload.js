@@ -9,7 +9,7 @@
     }]);
     function declare($scope,$http,$timeout) {
         $scope.viewController={
-            paperType_change:function (selectedType) {
+            paperType_change:function (selectedType){
                 if (selectedType.code==11){
                     $scope.isSEE=true;
                     $scope.showGradeSelect=false;
@@ -21,16 +21,18 @@
                     $scope.showGradeSelect=true;
                     $scope.showSchoolInput=true;
                 }
-                $scope.paperInfo.paperType=selectedType;
+                selectedType.code!=''?$scope.paperInfo.paperType=selectedType.value:$scope.paperInfo.paperType='';
             },
             year_change:function (selectedYear) {
                 $scope.paperInfo.year=selectedYear;
             },
             subject_change:function (selectedSubject) {
-                $scope.paperInfo.subject=selectedSubject;
+                selectedSubject.code!=''? $scope.paperInfo.subject=selectedSubject.value:$scope.paperInfo.subject='';
+
             },
             grade_change:function (selectedGrade) {
-                $scope.paperInfo.grade=selectedGrade;
+                selectedGrade.code!=''? $scope.paperInfo.grade=selectedGrade.value:$scope.paperInfo.grade='';
+
             },
             province_change:function (selectedProvince) {
                 if (selectedProvince.id){
@@ -39,9 +41,16 @@
                 }else {
                     $scope.ProvinceIsSelected=false;
                 }
+                $scope.cityPickingFinished=false;
             },
             city_change:function (selectedCity) {
-                $scope.paperInfo.region+=selectedCity.city;
+                if (selectedCity.id!=''){
+                    $scope.paperInfo.region+=selectedCity.city;
+                    $scope.cityPickingFinished=true;
+                }else {
+                    $scope.cityPickingFinished=false;
+                }
+
             },
             /*获取城市*/
             getCities:function (selectedProvince) {
@@ -58,12 +67,51 @@
             },
             /*提交试卷基础信息*/
             sumitPaperBasicInfo:function () {
-                if ($scope.isSEE){
-                    $scope.paperInfo.paperName=$scope.paperInfo.year+$scope.paperInfo.region+$scope.paperInfo.school+$scope.paperInfo.subject.value+$scope.paperInfo.paperType.value;
+                if (!$scope.isSEE){
+                    $scope.paperInfo.paperName=$scope.paperInfo.year+$scope.paperInfo.region+$scope.paperInfo.school+$scope.paperInfo.subject+$scope.paperInfo.paperType;
+                    console.log($scope.paperInfo);
+                    /*前端验证所有信息的填写*/
+                    if ($scope.paperInfo.year&&$scope.paperInfo.school&&$scope.paperInfo.grade&&$scope.paperInfo.subject&&$scope.paperInfo.paperType&&  $scope.cityPickingFinished){
+                        $http({
+                            method:'post',
+                            url:BASIC_DATA.API_URL+'/task/startMaking',
+                            data:$scope.paperInfo
+                        }).then(function(data){
+                            console.log(data);
+                        });
+                    }else{
+                        swal({
+                            title: "出错了",
+                            text: "以上所有信息必填",
+                            type: "error",
+                            confirmButtonColor: "#DD6B55",
+                            closeOnConfirm: false,
+                            html: false
+                        });
+                    }
                 }else {
-                    $scope.paperInfo.paperName=$scope.paperInfo.year+$scope.paperInfo.region+$scope.paperInfo.school+$scope.paperInfo.grade.value+$scope.paperInfo.subject.value+$scope.paperInfo.paperType.value;
+                    $scope.paperInfo.grade='';
+                    $scope.paperInfo.school='';
+                    $scope.paperInfo.paperName=$scope.paperInfo.year+$scope.paperInfo.region+$scope.paperInfo.school+$scope.paperInfo.grade+$scope.paperInfo.subject+$scope.paperInfo.paperType;
+                    if ($scope.paperInfo.year&&$scope.paperInfo.subject&&$scope.paperInfo.paperType&&$scope.cityPickingFinished){
+                        $http({
+                            method:'post',
+                            url:BASIC_DATA.API_URL+'/task/startMaking',
+                            data:$scope.paperInfo
+                        }).then(function(data){
+                            console.log(data);
+                        });
+                    }else {
+                        swal({
+                            title: "出错了",
+                            text: "以上所有信息必填",
+                            type: "error",
+                            confirmButtonColor: "#DD6B55",
+                            closeOnConfirm: false,
+                            html: false
+                        });
+                    }
                 }
-                console.log($scope.paperInfo);
             },
             /*文件提交后*/
             onFileSubmit:function () {

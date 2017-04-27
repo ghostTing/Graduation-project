@@ -187,7 +187,7 @@
             rotatable: false,
             zoomRatio:0.2
         });
-        $scope.paper = {
+        /*$scope.paper = {
             questionHeadline: [
                 {
                     questionType: '填空题I',
@@ -286,6 +286,17 @@
                         }
                     ]
                 }
+            ]
+        };*/
+        $scope.paper={
+            questionHeadline:[{
+                questionType: '',
+                questionList: [
+                    {
+                        stem: ''
+                    }
+                ]
+            }
             ]
         };
         if (typeof $rootScope.previousState_params.questionIndex != 'undefined') {
