@@ -34,7 +34,12 @@
                 templateUrl: BASIC_DATA.routerConfig.paperPreview.templateUrl,
                 cache:true,
                 controller: BASIC_DATA.routerConfig.paperPreview.controller,
-                params:{args:{}}
+            })
+            .state(BASIC_DATA.routerConfig.contentAudit.state, {
+                url: BASIC_DATA.routerConfig.contentAudit.url,
+                templateUrl: BASIC_DATA.routerConfig.contentAudit.templateUrl,
+                cache:true,
+                controller: BASIC_DATA.routerConfig.contentAudit.controller
             })
     })
         .run(function($rootScope, $state, $stateParams) {

@@ -25,15 +25,19 @@
                         <td class="solution-edit" ng-click="viewController.initUeditor()">
                             <script id="solution-edit" style="height:144px;width:100%"></script>
                             <input type="text" class="solution-input" placeholder="点击编辑答案" readonly
-                                   ng-show="showPlaceholder"></td>
+                                   ng-show="showPlaceholder">
+                            <div class="solution-content" ng-show="showSolutionContent">
+
+                            </div>
                         </td>
+
                     </tr>
                 </table>
             </div>
         </div>
         <div class="answer-edit-bottom">
             <button class="c-btn-normal fr fs-14 mt-10 mr-20" style="outline: none;">
-                <span class="glyphicon glyphicon-floppy-saved"></span>
+                <span class="glyphicon glyphicon-floppy-saved" ng-click="savaSolution()"></span>
                 保&nbsp;&nbsp;存
             </button>
             <button class="c-btn-normal fr fs-14 mt-10 mr-20" style="outline: none;"

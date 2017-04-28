@@ -40,12 +40,20 @@
                     }
                 }
             },
+            /*整卷预览页*/
             paperPreview:{
                 state:"paperPreview",
                 moduleName:'整卷预览',
                 url: '/paperPreview',
                 templateUrl:"view/paper_preview.html",
                 controller: 'paperPreviewController'
+            },
+            contentAudit:{
+                state:'contentAudit',
+                moduleName:'内容审核',
+                url:'/contentAudit',
+                templateUrl:"view/content_audit.html",
+                controller: 'contentAuditController'
             }
         },
         API_URL:' http://localhost:8080/question',
