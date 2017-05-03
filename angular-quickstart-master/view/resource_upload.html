@@ -12,7 +12,7 @@
                     <span class="glyphicon glyphicon-folder-open mr-15"></span>点击下面输入框上传源文件
                 </h4>
                 <p class="file-type-tip p-10 br-4 fc-666">
-                    <span class="glyphicon glyphicon-exclamation-sign mr-5"></span>温馨提示：支持word，JPG，JPEG，PNG，RAR，ZIP文件类型的上传，可多选。选择要上传的所有文件后点击提交按钮完成上传
+                    <span class="glyphicon glyphicon-exclamation-sign mr-5"></span>温馨提示：支持DOC，JPG，JPEG，PNG，PDF文件类型的上传，可多选。选择要上传的所有文件后点击提交按钮完成上传
                 </p>
                 <form name="fileForm"  method="post" action="http://localhost:8080/question/fileupload" enctype="multipart/form-data" target="noJump" ng-submit="viewController.onFileSubmit()">
                     <input type="file" name="files">
@@ -28,32 +28,66 @@
                 试卷信息源
             </div>
             <div class="resources-preview por">
-                <ul class="images tc">
-                    <li class="resources-item dib item-shadow" ng-mouseover="mouseOver=true;" ng-mouseleave="mouseOver=false;">
-                        <div class="img-cover poa" ng-hide="mouseOver">
-                            <span class="glyphicon glyphicon-fullscreen fs-16 poa fullscreen-icon"></span>
-                        </div>
-                        <img src="../img/sample_paper/0001.jpg" class="resources-img">
-                    </li>
-                    <li class="resources-item dib item-shadow" ng-mouseover="mouseOver=true;" ng-mouseleave="mouseOver=false;">
-                        <div class="img-cover poa" ng-hide="mouseOver">
-                            <span class="glyphicon glyphicon-fullscreen fs-16 poa fullscreen-icon"></span>
-                        </div>
-                        <img src="../img/sample_paper/0002.jpg" class="resources-img">
-                    </li>
-                    <li class="resources-item dib item-shadow" ng-mouseover="mouseOver=true;" ng-mouseleave="mouseOver=false;">
-                        <div class="img-cover poa" ng-hide="mouseOver">
-                            <span class="glyphicon glyphicon-fullscreen fs-16 poa fullscreen-icon"></span>
-                        </div>
-                        <img src="../img/sample_paper/0003.jpg" class="resources-img">
-                    </li>
-                    <li class="resources-item dib item-shadow" ng-mouseover="mouseOver=true;" ng-mouseleave="mouseOver=false;">
-                        <div class="img-cover poa" ng-hide="mouseOver">
-                            <span class="glyphicon glyphicon-fullscreen fs-16 poa fullscreen-icon"></span>
-                        </div>
-                        <img src="../img/sample_paper/0004.jpg" class="resources-img">
-                    </li>
-                </ul>
+                <i class="poa glyphicon glyphicon-chevron-left btn-pre fs-16" ng-click="viewController.moveTo('r')"></i>
+                <div class="visible-area">
+                    <ul class="images">
+                        <li class="resources-item dib item-shadow" ng-mouseover="mouseOver=true;" ng-mouseleave="mouseOver=false;">
+                            <div class="img-cover poa" ng-hide="mouseOver">
+                                <span class="glyphicon glyphicon-fullscreen fs-16 poa fullscreen-icon"></span>
+                            </div>
+                            <img src="../img/sample_paper/0001.jpg" class="resources-img">
+                        </li>
+                        <li class="resources-item dib item-shadow" ng-mouseover="mouseOver=true;" ng-mouseleave="mouseOver=false;">
+                            <div class="img-cover poa" ng-hide="mouseOver">
+                                <span class="glyphicon glyphicon-fullscreen fs-16 poa fullscreen-icon"></span>
+                            </div>
+                            <img src="../img/sample_paper/0001.jpg" class="resources-img">
+                        </li>
+                        <li class="resources-item dib item-shadow" ng-mouseover="mouseOver=true;" ng-mouseleave="mouseOver=false;">
+                            <div class="img-cover poa" ng-hide="mouseOver">
+                                <span class="glyphicon glyphicon-fullscreen fs-16 poa fullscreen-icon"></span>
+                            </div>
+                            <img src="../img/sample_paper/0001.jpg" class="resources-img">
+                        </li>
+                        <li class="resources-item dib item-shadow" ng-mouseover="mouseOver=true;" ng-mouseleave="mouseOver=false;">
+                            <div class="img-cover poa" ng-hide="mouseOver">
+                                <span class="glyphicon glyphicon-fullscreen fs-16 poa fullscreen-icon"></span>
+                            </div>
+                            <img src="../img/sample_paper/0001.jpg" class="resources-img">
+                        </li>
+                        <li class="resources-item dib item-shadow" ng-mouseover="mouseOver=true;" ng-mouseleave="mouseOver=false;">
+                            <div class="img-cover poa" ng-hide="mouseOver">
+                                <span class="glyphicon glyphicon-fullscreen fs-16 poa fullscreen-icon"></span>
+                            </div>
+                            <img src="../img/sample_paper/0001.jpg" class="resources-img">
+                        </li>
+                        <li class="resources-item dib item-shadow" ng-mouseover="mouseOver=true;" ng-mouseleave="mouseOver=false;">
+                            <div class="img-cover poa" ng-hide="mouseOver">
+                                <span class="glyphicon glyphicon-fullscreen fs-16 poa fullscreen-icon"></span>
+                            </div>
+                            <img src="../img/sample_paper/0002.jpg" class="resources-img">
+                        </li>
+                        <li class="resources-item dib item-shadow" ng-mouseover="mouseOver=true;" ng-mouseleave="mouseOver=false;">
+                            <div class="img-cover poa" ng-hide="mouseOver">
+                                <span class="glyphicon glyphicon-fullscreen fs-16 poa fullscreen-icon"></span>
+                            </div>
+                            <img src="../img/sample_paper/0002.jpg" class="resources-img">
+                        </li>
+                        <li class="resources-item dib item-shadow" ng-mouseover="mouseOver=true;" ng-mouseleave="mouseOver=false;">
+                            <div class="img-cover poa" ng-hide="mouseOver">
+                                <span class="glyphicon glyphicon-fullscreen fs-16 poa fullscreen-icon"></span>
+                            </div>
+                            <img src="../img/sample_paper/0003.jpg" class="resources-img">
+                        </li>
+                        <li class="resources-item dib item-shadow" ng-mouseover="mouseOver=true;" ng-mouseleave="mouseOver=false;">
+                            <div class="img-cover poa" ng-hide="mouseOver">
+                                <span class="glyphicon glyphicon-fullscreen fs-16 poa fullscreen-icon"></span>
+                            </div>
+                            <img src="../img/sample_paper/0004.jpg" class="resources-img">
+                        </li>
+                    </ul>
+                </div>
+                <i class="poa glyphicon glyphicon-chevron-right btn-next fs-16" ng-click="viewController.moveTo('l')"></i>
             </div>
         </div>
         <div class="apple-card-container mt-20">
@@ -62,35 +96,40 @@
                 <i class="apple-circle apple-circle-yellow"></i>
                 <i class="apple-circle apple-circle-green"></i>
             </div>
-            <div class="paper-info">
-                <div class="select-container">
-                    <label for="paperType" class="label-for-select">&nbsp;&nbsp;&nbsp;试题类型：</label>
-                    <select name="paperType" class="paper-basic-data por" id="paperType" ng-init="selectedType=paperType[0]" ng-options="item.value for item in paperType" ng-model="selectedType" ng-change="viewController.paperType_change(selectedType)"></select>
+            <div class="paper-info-container">
+                <div class="paper-info fl">
+                    <div class="select-container">
+                        <label for="paperType" class="label-for-select">&nbsp;&nbsp;&nbsp;试题类型：</label>
+                        <select name="paperType" class="paper-basic-data por" id="paperType" ng-init="selectedType=paperType[0]" ng-options="item.value for item in paperType" ng-model="selectedType" ng-change="viewController.paperType_change(selectedType)"></select>
+                    </div>
+                    <div class="select-container">
+                        <label for="year" class="label-for-select">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;年份：</label>
+                        <select name="year" class="paper-basic-data" id="year" ng-init="selectedYear=year[0]" ng-options="item for item in year" ng-model="selectedYear" ng-change="viewController.year_change(selectedYear)"></select>
+                    </div>
+                    <div class="select-container">
+                        <label for="subject" class="label-for-select">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;科目：</label>
+                        <select name="subject" class="paper-basic-data" id="subject" ng-init="selectedSubject=subject[0]" ng-options="item.value for item in subject" ng-model="selectedSubject" ng-change="viewController.subject_change(selectedSubject)"></select>
+                    </div>
+                    <div class="select-container" ng-if="showGradeSelect">
+                        <label for="grade" class="label-for-select" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;年级：</label>
+                        <select name="grade" class="paper-basic-data" id="grade" ng-init="selectedGrade=grade[0]" ng-options="item.value for item in grade" ng-model="selectedGrade" ng-change="viewController.grade_change(selectedGrade)"></select>
+                    </div>
+                    <div class="select-container">
+                        <label for="province" class="label-for-select">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;地区：</label>
+                        <select name="province" class="paper-basic-data" id="province"
+                                ng-options="item.province for item in province" ng-model="selectedProvince" ng-change="viewController.province_change(selectedProvince)"></select>
+                        <select name="city" class="paper-basic-data" id="city" ng-show="ProvinceIsSelected"
+                                ng-options="item.city for item in city" ng-model="selectedCity" ng-change="viewController.city_change(selectedCity)"></select>
+                    </div>
+                    <div class="select-container" ng-if="showSchoolInput">
+                        <label for="school" class="label-for-select">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;学校：</label>
+                        <input type="text" name="school" id="school" class="form-control dib" placeholder="请输入学校全称"
+                               ng-model="paperInfo.school">
+                    </div>
                 </div>
-                <div class="select-container">
-                    <label for="year" class="label-for-select">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;年份：</label>
-                    <select name="year" class="paper-basic-data" id="year" ng-init="selectedYear=year[0]" ng-options="item for item in year" ng-model="selectedYear" ng-change="viewController.year_change(selectedYear)"></select>
-                </div>
-                <div class="select-container">
-                    <label for="subject" class="label-for-select">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;科目：</label>
-                    <select name="subject" class="paper-basic-data" id="subject" ng-init="selectedSubject=subject[0]" ng-options="item.value for item in subject" ng-model="selectedSubject" ng-change="viewController.subject_change(selectedSubject)"></select>
-                </div>
-                <div class="select-container" ng-if="showGradeSelect">
-                    <label for="grade" class="label-for-select" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;年级：</label>
-                    <select name="grade" class="paper-basic-data" id="grade" ng-init="selectedGrade=grade[0]" ng-options="item.value for item in grade" ng-model="selectedGrade" ng-change="viewController.grade_change(selectedGrade)"></select>
-                </div>
-                <div class="select-container">
-                    <label for="province" class="label-for-select">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;地区：</label>
-                    <select name="province" class="paper-basic-data" id="province"
-                            ng-options="item.province for item in province" ng-model="selectedProvince" ng-change="viewController.province_change(selectedProvince)"></select>
-                    <select name="city" class="paper-basic-data" id="city" ng-show="ProvinceIsSelected"
-                            ng-options="item.city for item in city" ng-model="selectedCity" ng-change="viewController.city_change(selectedCity)"></select>
-                </div>
-                <div class="select-container" ng-if="showSchoolInput">
-                    <label for="school" class="label-for-select">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;学校：</label>
-                    <input type="text" name="school" id="school" class="form-control dib" placeholder="请输入学校全称"
-                           ng-model="paperInfo.school">
-                </div>
+                <p class="select-tip p-10 br-4 fc-666">
+                    <span class="glyphicon glyphicon-exclamation-sign mr-5"></span>温馨提示：左边的所有信息必填并确保您输入的这些基础信息完全正确，一旦提交，将不可修改！
+                </p>
                 <div class="bottom-btn">
                     <button class="c-btn-normal fr fs-14 mt-10" ng-click="viewController.sumitPaperBasicInfo()">
                         <span class="glyphicon glyphicon-edit"></span>
@@ -98,6 +137,7 @@
                     </button>
                 </div>
             </div>
+
         </div>
 <!--injiect:plugJS-->
 <script src="../plug/fileUploader/jquery.fileuploader.js"></script>

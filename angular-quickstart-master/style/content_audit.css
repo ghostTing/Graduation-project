@@ -39,7 +39,35 @@
     position: relative;
     cursor: pointer;
 }
-
+.visible-area{
+    width: 605px;
+    overflow: hidden;
+    margin: 0 auto;
+}
+.btn-pre,.btn-next{
+    font-size: 30px;
+    top: 110px;
+    cursor: pointer;
+}
+.btn-pre:hover,.btn-next:hover{
+    color: #92b65c;
+    font-size: 35px;
+    transition: all .2s;
+}
+.btn-pre{
+    left: 60px;
+}
+.btn-next{
+    right: 60px;
+}
+.images {
+    padding: 0;
+    width: 100000px;
+    text-align: left;
+    transition: all 0.5s;
+    letter-spacing: 0;
+    font-size: 0;
+}
 .resources-img {
     width: 100%;
     height: 100%;

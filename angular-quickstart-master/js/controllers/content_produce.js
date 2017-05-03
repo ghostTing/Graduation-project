@@ -11,6 +11,7 @@
         init($scope, $http, $sce, $rootScope, $timeout);
     }]);
     function declareModel($scope) {
+        $scope.flag=true;
         $scope.btnOnSave = [];
         $scope.hideExplain = [];
         /*控制操作区active类名的model*/
@@ -184,15 +185,37 @@
                         }
                     ]
                 });
-            }/*,
-            /!*初始化图片预览插件*!/
-            initViewer:function () {
-                $('.images').viewer('build');
             },
-            /!*销毁图片预览插件*!/
-            destroyViewer:function () {
-                $('.images').viewer('hidden');
-            }*/
+            /*移动图片*/
+            moveTo:function (derection) {
+                var ulNode,getUlMLval,imgLength;
+                /*设置点击事件响应的时间间隔*/
+                if (!$scope.flag){
+                    return false;
+                }
+                setTimeout(function(){
+                    $scope.flag=true;
+                },500);
+                ulNode=document.getElementsByClassName('images')[0];
+                if (ulNode.currentStyle){
+                    getUlMLval=ulNode.currentStyle('marginLeft');
+                }else {
+                    getUlMLval=parseInt(getComputedStyle(ulNode).marginLeft);
+                }
+                imgLength=ulNode.getElementsByTagName('li').length;
+                if (derection=='l'){
+                    if(getUlMLval<=(imgLength-4)*(-160)){
+                        return false
+                    }
+                    ulNode.style.marginLeft=getUlMLval-160+'px';
+                }else {
+                    if(getUlMLval>=0){
+                        return false
+                    }
+                    ulNode.style.marginLeft=getUlMLval+160+'px';
+                }
+                $scope.flag=false;
+            }
         }
     }
 

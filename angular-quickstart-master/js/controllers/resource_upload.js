@@ -120,6 +120,36 @@
                         console.log(data);
                     })
                 },3000)
+            },
+            /*移动图片*/
+            moveTo:function (derection) {
+                var ulNode,getUlMLval,imgLength;
+                /*设置点击事件响应的时间间隔*/
+                if (!$scope.flag){
+                    return false;
+                }
+                setTimeout(function(){
+                    $scope.flag=true;
+                },500);
+                ulNode=document.getElementsByClassName('images')[0];
+                if (ulNode.currentStyle){
+                    getUlMLval=ulNode.currentStyle('marginLeft');
+                }else {
+                    getUlMLval=parseInt(getComputedStyle(ulNode).marginLeft);
+                }
+                imgLength=ulNode.getElementsByTagName('li').length;
+                if (derection=='l'){
+                    if(getUlMLval<=(imgLength-4)*(-180)){
+                        return false
+                    }
+                    ulNode.style.marginLeft=getUlMLval-180+'px';
+                }else {
+                    if(getUlMLval>=0){
+                        return false
+                    }
+                    ulNode.style.marginLeft=getUlMLval+180+'px';
+                }
+                $scope.flag=false;
             }
         }
     }
@@ -147,6 +177,7 @@
         });
     }
     function declareModel($scope) {
+        $scope.flag=true;//设置点击事件响应的时间间隔
         $scope.paperType=BASIC_DATA.PAPER_TYPE;
         $scope.year=BASIC_DATA.YEAR;
         $scope.subject=BASIC_DATA.SUBJECT;
