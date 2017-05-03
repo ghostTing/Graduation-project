@@ -63,11 +63,12 @@ setTimeout(function () {
                     },
                     url:'http://localhost:8080/question/login'
                 }).then(function (data) {
-                    if(data.data=='success'){
+                        $cookieStore.put("token",data.data.token );
+                        $cookieStore.put('role',data.data.role);
+                        alert($cookieStore.get("token")+'//////'+$cookieStore.get("role"));
                         $cookieStore.put("username",$scope.username );
                         $cookieStore.put("password",$scope.password );
                         window.location='/index.html';
-                    }
                 },function () {
                     swal("用户名或者密码错误！！");
                 })

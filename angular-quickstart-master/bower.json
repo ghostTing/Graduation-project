@@ -1,18 +1,16 @@
 {
-  "name": "angular-quickstart",
-  "description": "for angular study",
+  "name": "question_platform",
+  "description": "for study",
   "main": "",
   "authors": [
-    "Yu Zhu Xu <timely.xyz@163.com>"
+    "544392498@qq.com"
   ],
   "license": "MIT",
   "homepage": "",
   "ignore": [
     "**/.*",
     "node_modules",
-    "bower_components",
-    "test",
-    "tests"
+    "bower_components"
   ],
   "dependencies": {
     "bootstrap": "^3.3.6",

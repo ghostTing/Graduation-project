@@ -1,25 +1,36 @@
-.container{
+.container {
     width: 100%;
 }
-.paper-file-container,.paper-info-container,.editor-area{
-    margin-top: 1px;
-    border: none;
+
+.paper-file-container, .paper-info-container, .editor-area {
     width: 800px;
 }
-.paper-info-container{
+
+.paper-info-container {
     margin-top: 270px;
 }
-.paper-file-container{
+
+.paper-file-container {
     position: fixed;
     height: 250px;
-    z-index: 10000;
-    background: url("../img/task_upload/fileCheck_bg.jpg") no-repeat center;
+    z-index: 1001;
+    background: url("../img/task_upload/fileCheck_bg.jpg") no-repeat top;
+    background-size: cover;
+    border: 1px solid #dcdcdc;
 }
-.resources-preview{
+.resources-preview-header{
+    background-color: #e8e8e8;
+}
+.resources-preview-tag{
+    font-size: 30px;
+    margin-top: -2px;
+    margin-right: -3px;
+}
+.resources-preview {
     padding-top: 20px;
     width: 100%;
 }
-.resources-item{
+.resources-item {
     width: 120px;
     height: 160px;
     padding: 8px;
@@ -27,32 +38,86 @@
     margin-right: 40px;
     border-radius: 2px;
     position: relative;
+    cursor: pointer;
+    transition: all 0.5s;
 }
-.resources-img{
-    width: 100%;
-    height: 100%;
-    background-color: #c7c7c7;
+.resources-item.active{
+    -webkit-box-shadow: 3px 7px 8px rgba(0,0,0,0.3);
+    -moz-box-shadow:  3px 7px 8px rgba(0,0,0,0.3);
+    box-shadow: 3px 7px 8px rgba(0,0,0,0.3);
 }
-/*试卷基础信息*/
-.paper-info-table{
+.visible-area{
+    width: 605px;
+    overflow: hidden;
     margin: 0 auto;
 }
-.paper-info-table td{
+.btn-pre,.btn-next{
+    font-size: 30px;
+    top: 110px;
+    cursor: pointer;
+}
+.btn-pre:hover,.btn-next:hover{
+    color: #92b65c;
+    font-size: 35px;
+    transition: all .2s;
+}
+.btn-pre{
+    left: 60px;
+}
+.btn-next{
+    right: 60px;
+}
+.images{
+    padding: 0;
+    width: 100000px;
+    text-align: left;
+    transition: all 0.5s;
+    letter-spacing: 0;
+    font-size: 0;
+}
+.resources-img {
+    width: 100%;
+    height: 100%;
+}
+.img-cover{
+    width: 104px;
+    height: 144px;
+    top: 8px;
+    left: 8px;
+    background-image:-webkit-linear-gradient(bottom, rgba(123,104,73,0.2) 0%,rgba(123,104,73,0.04) 100%);
+    background-image:-moz-linear-gradient(bottom, rgba(123,104,73,0.2) 0%,rgba(123,104,73,0.04) 100%);
+    background-image:linear-gradient(bottom, rgba(123,104,73,0.2) 0%,rgba(123,104,73,0.04) 100%);
+}
+.fullscreen-icon{
+    top: 62px;
+    left: 44px;
+}
+
+/*试卷基础信息*/
+.paper-info-table {
+    margin: 0 auto;
+}
+
+.paper-info-table td {
     padding: 5px;
 }
+
 /*试卷编辑区*/
-.question-item.noBorder{
+.question-item.noBorder {
     border: none;
 }
-.question-item{
+
+.question-item {
     background-color: #ffffff;
-    border: 1px solid #c7c7c7;
+    border: 1px solid #dcdcdc;
     margin-bottom: 50px;
 }
-.question-item:hover{
+
+.question-item:hover {
     border: 1px solid #92b65c;
 }
-.question-index{
+
+.question-index {
     left: -1px;
     top: -1px;
     display: inline-block;
@@ -67,24 +132,159 @@
     color: #fff;
     z-index: 1000;
 }
-.showContent{
-    padding: 35px;
+.paperclip{
+    font-size: 20px;
+    color: #3c763d;
+    margin-top: -3px;
+    margin-right: -3px;
+    z-index: 1000;
+}
+
+.showContent {
+    min-height: 100px;
+    border-bottom: 1px dashed #dcdcdc;
+    padding-left: 20px;
+    margin: 20px;
     white-space: normal;
     overflow-wrap: break-word;
 }
-.save-button{
+
+.save-button {
     bottom: -40px;
     right: 0;
 }
+
+/*解析录入的样式*/
+.explain {
+    width: 100%;
+}
+
+.explain-table {
+    width: 100%;
+}
+
+.explain-table td {
+    padding: 10px;
+}
+
+.explain-title {
+    text-align: right;
+    vertical-align: top;
+}
+
 /*插件的订制样式*/
-.viewer-container{
+.viewer-container {
     width: 800px;
     height: 300px;
     position: absolute;
     top: 0;
     left: 0;
 }
+
 /*隐藏销毁Ueditor后的textarea*/
-.question-item textarea{
+.question-item textarea {
     display: none;
+}
+
+/*操作区*/
+.shortcut {
+    width: 240px;
+    position: fixed;
+    top: 50px;
+    right: 150px;
+    z-index: 1003;
+}
+
+@media all and (max-width: 1400px) {
+    .shortcut {
+        right: 100px;
+    }
+}
+
+@media all and (max-width: 1200px) {
+    .shortcut {
+        right: 10px;
+    }
+}
+
+@media all and (max-width: 1000px) {
+    .shortcut {
+        display: none;
+    }
+}
+.add-question-headline{
+    height: 24px;
+    line-height: 24px;
+    margin-top: 3px;
+    margin-right: 10px;
+    padding: 0 10px;
+    border:1px solid #dcdcdc;
+}
+.shortcut-form-control {
+    height: 28px;
+    padding: 4px 12px;
+    border-color: #92b65c;
+    color: #92b65c;
+}
+.shortcut-input-group-addon{
+    color: #92b65c;
+    border-color: #92b65c;
+}
+
+.shortcut-question-list {
+    padding: 10px 0 10px 15px;
+    text-align: left;
+}
+
+.shortcut-question-list li {
+    display: inline-block;
+    margin-right: 15px;
+    margin-bottom: 10px;
+}
+
+.question-index-circle {
+    cursor: pointer;
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    border: 1px solid #92b65c;
+    color: #92b65c;
+    border-radius: 50%;
+    text-align: center;
+    font-style: normal;
+    line-height: 22px;
+    font-size: 16px;
+}
+
+.shortcut-add.margin-deal {
+    margin-left: -5px;
+}
+
+.shortcut-add-circle {
+    cursor: pointer;
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    border: 1px solid #92b65c;
+    color: #92b65c;
+    border-radius: 50%;
+    text-align: center;
+    padding-top: 5px;
+}
+
+.question-index-circle:hover, .shortcut-add-circle:hover {
+    background-color: #92b65c;
+    color: #FFFFFF;
+}
+
+.question-index-circle.active, .shortcut-add-circle.active {
+    background-color: #92b65c;
+    color: #FFFFFF;
+}
+
+.shortcut-body {
+    min-height: 500px;
+}
+.shortcut-footer{
+    height: 50px;
 }

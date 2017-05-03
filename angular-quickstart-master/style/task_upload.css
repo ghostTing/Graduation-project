@@ -16,9 +16,25 @@
 /*源文件预览*/
 .resources-preview{
     width: 100%;
-    background: url("../img/task_upload/fileCheck_bg.jpg") no-repeat center;
+    background: url("../img/task_upload/fileCheck_bg.jpg") no-repeat top;
     background-size: cover;
     padding: 20px;
+}
+.resources-preview-header{
+    background-color: #e8e8e8;
+}
+.visible-area{
+    width: 685px;
+    overflow: hidden;
+    margin: 0 auto;
+}
+.images{
+    padding: 0;
+    width: 100000px;
+    text-align: left;
+    transition: all 0.5s;
+    letter-spacing: 0;
+    font-size: 0;
 }
 .resources-item{
     width: 140px;
@@ -26,12 +42,50 @@
     padding: 8px;
     background-color: #FFFFFF;
     margin-right: 40px;
-    border-radius: 2px;
+    border-radius: 4px;
     text-align: center;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.5s;
+}
+.resources-item.active{
+    -webkit-box-shadow: 3px 7px 8px rgba(0,0,0,0.3);
+    -moz-box-shadow:  3px 7px 8px rgba(0,0,0,0.3);
+    box-shadow: 3px 7px 8px rgba(0,0,0,0.3);
 }
 .resources-img{
-    width: 126px;
-    height: 166px;
+    width: 124px;
+    height: 164px;
+}
+.btn-pre,.btn-next{
+    font-size: 30px;
+    top: 90px;
+    cursor: pointer;
+}
+.btn-pre:hover,.btn-next:hover{
+    color: #92b65c;
+    font-size: 35px;
+    transition: all .2s;
+}
+.btn-pre{
+    left: 80px;
+}
+.btn-next{
+    right: 80px;
+}
+.img-cover{
+    width: 124px;
+    height: 164px;
+    top: 8px;
+    left: 8px;
+    background-image:-webkit-linear-gradient(bottom, rgba(123,104,73,0.2) 0%,rgba(123,104,73,0.04) 100%);
+    background-image:-moz-linear-gradient(bottom, rgba(123,104,73,0.2) 0%,rgba(123,104,73,0.04) 100%);
+    background-image:linear-gradient(bottom, rgba(123,104,73,0.2) 0%,rgba(123,104,73,0.04) 100%);
+}
+.fullscreen-icon{
+    font-size: 18px;
+    top: 71px;
+    left: 53px;
 }
 /*进入任务上传页面导航*/
 .enter-upload{
@@ -67,7 +121,6 @@
 /*资源上传页*/
 .paper-info{
     padding: 20px;
-    margin-left: 250px;
 }
 .paper-basic-data{
     padding: 2px 30px 2px 10px;
@@ -78,8 +131,18 @@
     font-size: 16px;
     font-weight: 500;
 }
+.paper-info-container{
+    position: relative;
+    min-height: 350px;
+}
 .select-container{
     margin-bottom: 20px;
+}
+.select-tip{
+    background: #eeeeee;
+    float: right;
+    margin-top: 100px;
+    margin-right: 20px;
 }
 #school{
     width: 220px;
@@ -88,14 +151,22 @@
 }
 .bottom-btn{
     height: 40px;
+    width: 100%;
+    position: absolute;
+    bottom: 10px;
+    right: 20px;
 }
 /*插件的订制样式*/
 .viewer-container{
     width: 1000px;
     height: 400px;
+    position: fixed;
+    top: 0;
+    left: 0;
+}.viewer-container{
+    width: 1000px;
+    height: 400px;
     position: absolute;
     top: 0;
     left: 0;
-}
-.viewer-transition{
 }

@@ -1,8 +1,33 @@
+body{
+    background-color: #f1f1f1;
+}
+.name {
+    color: #26B7D5;
+    font-family: 'Lato', sans-serif;
+    font-size: 30px;
+    font-weight: 600;
+    width: 92px;
+    height: 50px;
+    line-height: 50px;
+    cursor: pointer;
+
+}
+.login-page-logo{
+    position: absolute;
+    margin-left: 50px;
+    top: 20px;
+}
 .login-container{
     margin:50px auto 0;
     width: 340px;
     background-color: #FFFFFF;
-    border: 1px solid #eeeeee;
+    border: hidden;
+    border-radius: 4px;
+    box-shadow: 0 0 8px rgba(0,0,0,.1);
+}
+.apple-card-t-bar{
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
 }
 .logo{
     margin: 0 auto;
@@ -21,6 +46,21 @@
 }
 .login-btn,.register-btn{
     width: 100%;
+    background-color: #26B7D5;
+    border: none;
+    font-size: 16px;
+    height: 34px;
+    line-height: 34px;
+    color: #FFFFFF;
+}
+.register-btn{
+    background-color: #ea6f5a;
+}
+.login-btn:hover{
+    background-color: #219db7;
+}
+.register-btn:hover{
+    background-color: #d06351;
 }
 .role-select{
     display: inline-block;
@@ -28,20 +68,20 @@
     height: 28px;
     line-height: 28px;
     text-align: center;
-    border: 1px solid #92b65c;
+    border: 1px solid #ea6f5a;
     border-radius: 4px;
     cursor: pointer;
-    color: #92b65c;
+    color: #ea6f5a;
 }
 .role-select:hover{
     color: #FFFFFF;
-    background-color: #92b65c;
-    border: 1px solid #92b65c;
+    background-color: #ea6f5a;
+    border: 1px solid #ea6f5a;
 }
 .role-select.active{
     color: #FFFFFF;
-    background-color: #729044;
-    border: 1px solid #729044;
+    background-color: #ea6f5a;
+    border: 1px solid #ea6f5a;
 }
 .role-select-tip{
     color: #666;
@@ -58,3 +98,14 @@
     border-radius: 3px;
     text-decoration: none;
     */
+/*订制样式*/
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover{
+    color: #ea6f5a;
+    font-weight: 600;
+}
+.nav>li>a{
+    color:#26B7D5;
+}
+.form-control:focus{
+    border-color: #26B7D5;
+}

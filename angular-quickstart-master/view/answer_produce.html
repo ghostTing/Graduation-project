@@ -1,0 +1,50 @@
+<link rel="stylesheet" href="../style/answer_produce.css">
+<div class="container p-20" id="answer-produce-container">
+    <div class="answer-edit-container card-shadow apple-card-container">
+        <div class="answer-edit-header apple-card-t-bar">
+            <i class="apple-circle apple-circle-red"></i>
+            <i class="apple-circle apple-circle-yellow"></i>
+            <i class="apple-circle apple-circle-green"></i>
+        </div>
+        <div class="answer-edit-body p-20">
+            <div class="stem-show" ng-bind-html="currentQuestionStem"></div>
+            <div class="answer-edit fs-16">
+                <table class="explain-table">
+                    <tr>
+                        <td class="explain-title" width="120">【考 点】</td>
+                        <td>
+                            <input type="text" class="exam-point-input" placeholder="点击编辑考点">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="explain-title">【答 案】</td>
+                        <td><input type="text" class="answer-input" placeholder="点击编辑答案"></td>
+                    </tr>
+                    <tr>
+                        <td class="explain-title">【解 析】</td>
+                        <td class="solution-edit" ng-click="viewController.initUeditor()">
+                            <script id="solution-edit" style="height:144px;width:100%"></script>
+                            <input type="text" class="solution-input" placeholder="点击编辑答案" readonly
+                                   ng-show="showPlaceholder">
+                            <div class="solution-content" ng-show="showSolutionContent">
+
+                            </div>
+                        </td>
+
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="answer-edit-bottom">
+            <button class="c-btn-normal fr fs-14 mt-10 mr-20" style="outline: none;">
+                <span class="glyphicon glyphicon-floppy-saved" ng-click="savaSolution()"></span>
+                保&nbsp;&nbsp;存
+            </button>
+            <button class="c-btn-normal fr fs-14 mt-10 mr-20" style="outline: none;"
+                    ng-click="viewController.backToContentProduce($event);">
+                <span class="glyphicon glyphicon-hand-left"></span>
+                返回题干制作
+            </button>
+        </div>
+    </div>
+</div>

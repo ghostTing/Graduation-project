@@ -9,7 +9,7 @@
             /*任务列表页*/
             taskUpload:{
                 state:"taskUpload",
-                moduleName:'任务上传',
+                moduleName:'任务中心',
                 url: '/taskUpload',
                 templateUrl:"view/task_upload.html",
                 controller: 'taskUploadController',
@@ -24,12 +24,36 @@
                     }
 
             },
+            /*内容制作页*/
             contentProduce:{
                 state:"contentProduce",
                 moduleName:'内容制作',
                 url: '/contentProduce',
                 templateUrl:"view/content_produce.html",
-                controller: 'contentProduceController'
+                controller: 'contentProduceController',
+                childrenPage:{
+                    answerProduce:{
+                        state:"answerProduce",
+                        url: '/answerProduce',
+                        templateUrl:"view/answer_produce.html",
+                        controller: 'answerProduceController'
+                    }
+                }
+            },
+            /*整卷预览页*/
+            paperPreview:{
+                state:"paperPreview",
+                moduleName:'整卷预览',
+                url: '/paperPreview',
+                templateUrl:"view/paper_preview.html",
+                controller: 'paperPreviewController'
+            },
+            contentAudit:{
+                state:'contentAudit',
+                moduleName:'内容审核',
+                url:'/contentAudit',
+                templateUrl:"view/content_audit.html",
+                controller: 'contentAuditController'
             }
         },
         API_URL:' http://localhost:8080/question',

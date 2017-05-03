@@ -2,30 +2,55 @@
 <div class="container" id="contentProduceContainer">
     <!--试卷信息源-->
     <div class="apple-card-container paper-file-container mb-20">
-        <div style="height: 20px;width: 100%;background:#f7f7f7;"></div>
-        <div class="apple-card-t-bar pl-20 fs-14">
+        <div class="apple-card-t-bar pl-10 fs-14 resources-preview-header"  ng-click="viewController.destroyViewer()">
+            <span class="glyphicon glyphicon-picture"></span>
             试卷信息源
+            <span class="fr glyphicon glyphicon-pushpin resources-preview-tag"></span>
         </div>
         <div class="resources-preview">
-            <ul class="images tc">
-                <li class="resources-item dib">
-                    <img src="../img/task_upload/mmexport1492095894396.jpg" class="resources-img">
-                </li>
-                <li class="resources-item dib">
-                    <img src="../img/login/login_simple_bg.jpg" class="resources-img">
-                </li>
-                <li class="resources-item dib">
-                    <img src="../img/login/login_simple_bg.jpg" class="resources-img">
-                </li>
-                <li class="resources-item dib">
-                    <img src="../img/login/login_simple_bg.jpg" class="resources-img">
-                </li>
-            </ul>
+            <i class="poa glyphicon glyphicon-chevron-left btn-pre fs-16" ng-click="viewController.moveTo('r')"></i>
+            <div class="visible-area">
+                <ul class="images">
+                    <li class="resources-item dib item-shadow" ng-class="{'active':mouseOver[0]}" ng-mouseover="mouseOver[0]=true;" ng-mouseleave="mouseOver[0]=false;">
+                        <div class="img-cover poa" ng-hide="mouseOver[0]">
+                            <span class="glyphicon glyphicon-fullscreen fs-16 poa fullscreen-icon"></span>
+                        </div>
+                        <img src="../img/sample_paper/0001.jpg" class="resources-img">
+                    </li>
+                    <li class="resources-item dib item-shadow" ng-class="{'active':mouseOver[1]}" ng-mouseover="mouseOver[1]=true;" ng-mouseleave="mouseOver[1]=false;">
+                        <div class="img-cover poa" ng-hide="mouseOver[1]">
+                            <span class="glyphicon glyphicon-fullscreen fs-16 poa fullscreen-icon"></span>
+                        </div>
+                        <img src="../img/sample_paper/0002.jpg" class="resources-img">
+                    </li>
+                    <li class="resources-item dib item-shadow" ng-class="{'active':mouseOver[2]}" ng-mouseover="mouseOver[2]=true;" ng-mouseleave="mouseOver[2]=false;">
+                        <div class="img-cover poa" ng-hide="mouseOver[2]">
+                            <span class="glyphicon glyphicon-fullscreen fs-16 poa fullscreen-icon"></span>
+                        </div>
+                        <img src="../img/sample_paper/0003.jpg" class="resources-img">
+                    </li>
+                    <li class="resources-item dib item-shadow" ng-class="{'active':mouseOver[3]}" ng-mouseover="mouseOver[3]=true;" ng-mouseleave="mouseOver[3]=false;">
+                        <div class="img-cover poa" ng-hide="mouseOver[3]">
+                            <span class="glyphicon glyphicon-fullscreen fs-16 poa fullscreen-icon"></span>
+                        </div>
+                        <img src="../img/sample_paper/0004.jpg" class="resources-img">
+                    </li>
+                    <li class="resources-item dib item-shadow" ng-class="{'active':mouseOver[4]}" ng-mouseover="mouseOver[4]=true;" ng-mouseleave="mouseOver[4]=false;">
+                        <div class="img-cover poa" ng-hide="mouseOver[4]">
+                            <span class="glyphicon glyphicon-fullscreen fs-16 poa fullscreen-icon"></span>
+                        </div>
+                        <img src="../img/sample_paper/0001.jpg" class="resources-img">
+                    </li>
+
+                </ul>
+            </div>
+            <i class="poa glyphicon glyphicon-chevron-right btn-next fs-16" ng-click="viewController.moveTo('l')"></i>
         </div>
     </div>
     <!--试卷基础信息-->
     <div class="apple-card-container paper-info-container mb-20">
-        <div class="apple-card-t-bar pl-20 fs-14">
+        <div class="apple-card-t-bar pl-10 fs-14">
+            <span class="glyphicon glyphicon-tags"></span>
             试卷基础信息
         </div>
         <div class="paper-basic-info tc p-10">
@@ -56,31 +81,95 @@
         <div class="question-headline" ng-repeat="questionHeadline in paper.questionHeadline">
             <div class="headline-title mb-10">
                 <div class="input-group">
-                    <span class="input-group-addon fs-18" ng-bind="BASIC_DATA.cnNum[$index]" id="basic-addon4" style="top: 0;border-radius: 0;"></span>
-                    <input type="text" class="form-control fs-18" ng-model="questionHeadline.questionType" placeholder="请输入标题，如：选择题" aria-describedby="basic-addon4">
+                    <span class="input-group-addon fs-18 fw-600" ng-bind="BASIC_DATA.cnNum[$index]" id="basic-addon4"
+                          style="top: 0;border-radius: 0;"></span>
+                    <input type="text" class="form-control fs-18 fw-600" ng-model="questionHeadline.questionType"
+                           placeholder="请输入标题，如：选择题" aria-describedby="basic-addon4">
                 </div>
             </div>
             <!--题目-->
-            <div class="question-item por" style="min-height:200px;width:800px" ng-repeat="question in questionHeadline.questionList">
-                <span class="question-index poa" ng-bind="viewController.questionIndexCom($parent,$index)+1"></span>
-                <div class="showContent fs-14" ng-bind-html="question.stem" ng-click="viewController.newUeditor($event,viewController.questionIndexCom($parent,$index),question)"></div>
+            <div class="question-item por" style="min-height:200px;width:800px"
+                 ng-repeat="question in questionHeadline.questionList">
+                <span class="question-index poa ng-hide" ng-bind="viewController.questionIndexCom($parent,$index)+1"></span>
+                <span class="glyphicon glyphicon-paperclip fr paperclip"></span>
+                <div class="showContent fs-14" ng-bind-html="question.stem"
+                     ng-click="viewController.newUeditor($event,viewController.questionIndexCom($parent,$index),question)"></div>
+                <div class="explain fs-14 input-group p-20" ng-hide="hideExplain[questionIndex]">
+                    <table class="explain-table">
+                        <tr>
+                            <td width="120" class="explain-title">【考 点】</td>
+                            <td ng-bind="question.examPoint"></td>
+                        </tr>
+                        <tr>
+                            <td class="explain-title">【答 案】</td>
+                            <td ng-bind="question.answer">A</td>
+                        </tr>
+                        <tr>
+                            <td class="explain-title">【解 析】</td>
+                            <td ng-bind="question.solution"></td>
+                        </tr>
+                    </table>
+                </div>
                 <script id="{{'Ueditor'+questionIndex}}" style="height:144px;width:100%"></script>
                 <div class="save-button poa">
-                    <button class="c-btn-normal fr fs-14 mt-10" ng-class="{'active':btnOnSave[viewController.questionIndexCom($parent,$index)]}" ng-click="viewController.saveQuestion($event,$parent,$index,viewController.questionIndexCom($parent,$index))" style="outline: none;">
+                    <button class="c-btn-normal fr fs-14 mt-10"
+                            ng-class="{'active':btnOnSave[viewController.questionIndexCom($parent,$index)]}"
+                            ng-click="viewController.saveQuestion($event,$parent,$index,viewController.questionIndexCom($parent,$index),true)"
+                            style="outline: none;">
+                        <span class="glyphicon glyphicon-floppy-saved"></span>
                         保&nbsp;&nbsp;存
+                    </button>
+                    <button class="c-btn-normal fr fs-14 mt-10 mr-10" style="outline: none;"
+                            ng-click="viewController.answerProduce($event,$parent,$index)">
+                        <span class="glyphicon glyphicon-edit"></span>
+                        解析录入
                     </button>
                 </div>
             </div>
-            <!--<div class="question-item por" style="min-height:200px;width:800px" ng-click="viewController.newUeditor($event,1)">
-                <span class="question-index poa">10</span>
-                <div class="showContent" ng-bind-html=""></div>
-                <script id="{{'Ueditor'+10}}" style="height:144px;width:100%"></script>
-                <div class="save-button poa">
-                    <button class="c-btn-normal fr fs-14 mt-10" ng-click="viewController.saveQuestion($event,1)" >
-                        保&nbsp;&nbsp;存
-                    </button>
-                </div>
-            </div>-->
         </div>
+    </div>
+</div>
+<!--操作台-->
+<div class="shortcut apple-card-container">
+    <div class="shortcut-header apple-card-t-bar">
+        <i class="apple-circle apple-circle-red"></i>
+        <i class="apple-circle apple-circle-yellow"></i>
+        <i class="apple-circle apple-circle-green"></i>
+        <button class="c-btn-normal fr add-question-headline" style="outline: none;"
+                ng-click="viewController.addQuestionHeadline()">
+            <span class="glyphicon glyphicon-plus"></span> 添加大题
+        </button>
+    </div>
+    <div class="shortcut-body p-10">
+        <div ng-repeat="questionHeadline in paper.questionHeadline" class="shortcut-question-headline mb-5">
+            <div class="input-group">
+                <span class="input-group-addon shortcut-input-group-addon fs-14" ng-bind="BASIC_DATA.cnNum[$index]"
+                      id="basic-addon20"
+                      style="top: 0;border-radius: 0;"></span>
+                <input type="text" class="form-control fs-14 shortcut-form-control"
+                       ng-model="questionHeadline.questionType" placeholder="请输入标题，如：选择题"
+                       aria-describedby="basic-addon20">
+            </div>
+            <ul class="shortcut-question-list">
+                <li ng-repeat="quesiton in questionHeadline.questionList"><i class="question-index-circle"
+                                                                             ng-click="viewController.shortcutJump($event,$parent,$index)"
+                                                                             ng-class="{'active':currentQuestion[viewController.questionIndexCom($parent,$index)]}"
+                                                                             ng-bind="viewController.questionIndexCom($parent,$index)+1"></i>
+                </li>
+                <li class="shortcut-add" ng-class="{'margin-deal':questionHeadline.questionList.length%5}"
+                    ng-click="viewController.addQuestion($index)"><i
+                        class="shortcut-add-circle glyphicon glyphicon-plus "></i></li>
+            </ul>
+        </div>
+    </div>
+    <div class="shortcut-footer p-10">
+        <button class="c-btn-normal submit-paper fs-14 fr" style="outline: none;"
+                ng-click="viewController.submitPaper()">
+            <span class="glyphicon glyphicon-saved"></span> 提&nbsp;交
+        </button>
+        <button class="c-btn-normal submit-paper fs-14 fr mr-10" style="outline: none;"
+                ng-click="viewController.preview()">
+            <span class="glyphicon glyphicon-floppy-saved"></span> 保存预览
+        </button>
     </div>
 </div>

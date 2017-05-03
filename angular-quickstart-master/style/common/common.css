@@ -372,7 +372,7 @@
 
 /*custom*/
 body{
-    font-family: "微软雅黑","Microsoft Yahei", Helvetica,"Hiragino Sans GB",STHeiTi, sans-serif;
+    font-family: "微软雅黑",'Lato',sans-serif;
     line-height: 1.5;
     font-size: 12px;
 }
@@ -402,6 +402,12 @@ select, textarea, input[type="text"],input[type="tel"],input[type="number"]{
 }
 .b-d-c7{
     border: 1px dashed #c7c7c7;
+}
+.b-s-dc{
+    border: 1px solid #dcdcdc;
+}
+.b-d-dc{
+    border: 1px dashed #dcdcdc;
 }
 /*字体加粗*/
 .fw-700{

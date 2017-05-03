@@ -1,0 +1,134 @@
+<link rel="stylesheet" href="../style/content_audit.css">
+<div class="content-audit-container">
+    <div class="apple-card-container paper-file-container mb-20">
+        <div class="apple-card-t-bar pl-10 fs-14 resources-preview-header">
+            <span class="glyphicon glyphicon-picture"></span>
+            试卷信息源
+            <span class="fr glyphicon glyphicon-pushpin resources-preview-tag"></span>
+        </div>
+        <div class="resources-preview">
+            <i class="poa glyphicon glyphicon-chevron-left btn-pre fs-16" ng-click="viewController.moveTo('r')"></i>
+            <div class="visible-area">
+                <ul class="images">
+                    <li class="resources-item dib item-shadow" ng-class="{'active':mouseOver[0]}" ng-mouseover="mouseOver[0]=true;" ng-mouseleave="mouseOver[0]=false;">
+                        <div class="img-cover poa" ng-hide="mouseOver[0]">
+                            <span class="glyphicon glyphicon-fullscreen fs-16 poa fullscreen-icon"></span>
+                        </div>
+                        <img src="../img/sample_paper/0001.jpg" class="resources-img">
+                    </li>
+                    <li class="resources-item dib item-shadow" ng-class="{'active':mouseOver[1]}" ng-mouseover="mouseOver[1]=true;" ng-mouseleave="mouseOver[1]=false;">
+                        <div class="img-cover poa" ng-hide="mouseOver[1]">
+                            <span class="glyphicon glyphicon-fullscreen fs-16 poa fullscreen-icon"></span>
+                        </div>
+                        <img src="../img/sample_paper/0002.jpg" class="resources-img">
+                    </li>
+                    <li class="resources-item dib item-shadow" ng-class="{'active':mouseOver[2]}" ng-mouseover="mouseOver[2]=true;" ng-mouseleave="mouseOver[2]=false;">
+                        <div class="img-cover poa" ng-hide="mouseOver[2]">
+                            <span class="glyphicon glyphicon-fullscreen fs-16 poa fullscreen-icon"></span>
+                        </div>
+                        <img src="../img/sample_paper/0003.jpg" class="resources-img">
+                    </li>
+                    <li class="resources-item dib item-shadow" ng-class="{'active':mouseOver[3]}" ng-mouseover="mouseOver[3]=true;" ng-mouseleave="mouseOver[3]=false;">
+                        <div class="img-cover poa" ng-hide="mouseOver[3]">
+                            <span class="glyphicon glyphicon-fullscreen fs-16 poa fullscreen-icon"></span>
+                        </div>
+                        <img src="../img/sample_paper/0004.jpg" class="resources-img">
+                    </li>
+                    <li class="resources-item dib item-shadow" ng-class="{'active':mouseOver[4]}" ng-mouseover="mouseOver[4]=true;" ng-mouseleave="mouseOver[4]=false;">
+                        <div class="img-cover poa" ng-hide="mouseOver[4]">
+                            <span class="glyphicon glyphicon-fullscreen fs-16 poa fullscreen-icon"></span>
+                        </div>
+                        <img src="../img/sample_paper/0001.jpg" class="resources-img">
+                    </li>
+
+                </ul>
+            </div>
+            <i class="poa glyphicon glyphicon-chevron-right btn-next fs-16" ng-click="viewController.moveTo('l')"></i>
+        </div>
+    </div>
+    <!--试卷基础信息-->
+    <div class="apple-card-container paper-info-container mb-20">
+        <div class="apple-card-t-bar pl-10 fs-14">
+            <span class="glyphicon glyphicon-tags"></span>
+            试卷基础信息
+        </div>
+        <div class="paper-basic-info tc p-10">
+            <div class="paper-name fs-20 mb-20">2013-2014东莞市八年级数学上学期期末统考试题</div>
+            <table class="paper-info-table fs-16" width="700">
+                <tr class="tl mb-20">
+                    <td>年份：</td>
+                    <td>2015</td>
+                    <td>地区：</td>
+                    <td>广东_东莞</td>
+                    <td>学校：</td>
+                    <td>东莞中学</td>
+                </tr>
+                <tr class="tl">
+                    <td>年级：</td>
+                    <td>八年级</td>
+                    <td>科目：</td>
+                    <td>数学</td>
+                    <td>试卷类型：</td>
+                    <td>期末考试</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="paper-content card-shadow">
+        <!--试卷题目-->
+        <div class="question">
+            <div class="quesiton-headline" ng-repeat="questionHeadline in paper.questionHeadline">
+                <div class="question-type-wrapper tl">
+                    <span class="glyphicon glyphicon-hand-down fs-16 question-type-icon"></span>
+                    <span class="headline-index fs-16 fw-600" ng-bind="BASIC_DATA.cnNum[$index]+'.'"></span>
+                    <span class="question-type fs-16 fw-600" ng-bind="questionHeadline.questionType"></span>
+                </div>
+                <div class="question-item tl por" ng-repeat="question in questionHeadline.questionList" >
+                    <span class="glyphicon glyphicon-filter question-index-tag poa"></span>
+                    <span class="poa question-index" ng-bind="viewController.questionIndexCom($parent,$index)+1"></span>
+                    <div class="pl-20" ng-bind-html="question.stem"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="shortcut apple-card-container">
+    <div class="shortcut-header apple-card-t-bar">
+        <i class="apple-circle apple-circle-red"></i>
+        <i class="apple-circle apple-circle-yellow"></i>
+        <i class="apple-circle apple-circle-green"></i>
+    </div>
+    <div class="shortcut-footer p-10">
+        <button class="c-btn-normal submit-paper fs-14 fr" style="outline: none;"
+                ng-click="viewController.passAudit()">
+            <span class="glyphicon glyphicon-ok"></span> 审核通过
+        </button>
+        <button class="c-btn-normal submit-paper fs-14 fr mr-10" style="outline: none;"
+                ng-click="showAlertBox=true;">
+            <span class="glyphicon glyphicon-remove"></span> 有误批注
+        </button>
+    </div>
+</div>
+<div class="alert-box-cover" ng-show="showAlertBox">
+</div>
+<div class="alert-box card-shadow br-4 apple-card-container" ng-show="showAlertBox">
+    <div class="alert-title apple-card-t-bar">
+        <i class="apple-circle apple-circle-red curp"></i>
+        <i class="apple-circle apple-circle-yellow"></i>
+        <i class="apple-circle apple-circle-green"></i>
+        <span class="glyphicon glyphicon-remove fr fs-16" ng-click="showAlertBox=false;"></span>
+    </div>
+    <div class="alert-body">
+        <textarea name="errMsg" id="errMsg" cols="30" rows="10" placeholder="点击键入错误批注，如：18题，题干公式有误（或者答案解析不正确）[点击保存按钮本地缓存错误信息，整卷审核后，所有批注填写完毕点击提交]" ng-model="errMsg"></textarea>
+    </div>
+    <div class="alert-footer">
+        <button class="c-btn-normal submit-paper fs-14 fr mr-10" style="outline: none;"
+                ng-click="viewController.submitErrMsg()">
+            <span class="glyphicon glyphicon-saved"></span> 提&nbsp;交
+        </button>
+        <button class="c-btn-normal submit-paper fs-14 fr mr-10" style="outline: none;"
+                ng-click="showAlertBox=false;">
+            <span class="glyphicon glyphicon-floppy-saved"></span> 保&nbsp;存
+        </button>
+    </div>
+</div>

@@ -1,75 +1,96 @@
 <!DOCTYPE html>
 <html lang="en" data-ng-app="myApp">
 <head>
-<meta charset="utf-8">
-  <title> Question Bank Online</title>
-  <!--favion.io-->
-  <link rel="icon" href="img/login/logo.png">
-  <!-- bower:css -->
-  <link rel="stylesheet" href="bower_components/normalize-css/normalize.css">
-  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
-  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.css">
-  <link rel="stylesheet" href="bower_components/sweetalert/dist/sweetalert.css">
-  <link rel="stylesheet" href="bower_components/imageviewer/dist/viewer.css">
-  <!-- endinject -->
+    <meta charset="utf-8">
+    <title>题库平台</title>
+    <!--favion.io-->
+    <link rel="icon" href="img/login/logo.png">
+    <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/normalize-css/normalize.css">
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.css">
+    <link rel="stylesheet" href="bower_components/sweetalert/dist/sweetalert.css">
+    <link rel="stylesheet" href="plug/imageviewer/dist/viewer.css">
+    <!-- endinject -->
 
-  <!-- inject:css -->
-  <link rel="stylesheet" href="style/common/reset.css">
-  <link rel="stylesheet" href="style/common/common.css">
-  <link rel="stylesheet" href="style/common/custom.css">
-  <link rel="stylesheet" href="style/main.css">
-  <!-- endinject -->
+    <!-- inject:css -->
+    <link rel="stylesheet" href="style/common/reset.css">
+    <link rel="stylesheet" href="style/common/common.css">
+    <link rel="stylesheet" href="style/common/custom.css">
+    <link rel="stylesheet" href="style/main.css">
+    <!-- endinject -->
 </head>
 
-<body  ng-controller="indexController">
-  <nav class="navbar navbar-default navbar-fixed-top">
-    <div class="navbar-container">
-      <!-- Brand and toggle get grouped for better mobile display -->
-      <div class="navbar-header">
-        <a class="navbar-brand nav-logo" href="#"></a>
-      </div>
+<body ng-controller="indexController">
+<!--<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="navbar-container">
+    &lt;!&ndash; Brand and toggle get grouped for better mobile display &ndash;&gt;
+    <div class="navbar-header">
+      <a class="navbar-brand nav-logo" href="#"></a>
+    </div>
 
-      <!-- Collect the nav links, forms, and other content for toggling -->
-      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <ul class="nav navbar-nav">
-          <li  ng-repeat="item in module" ng-class="{'active': item.isCurrentPage}" ng-click="viewController.goPage(item)"><a class="module-name curp" ng-bind="item.moduleName"></a></li>
+    &lt;!&ndash; Collect the nav links, forms, and other content for toggling &ndash;&gt;
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li  ng-repeat="item in module" ng-class="{'active': item.isCurrentPage}" ng-click="viewController.goPage(item)"><a class="module-name curp" ng-bind="item.moduleName"></a></li>
+      </ul>
+    </div>&lt;!&ndash; /.navbar-collapse &ndash;&gt;
+  </div>&lt;!&ndash; /.container-fluid &ndash;&gt;
+</nav>-->
+<div class="navBar-container">
+    <nav id="navigation" class="navBar">
+        <div class="navbar-header mr-10">
+            <a class="navbar-brand nav-logo" href="#"></a>
+            <span href="#" class="name"><span class="glyphicon glyphicon-pencil"></span> P E N P A L</span>
+        </div>
+        <ul class="nav-list">
+            <li ng-repeat="item in module" ng-click="viewController.goPage(item)"><a class="module-name curp"
+                                                                                     ng-class="{'active': item.isCurrentPage}"
+                                                                                     ng-bind="item.moduleName">
+            </a></li>
         </ul>
-      </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
-  </nav>
-  <div ui-view class="view-container"></div>
+    </nav>
+</div>
+<button href="#" class="c-btn-normal back-to-top fs-14" style="outline: none;"
+        ng-click="viewController.backToTop()">
+    <span class="glyphicon glyphicon-hand-up"></span> 返回顶部
+</button>
+<div ui-view class="view-container"></div>
 
-  <!-- bower:js -->
-  <script src="bower_components/jquery/dist/jquery.js"></script>
-  <!--<script src="plug/jQuery.filer/js/jquery-2.1.1.min.js"></script>-->
-  <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-  <script src="bower_components/angular/angular.js"></script>
-  <script src="bower_components/underscore/underscore.js"></script>
-  <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
-  <script src="bower_components/angular-cookies/angular-cookies.js"></script>
-  <script src="bower_components/angular-sweetalert/SweetAlert.min.js"></script>
-  <script src="bower_components/sweetalert/dist/sweetalert-dev.js"></script>
-  <script src="bower_components/imageviewer/dist/viewer.js"></script>
+<!-- bower:js -->
+<script src="bower_components/jquery/dist/jquery.js"></script>
+<!--<script src="plug/jQuery.filer/js/jquery-2.1.1.min.js"></script>-->
+<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/underscore/underscore.js"></script>
+<script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+<script src="bower_components/angular-cookies/angular-cookies.js"></script>
+<script src="bower_components/angular-sweetalert/SweetAlert.min.js"></script>
+<script src="bower_components/sweetalert/dist/sweetalert-dev.js"></script>
+<script src="plug/imageviewer/dist/viewer.js"></script>
 
 
-  <!-- endinject -->
+<!-- endinject -->
 <!--公式编辑器-->
-  <script type="text/javascript" src="plug/UEditor/ueditor.config.js"></script>
-  <script type="text/javascript" src="plug/UEditor/ueditor.all.js"></script>
-  <script type="text/javascript" src="plug/UEditor/lang/zh-cn/zh-cn.js"></script>
-  <script type="text/javascript" charset="utf-8" src="plug/UEditor/kityformula-plugin/addKityFormulaDialog.js"></script>
-  <script type="text/javascript" charset="utf-8" src="plug/UEditor/kityformula-plugin/getKfContent.js"></script>
-  <script type="text/javascript" charset="utf-8" src="plug/UEditor/kityformula-plugin/defaultFilterFix.js"></script>
+<script type="text/javascript" src="plug/UEditor/ueditor.config.js"></script>
+<script type="text/javascript" src="plug/UEditor/ueditor.all.js"></script>
+<script type="text/javascript" src="plug/UEditor/lang/zh-cn/zh-cn.js"></script>
+<script type="text/javascript" charset="utf-8" src="plug/UEditor/kityformula-plugin/addKityFormulaDialog.js"></script>
+<script type="text/javascript" charset="utf-8" src="plug/UEditor/kityformula-plugin/getKfContent.js"></script>
+<script type="text/javascript" charset="utf-8" src="plug/UEditor/kityformula-plugin/defaultFilterFix.js"></script>
 <!--公式编辑器end-->
-  <!-- inject:js -->
+<!-- inject:js -->
 
-  <script src="js/basic_data.js"></script>
-  <script src="js/app.js"></script>
-  <script src="js/service/AuthInterceptor.js"></script>
-  <script src="js/controllers/index.js"></script>
-  <script src="js/controllers/task_upload.js"></script>
-  <script src="js/controllers/resource_upload.js"></script>
-  <script src="js/controllers/content_produce.js"></script>
-  <!-- endinject -->
+<script src="js/basic_data.js"></script>
+<script src="js/app.js"></script>
+<script src="js/service/AuthInterceptor.js"></script>
+<script src="js/controllers/index.js"></script>
+<script src="js/controllers/task_upload.js"></script>
+<script src="js/controllers/resource_upload.js"></script>
+<script src="js/controllers/content_produce.js"></script>
+<script src="js/controllers/answer_produce.js"></script>
+<script src="js/controllers/paper_preview.js"></script>
+<script src="js/controllers/content_audit.js"></script>
+<!-- endinject -->
 </body>
 </html>
