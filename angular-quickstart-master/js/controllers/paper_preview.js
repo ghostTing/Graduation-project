@@ -5,7 +5,7 @@
     angular.module('myApp').controller('paperPreviewController',['$scope','$http','$sce','$rootScope','$state', function ($scope,$http,$sce,$rootScope,$state) {
         declareModel($scope);
         declare($scope,$http,$state);
-        init($scope,$http,$sce);
+        init($scope,$http,$sce,$rootScope);
     }]);
     function declareModel($scope) {
         $scope.BASIC_DATA = window.BASIC_DATA;
@@ -31,10 +31,28 @@
             /*返回题干制作*/
             backToContentProduce: function () {
                $state.go(BASIC_DATA.routerConfig.contentProduce.state);
+            },
+            submitPaper:function () {
+                swal({
+                        title: "提交试卷",
+                        text: "确保所有题目的正确无误？",
+                        type: "info",
+                        showCancelButton: true,
+                        closeOnConfirm: false,
+                        confirmButtonColor: "#DD6B55",
+                        confirmButtonText: "确定",
+                        cancelButtonText: "取消",
+                        showLoaderOnConfirm: true
+                    },
+                    function(){
+                        setTimeout(function(){
+                            swal("提交成功");
+                        }, 2000);
+                    });
             }
         }
     }
-    function init($scope,$http,$sce) {
-
+    function init($scope,$http,$sce,$rootScope) {
+        $rootScope.currentPage('paperPreview');
     }
 })();

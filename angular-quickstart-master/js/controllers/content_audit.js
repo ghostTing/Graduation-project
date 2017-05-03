@@ -2,10 +2,10 @@
  * Created by Administrator on 2017/4/29.
  */
 (function(){
-    angular.module('myApp').controller('contentAuditController',['$scope','$http','$sce',function($scope,$http,$sce){
+    angular.module('myApp').controller('contentAuditController',['$scope','$http','$sce','$rootScope',function($scope,$http,$sce,$rootScope){
         declareModel($scope);
         declare($scope, $sce);
-        init($scope, $http, $sce);
+        init($scope, $http, $sce,$rootScope);
     }]);
     function declareModel($scope) {
         $scope.flag=true;
@@ -28,6 +28,62 @@
                 }
                 $scope.questionIndex = tempLength + $index;
                 return $scope.questionIndex;
+            },
+            submitErrMsg:function () {
+                swal({
+                        title: "批注提交",
+                        text: "提交前确保所有题目的错误批注填写完毕",
+                        type: "info",
+                        showCancelButton: true,
+                        closeOnConfirm: false,
+                        confirmButtonColor: "#DD6B55",
+                        confirmButtonText: "确定",
+                        cancelButtonText: "取消",
+                        showLoaderOnConfirm: true
+                    },
+                    function(){
+                        setTimeout(function(){
+                            swal("提交成功");
+                        }, 2000);
+                    });
+               /* swal({
+                        title: "确认提交?",
+                        text: "请确保所有题目的错误批注填写完毕",
+                        type: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#DD6B55",
+                        confirmButtonText: "确定",
+                        cancelButtonText: "取消",
+                        closeOnConfirm: false,
+                        closeOnCancel: false
+                    },
+                    function(isConfirm){
+                        if (isConfirm) {
+                            setTimeout(function(){
+                                swal("Ajax request finished!");
+                            }, 2000);
+                        } else {
+                            swal("取消成功", "您填写的批注仍旧保存", "error");
+                        }
+                    });*/
+            },
+            passAudit:function () {
+                swal({
+                        title: "审核通过",
+                        text: "确保所有题目的正确无误？",
+                        type: "info",
+                        showCancelButton: true,
+                        closeOnConfirm: false,
+                        confirmButtonColor: "#DD6B55",
+                        confirmButtonText: "确定",
+                        cancelButtonText: "取消",
+                        showLoaderOnConfirm: true
+                    },
+                    function(){
+                        setTimeout(function(){
+                            swal("提交成功");
+                        }, 2000);
+                    });
             },
             /*移动图片*/
             moveTo:function (derection) {
@@ -61,7 +117,8 @@
             }
         }
     }
-    function init($scope, $http, $sce){
+    function init($scope, $http, $sce,$rootScope){
+        $rootScope.currentPage('contentAudit');
         $('.images').viewer({
             navbar: false,
             rotatable: false,

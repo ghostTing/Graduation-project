@@ -9,7 +9,7 @@
             /*任务列表页*/
             taskUpload:{
                 state:"taskUpload",
-                moduleName:'任务列表',
+                moduleName:'任务中心',
                 url: '/taskUpload',
                 templateUrl:"view/task_upload.html",
                 controller: 'taskUploadController',

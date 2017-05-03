@@ -46,6 +46,12 @@
     text-align: center;
     position: relative;
     cursor: pointer;
+    transition: all 0.5s;
+}
+.resources-item.active{
+    -webkit-box-shadow: 3px 7px 8px rgba(0,0,0,0.3);
+    -moz-box-shadow:  3px 7px 8px rgba(0,0,0,0.3);
+    box-shadow: 3px 7px 8px rgba(0,0,0,0.3);
 }
 .resources-img{
     width: 124px;

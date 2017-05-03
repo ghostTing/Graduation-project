@@ -2,16 +2,17 @@
  * Created by Administrator on 2017/3/27.
  */
 (function () {
-    angular.module('myApp').controller('taskUploadController',['$scope','$http','$location',function ($scope,$http,$location) {
+    angular.module('myApp').controller('taskUploadController',['$scope','$http','$location','$rootScope',function ($scope,$http,$location,$rootScope) {
         declare($scope,$location);
-        init($scope,$http);
+        init($scope,$http,$rootScope);
     }]);
     function declare($scope,$location) {
         $scope.goPage=function () {
             $location.path('resourceUpload');
         }
     }
-    function init($scope,$http) {
+    function init($scope,$http,$rootScope) {
+        $rootScope.currentPage('taskUpload');
         /*$http.get(BASIC_DATA.API_URL+'/testWeb/',{
             params:{
                 id:5

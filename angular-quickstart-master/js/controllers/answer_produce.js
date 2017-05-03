@@ -5,7 +5,7 @@
     angular.module('myApp').controller('answerProduceController', ['$scope', '$http', '$location', '$sce', '$state', '$stateParams', '$rootScope', function ($scope, $http, $location, $sce, $state, $stateParams, $rootScope) {
         declareModel($scope, $stateParams);
         declare($scope, $sce, $rootScope);
-        init($scope, $http, $sce, $stateParams);
+        init($scope, $http, $sce, $stateParams,$rootScope);
     }]);
     function declareModel($scope, $stateParams) {
         $scope.showPlaceholder = true;
@@ -33,7 +33,7 @@
         }
     }
 
-    function init($scope, $http, $sce, $stateParams) {
+    function init($scope, $http, $sce, $stateParams,$rootScope) {
         $scope.paper={
             questionHeadline:[{
                 questionType: '',

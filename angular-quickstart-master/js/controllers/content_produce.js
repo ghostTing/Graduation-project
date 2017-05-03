@@ -220,6 +220,7 @@
     }
 
     function init($scope, $http, $sce, $rootScope, $timeout) {
+        $rootScope.currentPage('contentProduce');
         $('.images').viewer({
             navbar: false,
             rotatable: false,

@@ -38,6 +38,12 @@
     border-radius: 2px;
     position: relative;
     cursor: pointer;
+    transition: all 0.5s;
+}
+.resources-item.active{
+    -webkit-box-shadow: 3px 7px 8px rgba(0,0,0,0.3);
+    -moz-box-shadow:  3px 7px 8px rgba(0,0,0,0.3);
+    box-shadow: 3px 7px 8px rgba(0,0,0,0.3);
 }
 .visible-area{
     width: 605px;
@@ -253,4 +259,42 @@
     position: absolute;
     top: 0;
     left: 0;
+}
+/*有误批注弹窗*/
+.alert-box-cover{
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 2017;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0,0,0,0.3);
+}
+.alert-box{
+    width: 500px;
+    position: fixed;
+    z-index: 2018;
+    top: 60px;
+    right: 50px;
+    background-color: #FFFFFF;
+}
+#errMsg{
+    width: 100%;
+    margin: 0 auto;
+    font-size: 14px;
+    border: none;
+    padding: 0 10px 10px;
+    line-height: 18px;
+}
+.alert-body{
+    text-align: center;
+}
+.alert-footer{
+    height: 30px;
+}
+.alert-title span{
+    color: #666;
+    margin-right: 5px;
+    margin-top: 5px;
+    cursor: pointer;
 }

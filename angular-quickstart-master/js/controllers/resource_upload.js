@@ -177,6 +177,7 @@
         });
     }
     function declareModel($scope) {
+        $scope.mouseOver=[];//控制图片上全屏图标显示隐藏的model
         $scope.flag=true;//设置点击事件响应的时间间隔
         $scope.paperType=BASIC_DATA.PAPER_TYPE;
         $scope.year=BASIC_DATA.YEAR;

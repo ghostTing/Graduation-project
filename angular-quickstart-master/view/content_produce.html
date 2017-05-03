@@ -11,60 +11,37 @@
             <i class="poa glyphicon glyphicon-chevron-left btn-pre fs-16" ng-click="viewController.moveTo('r')"></i>
             <div class="visible-area">
                 <ul class="images">
-                    <li class="resources-item dib item-shadow" ng-mouseover="mouseOver=true;" ng-mouseleave="mouseOver=false;">
-                        <div class="img-cover poa" ng-hide="mouseOver">
+                    <li class="resources-item dib item-shadow" ng-class="{'active':mouseOver[0]}" ng-mouseover="mouseOver[0]=true;" ng-mouseleave="mouseOver[0]=false;">
+                        <div class="img-cover poa" ng-hide="mouseOver[0]">
                             <span class="glyphicon glyphicon-fullscreen fs-16 poa fullscreen-icon"></span>
                         </div>
                         <img src="../img/sample_paper/0001.jpg" class="resources-img">
                     </li>
-                    <li class="resources-item dib item-shadow" ng-mouseover="mouseOver=true;" ng-mouseleave="mouseOver=false;">
-                        <div class="img-cover poa" ng-hide="mouseOver">
-                            <span class="glyphicon glyphicon-fullscreen fs-16 poa fullscreen-icon"></span>
-                        </div>
-                        <img src="../img/sample_paper/0001.jpg" class="resources-img">
-                    </li>
-                    <li class="resources-item dib item-shadow" ng-mouseover="mouseOver=true;" ng-mouseleave="mouseOver=false;">
-                        <div class="img-cover poa" ng-hide="mouseOver">
-                            <span class="glyphicon glyphicon-fullscreen fs-16 poa fullscreen-icon"></span>
-                        </div>
-                        <img src="../img/sample_paper/0001.jpg" class="resources-img">
-                    </li>
-                    <li class="resources-item dib item-shadow" ng-mouseover="mouseOver=true;" ng-mouseleave="mouseOver=false;">
-                        <div class="img-cover poa" ng-hide="mouseOver">
-                            <span class="glyphicon glyphicon-fullscreen fs-16 poa fullscreen-icon"></span>
-                        </div>
-                        <img src="../img/sample_paper/0001.jpg" class="resources-img">
-                    </li>
-                    <li class="resources-item dib item-shadow" ng-mouseover="mouseOver=true;" ng-mouseleave="mouseOver=false;">
-                        <div class="img-cover poa" ng-hide="mouseOver">
-                            <span class="glyphicon glyphicon-fullscreen fs-16 poa fullscreen-icon"></span>
-                        </div>
-                        <img src="../img/sample_paper/0001.jpg" class="resources-img">
-                    </li>
-                    <li class="resources-item dib item-shadow" ng-mouseover="mouseOver=true;" ng-mouseleave="mouseOver=false;">
-                        <div class="img-cover poa" ng-hide="mouseOver">
+                    <li class="resources-item dib item-shadow" ng-class="{'active':mouseOver[1]}" ng-mouseover="mouseOver[1]=true;" ng-mouseleave="mouseOver[1]=false;">
+                        <div class="img-cover poa" ng-hide="mouseOver[1]">
                             <span class="glyphicon glyphicon-fullscreen fs-16 poa fullscreen-icon"></span>
                         </div>
                         <img src="../img/sample_paper/0002.jpg" class="resources-img">
                     </li>
-                    <li class="resources-item dib item-shadow" ng-mouseover="mouseOver=true;" ng-mouseleave="mouseOver=false;">
-                        <div class="img-cover poa" ng-hide="mouseOver">
-                            <span class="glyphicon glyphicon-fullscreen fs-16 poa fullscreen-icon"></span>
-                        </div>
-                        <img src="../img/sample_paper/0002.jpg" class="resources-img">
-                    </li>
-                    <li class="resources-item dib item-shadow" ng-mouseover="mouseOver=true;" ng-mouseleave="mouseOver=false;">
-                        <div class="img-cover poa" ng-hide="mouseOver">
+                    <li class="resources-item dib item-shadow" ng-class="{'active':mouseOver[2]}" ng-mouseover="mouseOver[2]=true;" ng-mouseleave="mouseOver[2]=false;">
+                        <div class="img-cover poa" ng-hide="mouseOver[2]">
                             <span class="glyphicon glyphicon-fullscreen fs-16 poa fullscreen-icon"></span>
                         </div>
                         <img src="../img/sample_paper/0003.jpg" class="resources-img">
                     </li>
-                    <li class="resources-item dib item-shadow" ng-mouseover="mouseOver=true;" ng-mouseleave="mouseOver=false;">
-                        <div class="img-cover poa" ng-hide="mouseOver">
+                    <li class="resources-item dib item-shadow" ng-class="{'active':mouseOver[3]}" ng-mouseover="mouseOver[3]=true;" ng-mouseleave="mouseOver[3]=false;">
+                        <div class="img-cover poa" ng-hide="mouseOver[3]">
                             <span class="glyphicon glyphicon-fullscreen fs-16 poa fullscreen-icon"></span>
                         </div>
                         <img src="../img/sample_paper/0004.jpg" class="resources-img">
                     </li>
+                    <li class="resources-item dib item-shadow" ng-class="{'active':mouseOver[4]}" ng-mouseover="mouseOver[4]=true;" ng-mouseleave="mouseOver[4]=false;">
+                        <div class="img-cover poa" ng-hide="mouseOver[4]">
+                            <span class="glyphicon glyphicon-fullscreen fs-16 poa fullscreen-icon"></span>
+                        </div>
+                        <img src="../img/sample_paper/0001.jpg" class="resources-img">
+                    </li>
+
                 </ul>
             </div>
             <i class="poa glyphicon glyphicon-chevron-right btn-next fs-16" ng-click="viewController.moveTo('l')"></i>

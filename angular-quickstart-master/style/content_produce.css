@@ -39,6 +39,12 @@
     border-radius: 2px;
     position: relative;
     cursor: pointer;
+    transition: all 0.5s;
+}
+.resources-item.active{
+    -webkit-box-shadow: 3px 7px 8px rgba(0,0,0,0.3);
+    -moz-box-shadow:  3px 7px 8px rgba(0,0,0,0.3);
+    box-shadow: 3px 7px 8px rgba(0,0,0,0.3);
 }
 .visible-area{
     width: 605px;
