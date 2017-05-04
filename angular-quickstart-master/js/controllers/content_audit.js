@@ -2,10 +2,10 @@
  * Created by Administrator on 2017/4/29.
  */
 (function(){
-    angular.module('myApp').controller('contentAuditController',['$scope','$http','$sce','$rootScope',function($scope,$http,$sce,$rootScope){
+    angular.module('myApp').controller('contentAuditController',['$scope','$http','$sce','$rootScope','$location','$timeout',function($scope,$http,$sce,$rootScope,$location,$timeout){
         declareModel($scope);
         declare($scope, $sce);
-        init($scope, $http, $sce,$rootScope);
+        init($scope, $http, $sce,$rootScope,$location,$timeout);
     }]);
     function declareModel($scope) {
         $scope.flag=true;
@@ -117,7 +117,18 @@
             }
         }
     }
-    function init($scope, $http, $sce,$rootScope){
+    function init($scope, $http, $sce,$rootScope,$location,$timeout){
+        if ($rootScope.role!=2){
+            swal({
+                type:'error',
+                text:'操作未授权',
+                timer:'2000',
+                title:'发生错误！'
+            });
+            $timeout(function () {
+                $location.path(BASIC_DATA.routerConfig.taskUpload.state);
+            },3000)
+        }
         $rootScope.currentPage('contentAudit');
         $('.images').viewer({
             navbar: false,

@@ -147,7 +147,7 @@ gulp.task('sync', function () {
         server: {
             baseDir: './',
             index:'/login.html'
-        },
+        }
     })
 });
 

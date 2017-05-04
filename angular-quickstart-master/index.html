@@ -22,21 +22,6 @@
 </head>
 
 <body ng-controller="indexController">
-<!--<nav class="navbar navbar-default navbar-fixed-top">
-  <div class="navbar-container">
-    &lt;!&ndash; Brand and toggle get grouped for better mobile display &ndash;&gt;
-    <div class="navbar-header">
-      <a class="navbar-brand nav-logo" href="#"></a>
-    </div>
-
-    &lt;!&ndash; Collect the nav links, forms, and other content for toggling &ndash;&gt;
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <li  ng-repeat="item in module" ng-class="{'active': item.isCurrentPage}" ng-click="viewController.goPage(item)"><a class="module-name curp" ng-bind="item.moduleName"></a></li>
-      </ul>
-    </div>&lt;!&ndash; /.navbar-collapse &ndash;&gt;
-  </div>&lt;!&ndash; /.container-fluid &ndash;&gt;
-</nav>-->
 <div class="navBar-container">
     <nav id="navigation" class="navBar">
         <div class="navbar-header mr-10">
@@ -44,11 +29,14 @@
             <span href="#" class="name"><span class="glyphicon glyphicon-pencil"></span> P E N P A L</span>
         </div>
         <ul class="nav-list">
-            <li ng-repeat="item in module" ng-click="viewController.goPage(item)"><a class="module-name curp"
-                                                                                     ng-class="{'active': item.isCurrentPage}"
-                                                                                     ng-bind="item.moduleName">
+            <li ng-repeat="item in module" ng-click="viewController.goPage(item)" ng-if="item.role==role"><a
+                    class="module-name curp"
+                    ng-class="{'active': item.isCurrentPage}"
+                    ng-bind="item.moduleName">
             </a></li>
         </ul>
+
+        <span class="glyphicon glyphicon-off logout" ng-click="viewController.logout()" title="退出当前账户"></span>
     </nav>
 </div>
 <button href="#" class="c-btn-normal back-to-top fs-14" style="outline: none;"

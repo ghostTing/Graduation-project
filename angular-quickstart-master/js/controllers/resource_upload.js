@@ -2,12 +2,12 @@
  * Created by Administrator on 2017/4/2.
  */
 (function () {
-    angular.module('myApp').controller('resourceUploadController',['$scope','$http','$location','$timeout',function ($scope,$http,$location,$timeout) {
-        declare($scope,$http,$timeout);
+    angular.module('myApp').controller('resourceUploadController',['$scope','$http','$location','$timeout','$cookieStore',function ($scope,$http,$location,$timeout,$cookieStore) {
+        declare($scope,$http,$timeout,$cookieStore);
         declareModel($scope);
-        init($scope,$http);
+        init($scope,$http,$cookieStore);
     }]);
-    function declare($scope,$http,$timeout) {
+    function declare($scope,$http,$timeout,$cookieStore) {
         $scope.viewController={
             paperType_change:function (selectedType){
                 if (selectedType.code==11){
@@ -77,7 +77,9 @@
                             url:BASIC_DATA.API_URL+'/task/startMaking',
                             data:$scope.paperInfo
                         }).then(function(data){
-                            console.log(data);
+                           if(data.status==200){
+                               $cookieStore.put('taskId',data.data.taskId);
+                           }
                         });
                     }else{
                         swal({
@@ -99,7 +101,9 @@
                             url:BASIC_DATA.API_URL+'/task/startMaking',
                             data:$scope.paperInfo
                         }).then(function(data){
-                            console.log(data);
+                            if(data.status==200){
+                                $cookieStore.put('taskId',data.data.taskId);
+                            }
                         });
                     }else {
                         swal({
@@ -153,7 +157,7 @@
             }
         }
     }
-    function init($scope,$http) {
+    function init($scope,$http,$cookieStore) {
         //配置jQuery文件上传插件
         $('input[name="files"]').fileuploader({
             extensions:['jpg','jpeg','docx','pdf','png'],

@@ -5,10 +5,10 @@
  * Created by Administrator on 2017/4/2.
  */
 (function () {
-    angular.module('myApp').controller('contentProduceController', ['$scope', '$http', '$location', '$sce', '$state', '$stateParams', '$rootScope', '$timeout', function ($scope, $http, $location, $sce, $state, $stateParams, $rootScope, $timeout) {
+    angular.module('myApp').controller('contentProduceController', ['$scope', '$http', '$location', '$sce', '$state', '$stateParams', '$rootScope', '$timeout','$cookieStore', function ($scope, $http, $location, $sce, $state, $stateParams, $rootScope, $timeout,$cookieStore) {
         declareModel($scope);
-        declare($scope, $sce, $state, $location, $timeout);
-        init($scope, $http, $sce, $rootScope, $timeout);
+        declare($scope, $sce, $state, $location, $timeout,$cookieStore);
+        init($scope, $http, $sce, $rootScope, $timeout,$cookieStore);
     }]);
     function declareModel($scope) {
         $scope.flag=true;
@@ -19,7 +19,7 @@
         $scope.BASIC_DATA = window.BASIC_DATA;
     }
 
-    function declare($scope, $sce, $state, $location, $timeout) {
+    function declare($scope, $sce, $state, $location, $timeout,$cookieStore) {
         $scope.viewController = {
             newUeditor: function ($event, $index, question) {
                 var showContentNode, questionItemNode, examPointNode;
@@ -219,7 +219,9 @@
         }
     }
 
-    function init($scope, $http, $sce, $rootScope, $timeout) {
+    function init($scope, $http, $sce, $rootScope, $timeout,$cookieStore) {
+        $scope.taskId=$cookieStore.get('taskId');
+        alert( $scope.taskId);
         $rootScope.currentPage('contentProduce');
         $('.images').viewer({
             navbar: false,

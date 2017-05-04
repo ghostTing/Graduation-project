@@ -57,9 +57,17 @@ body {
 .module-name.active{
     color: #ea6f5a;
 }
-.module-name:hover{
+.logout{
+    float: right;
+    cursor: pointer;
+    margin-top: 16px;
+    margin-right: 50px;
+    font-size: 16px;
+}
+.module-name:hover,.logout:hover{
     color: #ea6f5a;
 }
+
 /*子页面容器*/
 .view-container{
     width: 1000px;
