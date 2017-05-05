@@ -41,6 +41,11 @@
                 cache:true,
                 controller: BASIC_DATA.routerConfig.contentAudit.controller
             })
+            .state('test',{
+                url:'/test',
+                templateUrl:'for_test/API_TEST.html',
+                controller: 'TEST_CONTROLLER'
+            })
     })
         .run(function($rootScope, $state, $stateParams) {
         $rootScope.$state = $state;

@@ -18,41 +18,22 @@
                 <td width="50">序号</td>
                 <td>名称</td>
                 <td width="50">科目</td>
-                <td width="50">年级</td>
+                <td width="100">年级</td>
                 <td>时间</td>
                 <td width="150">状态</td>
                 <td width="150">操作</td>
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <td>1</td>
-                <td>2015东莞中学高二下学期期中考试</td>
-                <td>数学</td>
-                <td>高二</td>
-                <td>2016.04.19 16:00</td>
-                <td>审核中</td>
-                <td>刷新状态</td>
-            </tr>
-            <tr>
-                <td>1</td>
-                <td>2015东莞中学高二下学期期中考试</td>
-                <td>数学</td>
-                <td>高二</td>
-                <td>2016.04.19 16:00</td>
-                <td>审核中</td>
-                <td>刷新状态</td>
-            </tr>
-            <tr>
-                <td>1</td>
-                <td>2015东莞中学高二下学期期中考试</td>
-                <td>数学</td>
-                <td>高二</td>
-                <td>2016.04.19 16:00</td>
-                <td>审核中</td>
-                <td>刷新状态</td>
+            <tr ng-repeat="task in taskList">
+                <td ng-bind="$index+1"></td>
+                <td ng-bind="task.paperName"></td>
+                <td ng-bind="task.subject"></td>
+                <td ng-bind="task.grade"></td>
+                <td ng-bind="task.createTime"></td>
+                <td></td>
+                <td></td>
             </tr>
             </tbody>
         </table>
-    </div>
 </div>
