@@ -28,7 +28,7 @@
             },
             /*内容制作页*/
             contentProduce: {
-                state: "contentProduce",
+                state: 'contentProduce',
                 moduleName: '内容制作',
                 url: '/contentProduce',
                 templateUrl: "view/content_produce.html",

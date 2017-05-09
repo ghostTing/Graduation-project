@@ -31,8 +31,14 @@
                 <td ng-bind="task.subject"></td>
                 <td ng-bind="task.grade"></td>
                 <td ng-bind="task.createTime"></td>
-                <td></td>
-                <td></td>
+                <td><span ng-if="task.status==10">正在制作</span></td>
+                <td>
+                    <button ng-if="task.status==10" class="c-btn-normal fs-14" style="outline: none;"
+                            ng-click="goContentProduce(task.taskId)">
+                        <span class="glyphicon glyphicon-edit"></span>
+                        继续制作
+                    </button>
+               </td>
             </tr>
             </tbody>
         </table>

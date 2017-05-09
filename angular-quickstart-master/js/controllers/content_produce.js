@@ -7,7 +7,7 @@
 (function () {
     angular.module('myApp').controller('contentProduceController', ['$scope', '$http', '$location', '$sce', '$state', '$stateParams', '$rootScope', '$timeout','$cookieStore', function ($scope, $http, $location, $sce, $state, $stateParams, $rootScope, $timeout,$cookieStore) {
         declareModel($scope);
-        declare($scope, $sce, $state, $location, $timeout,$cookieStore);
+        declare($scope, $sce, $state, $location, $timeout,$cookieStore,$http);
         init($scope, $http, $sce, $rootScope, $timeout,$cookieStore);
     }]);
     function declareModel($scope) {
@@ -19,7 +19,7 @@
         $scope.BASIC_DATA = window.BASIC_DATA;
     }
 
-    function declare($scope, $sce, $state, $location, $timeout,$cookieStore) {
+    function declare($scope, $sce, $state, $location, $timeout,$cookieStore,$http) {
         $scope.viewController = {
             newUeditor: function ($event, $index, question) {
                 var showContentNode, questionItemNode, examPointNode;
@@ -171,19 +171,48 @@
             },
             /*操作区添加 小题*/
             addQuestion: function (parentIndex) {
-                $scope.paper.questionHeadline[parentIndex].questionList.push({
-                    stem: $sce.trustAsHtml('1111111111111111111111')
+                console.log($scope.paper);
+                $http({
+                    method:'post',
+                    url:BASIC_DATA.API_URL+'/task/addOrUpdatePaperItem/'+$scope.taskId,
+                    data:{
+                        'parentIndex':parentIndex,
+                        'paperItem':{
+                            'childIndex':$scope.paper.questionHeadline[parentIndex].questionList.length,
+                            'stem':'',
+                            'examPoint':'',
+                            'answer':'',
+                            'solution':''
+                        }
+                    }
+                }).then(function(data){
+                    $scope.paper=$scope.viewController.transformToSafeHtml(data.data);
+                });
+            },
+            /*删除小题*/
+            deleteQuestion:function ($parent,$index) {
+                $http({
+                    method:'post',
+                    url:BASIC_DATA.API_URL+'/task/deletePaperItem/'+$scope.taskId,
+                    params:{
+                        'parentIndex':$parent.$index,
+                        'childIndex':$index
+                    }
+                }).then(function(data){
+                    $scope.paper=$scope.viewController.transformToSafeHtml(data.data);
                 });
             },
             /*操作区添加 大题*/
-            addQuestionHeadline:function () {
-                $scope.paper.questionHeadline.push({
-                    questionType:'',
-                    questionList:[
-                        {
-                            stem:''
-                        }
-                    ]
+            editQuestionHeadline:function (parentIndex,questionType) {
+                $http({
+                    method:'post',
+                    url:BASIC_DATA.API_URL+'/task/addOrUpdatePaperDetail/'+$scope.taskId,
+                    data:{
+                        'parentIndex':parentIndex||$scope.paper.questionHeadline.length,
+                        'questionType':questionType||''
+                    }
+                }).then(function(data){
+                    $scope.paper=$scope.viewController.transformToSafeHtml(data.data);
                 });
             },
             /*移动图片*/
@@ -215,30 +244,38 @@
                     ulNode.style.marginLeft=getUlMLval+160+'px';
                 }
                 $scope.flag=false;
+            },
+            /*请求获取paper*/
+            getPaper:function(){
+                $http.get(BASIC_DATA.API_URL+'/task/editPaper/'+$scope.taskId).then(function (data) {
+                    $scope.paper=$scope.viewController.transformToSafeHtml(data.data);
+                });
+            },
+            /*转化为新人的html绑定到页面去*/
+            transformToSafeHtml:function (paper) {
+                for(var i=0;i<paper.questionHeadline.length;i++){
+                    for (var j=0;j<paper.questionHeadline[i].questionList.length;j++)
+                    paper.questionHeadline[i].questionList[j].stem=$sce.trustAsHtml( paper.questionHeadline[i].questionList[j].stem);
+                }
+                return paper
             }
         }
     }
 
     function init($scope, $http, $sce, $rootScope, $timeout,$cookieStore) {
         $scope.taskId=$cookieStore.get('taskId');
-        alert( $scope.taskId);
+        /*进入页面 获取paper*/
+        $scope.viewController.getPaper();
+        /*获取基础信息*/
+        $http.get(BASIC_DATA.API_URL+'/paper/basicInfo/'+$scope.taskId).then(function (data) {
+            $scope.basicInfo=data.data;
+        });
         $rootScope.currentPage('contentProduce');
         $('.images').viewer({
             navbar: false,
             rotatable: false,
             zoomRatio:0.2
         });
-        $scope.paper={
-            questionHeadline:[{
-                questionType: '',
-                questionList: [
-                    {
-                        stem: ''
-                    }
-                ]
-            }
-            ]
-        };
         if (typeof $rootScope.previousState_params.questionIndex != 'undefined') {
             var questionIndex;
             questionIndex = $scope.viewController.questionIndexCom(parseInt($rootScope.previousState_params.parentIndex), parseInt($rootScope.previousState_params.childIndex));

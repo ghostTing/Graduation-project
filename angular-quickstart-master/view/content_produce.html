@@ -54,23 +54,23 @@
             试卷基础信息
         </div>
         <div class="paper-basic-info tc p-10">
-            <div class="paper-name fs-20 mb-20">2013-2014东莞市八年级数学上学期期末统考试题</div>
+            <div class="paper-name fs-20 mb-20" ng-bind="basicInfo.paperName"></div>
             <table class="paper-info-table fs-16" width="700">
                 <tr class="tl mb-20">
                     <td>年份：</td>
-                    <td>2015</td>
+                    <td ng-bind="basicInfo.year"></td>
                     <td>地区：</td>
-                    <td>广东-东莞</td>
+                    <td ng-bind="basicInfo.region"></td>
                     <td>学校：</td>
-                    <td>东莞中学</td>
+                    <td ng-bind="basicInfo.school||'-'"></td>
                 </tr>
                 <tr class="tl">
                     <td>年级：</td>
-                    <td>八年级</td>
+                    <td ng-bind="basicInfo.grade||'-'"></td>
                     <td>科目：</td>
-                    <td>数学</td>
+                    <td ng-bind="basicInfo.subject"></td>
                     <td>试卷类型：</td>
-                    <td>期末考试</td>
+                    <td ng-bind="basicInfo.paperType"></td>
                 </tr>
             </table>
         </div>
@@ -113,6 +113,11 @@
                 <script id="{{'Ueditor'+questionIndex}}" style="height:144px;width:100%"></script>
                 <div class="save-button poa">
                     <button class="c-btn-normal fr fs-14 mt-10"
+                            style="outline: none;" ng-click="viewController.deleteQuestion($parent,$index)">
+                        <span class="glyphicon glyphicon-trash"></span>
+                        删&nbsp;&nbsp;除
+                    </button>
+                    <button class="c-btn-normal fr fs-14 mt-10 mr-10"
                             ng-class="{'active':btnOnSave[viewController.questionIndexCom($parent,$index)]}"
                             ng-click="viewController.saveQuestion($event,$parent,$index,viewController.questionIndexCom($parent,$index),true)"
                             style="outline: none;">
@@ -136,7 +141,7 @@
         <i class="apple-circle apple-circle-yellow"></i>
         <i class="apple-circle apple-circle-green"></i>
         <button class="c-btn-normal fr add-question-headline" style="outline: none;"
-                ng-click="viewController.addQuestionHeadline()">
+                ng-click="viewController.editQuestionHeadline()">
             <span class="glyphicon glyphicon-plus"></span> 添加大题
         </button>
     </div>

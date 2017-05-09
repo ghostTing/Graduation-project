@@ -43,6 +43,9 @@
         ng-click="viewController.backToTop()">
     <span class="glyphicon glyphicon-hand-up"></span> 返回顶部
 </button>
+<div class="loading" ng-show="loading">
+    <div class="loading-img"></div>
+</div>
 <div ui-view class="view-container"></div>
 
 <!-- bower:js -->

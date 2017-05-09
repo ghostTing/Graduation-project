@@ -118,6 +118,9 @@
 .task-list thead{
     font-size: 16px;
 }
+.table>tbody>tr>td{
+    vertical-align: middle;
+}
 /*资源上传页*/
 .paper-info{
     padding: 20px;

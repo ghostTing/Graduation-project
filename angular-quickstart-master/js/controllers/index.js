@@ -2,11 +2,12 @@
  * Created by Administrator on 2017/3/27.
  */
 (function () {
-    angular.module('myApp').controller('indexController', ['$scope', '$location', 'SweetAlert', '$cookieStore', '$rootScope', function ($scope, $location, SweetAlert, $cookieStore, $rootScope) {
-        declare($scope, $location,$rootScope,$cookieStore);
+    var myApp=angular.module('myApp');
+    angular.module('myApp').controller('indexController', ['$scope', '$location', 'SweetAlert', '$cookieStore', '$rootScope', '$state',function ($scope, $location, SweetAlert, $cookieStore, $rootScope,$state) {
+        declare($scope, $location,$rootScope,$cookieStore,$state);
         init($scope, SweetAlert, $cookieStore, $rootScope,$location);
     }]);
-    function declare($scope,$location,$rootScope,$cookieStore) {
+    function declare($scope,$location,$rootScope,$cookieStore,$state) {
 
         /*导航栏同步切换*/
         $rootScope.currentPage = function (state) {
@@ -25,7 +26,8 @@
                 $cookieStore.remove("token");
             },
             goPage: function (item) {
-                $location.path(item.state);
+                $state.go(item.state);
+                /*$location.path(item.state);*/
                 $rootScope.currentPage(item.state);
             },
             /*返回顶部*/

@@ -2,12 +2,12 @@
  * Created by Administrator on 2017/4/2.
  */
 (function () {
-    angular.module('myApp').controller('resourceUploadController',['$scope','$http','$location','$timeout','$cookieStore',function ($scope,$http,$location,$timeout,$cookieStore) {
-        declare($scope,$http,$timeout,$cookieStore);
+    angular.module('myApp').controller('resourceUploadController',['$scope','$http','$location','$timeout','$cookieStore','$state','$stateParams','$rootScope',function ($scope,$http,$location,$timeout,$cookieStore,$state,$stateParams,$rootScope) {
+        declare($scope,$http,$timeout,$cookieStore,$state,$stateParams);
         declareModel($scope);
         init($scope,$http,$cookieStore);
     }]);
-    function declare($scope,$http,$timeout,$cookieStore) {
+    function declare($scope,$http,$timeout,$cookieStore,$state,$stateParams) {
         $scope.viewController={
             paperType_change:function (selectedType){
                 if (selectedType.code==11){
@@ -69,7 +69,6 @@
             sumitPaperBasicInfo:function () {
                 if (!$scope.isSEE){
                     $scope.paperInfo.paperName=$scope.paperInfo.year+$scope.paperInfo.region+$scope.paperInfo.school+$scope.paperInfo.subject+$scope.paperInfo.paperType;
-                    console.log($scope.paperInfo);
                     /*前端验证所有信息的填写*/
                     if ($scope.paperInfo.year&&$scope.paperInfo.school&&$scope.paperInfo.grade&&$scope.paperInfo.subject&&$scope.paperInfo.paperType&&  $scope.cityPickingFinished){
                         $http({
@@ -79,6 +78,7 @@
                         }).then(function(data){
                            if(data.status==200){
                                $cookieStore.put('taskId',data.data.taskId);
+                               $state.go('contentProduce');
                            }
                         });
                     }else{
@@ -103,6 +103,7 @@
                         }).then(function(data){
                             if(data.status==200){
                                 $cookieStore.put('taskId',data.data.taskId);
+                                $state.go('contentProduce');
                             }
                         });
                     }else {
@@ -121,7 +122,7 @@
             onFileSubmit:function () {
                 $timeout(function(){
                     $http.get(BASIC_DATA.API_URL+'/getFileUpload').then(function (data) {
-                        console.log(data);
+
                     })
                 },3000)
             },
@@ -170,7 +171,6 @@
         });
         /*获取省份*/
         $http.get(BASIC_DATA.API_URL+'/provinces').then(function (data) {
-            console.log(data);
             data.data.unshift({
                 id:'',
                 provinceId:'',

@@ -52,7 +52,7 @@
                     swal("Good job!", "注册成功！！", "success");
                 }, function () {
                     swal("用户名已存在");
-                })
+                });
             },
             /*登录*/
             login: function () {
