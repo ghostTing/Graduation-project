@@ -66,6 +66,7 @@
                 }).then(function (data) {
                     $cookieStore.put("token", data.data.token);
                     $cookieStore.put('role', data.data.role);
+                    $cookieStore.put('afterLogin', true);
                     $cookieStore.put("username", $scope.username);
                     $cookieStore.put("password", $scope.password);
                     window.location = '/index.html';

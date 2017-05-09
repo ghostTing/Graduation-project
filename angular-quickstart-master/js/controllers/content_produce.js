@@ -77,7 +77,6 @@
                 LastQuestionIndex=this.questionIndexCom(biggestParentIndex,biggestChildIndex);
 
                 if ($scope.ue) {
-                    console.log($scope.ue.getContent());
                     $event.stopPropagation();
                     $scope.hideExplain[questionIndex] = false;
                     $scope.btnOnSave[questionIndex] = true;
@@ -104,6 +103,22 @@
                         this.destroyUeditor();
                         document.getElementsByClassName('showContent')[questionIndex].style.display='block';
                     }
+                    $http({
+                        method:'post',
+                        url:BASIC_DATA.API_URL+'/task/addOrUpdatePaperItem/'+$scope.taskId,
+                        data:{
+                            'parentIndex':$parent.$index,
+                            'paperItem':{
+                                'childIndex':$index,
+                                'stem':$scope.svaeHtml,
+                                'examPoint':'',
+                                'answer':'',
+                                'solution':''
+                            }
+                        }
+                    }).then(function(data){
+                        $scope.paper=$scope.viewController.transformToSafeHtml(data.data);
+                    });
                 }
             },
             /*计算题序*/
@@ -189,7 +204,7 @@
                     $scope.paper=$scope.viewController.transformToSafeHtml(data.data);
                 });
             },
-            /*删除小题*/
+            /*编辑区删除小题*/
             deleteQuestion:function ($parent,$index) {
                 $http({
                     method:'post',
@@ -215,6 +230,29 @@
                     $scope.paper=$scope.viewController.transformToSafeHtml(data.data);
                 });
             },
+            /*操作区删除大题*/
+            deleteQuestionHeadline:function ($index) {
+            if(!$scope.paper.questionHeadline[$index].questionList.length){
+                $http({
+                    method:'post',
+                    url:BASIC_DATA.API_URL+'/task/deletePaperDetail/'+$scope.taskId,
+                    params:{
+                        'parentIndex':$index
+                    }
+                }).then(function(data){
+                    $scope.paper=$scope.viewController.transformToSafeHtml(data.data);
+                });
+            }else {
+                swal({
+                    title: "操作出错",
+                    text: "该题型下有题目，不能直接删除大题",
+                    type: "error",
+                    confirmButtonColor: "#DD6B55",
+                    closeOnConfirm: false,
+                    html: false
+                });
+            }
+        },
             /*移动图片*/
             moveTo:function (derection) {
                 var ulNode,getUlMLval,imgLength;

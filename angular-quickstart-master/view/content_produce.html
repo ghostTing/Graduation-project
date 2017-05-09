@@ -147,13 +147,14 @@
     </div>
     <div class="shortcut-body p-10">
         <div ng-repeat="questionHeadline in paper.questionHeadline" class="shortcut-question-headline mb-5">
-            <div class="input-group">
+            <div class="input-group por">
                 <span class="input-group-addon shortcut-input-group-addon fs-14" ng-bind="BASIC_DATA.cnNum[$index]"
                       id="basic-addon20"
                       style="top: 0;border-radius: 0;"></span>
                 <input type="text" class="form-control fs-14 shortcut-form-control"
                        ng-model="questionHeadline.questionType" placeholder="请输入标题，如：选择题"
                        aria-describedby="basic-addon20">
+                <span class="poa glyphicon glyphicon-remove remove-question-headline" ng-click="viewController.deleteQuestionHeadline($index)"></span>
             </div>
             <ul class="shortcut-question-list">
                 <li ng-repeat="quesiton in questionHeadline.questionList"><i class="question-index-circle"

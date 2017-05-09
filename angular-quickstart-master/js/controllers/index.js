@@ -42,13 +42,16 @@
     function init($scope, SweetAlert, $cookieStore, $rootScope,$location){
         $rootScope.module = BASIC_DATA.routerConfig;
         $rootScope.role = $cookieStore.get('role');
-        switch ($rootScope.role){
-            case 1:
-                $location.path($rootScope.module.taskUpload.state);
-                break;
-            case 2:
-                $location.path($rootScope.module.contentAudit.state);
-                break;
+        if ($cookieStore.get('afterLogin')){
+            switch ($rootScope.role){
+                case 1:
+                    $location.path($rootScope.module.taskUpload.state);
+                    break;
+                case 2:
+                    $location.path($rootScope.module.contentAudit.state);
+                    break;
+            }
+            $cookieStore.remove('afterLogin');
         }
     }
 })();

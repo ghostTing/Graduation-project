@@ -288,3 +288,17 @@
 .shortcut-footer{
     height: 50px;
 }
+.remove-question-headline{
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    text-align: center;
+    padding-top: 1px;
+    border-radius: 50%;
+    border: 1px solid #92b65c;
+    color: #FFFFFF;
+    background-color: #92b65c;;
+    top: -6px;
+    right: -6px;
+    z-index: 3;
+}
