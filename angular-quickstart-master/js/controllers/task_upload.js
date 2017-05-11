@@ -11,9 +11,12 @@
            /* $location.path('resourceUpload');*/
            $state.go('resourceUpload');
         };
-        $scope.goContentProduce=function (taskId) {
-            $cookieStore.put('taskId',taskId);
-            $state.go('contentProduce');
+        $scope.goContentProduce=function (task) {
+            $cookieStore.put('taskId',task.taskId);
+            if (task.status=30&&task.errMsg){
+                $cookieStore.put('errMsg',task.errorMessage);
+            }
+            $state.go('contentProduce',{errMsg:task.errorMessage});
         }
     }
     function init($scope,$http,$rootScope) {

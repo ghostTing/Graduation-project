@@ -106,14 +106,14 @@
                         </tr>
                         <tr>
                             <td class="explain-title">【解 析】</td>
-                            <td ng-bind="question.solution"></td>
+                            <td ng-bind-html="question.solution"></td>
                         </tr>
                     </table>
                 </div>
                 <script id="{{'Ueditor'+questionIndex}}" style="height:144px;width:100%"></script>
                 <div class="save-button poa">
                     <button class="c-btn-normal fr fs-14 mt-10"
-                            style="outline: none;" ng-click="viewController.deleteQuestion($parent,$index)">
+                            style="outline: none;" ng-click="viewController.deleteQuestion($parent,$index)" ng-show="!isEditing">
                         <span class="glyphicon glyphicon-trash"></span>
                         删&nbsp;&nbsp;除
                     </button>
@@ -125,7 +125,8 @@
                         保&nbsp;&nbsp;存
                     </button>
                     <button class="c-btn-normal fr fs-14 mt-10 mr-10" style="outline: none;"
-                            ng-click="viewController.answerProduce($event,$parent,$index)">
+                            ng-click="viewController.answerProduce($event,$parent,$index)"
+                    ng-show="!isEditing">
                         <span class="glyphicon glyphicon-edit"></span>
                         解析录入
                     </button>
@@ -170,12 +171,32 @@
     </div>
     <div class="shortcut-footer p-10">
         <button class="c-btn-normal submit-paper fs-14 fr" style="outline: none;"
-                ng-click="viewController.submitPaper()">
+                ng-click="viewController.finishEditPaper()">
             <span class="glyphicon glyphicon-saved"></span> 提&nbsp;交
         </button>
         <button class="c-btn-normal submit-paper fs-14 fr mr-10" style="outline: none;"
                 ng-click="viewController.preview()">
             <span class="glyphicon glyphicon-floppy-saved"></span> 保存预览
         </button>
+        <!--错误信息按钮-->
+        <button class="c-btn-warning errorMsg fs-14 mt-10 mb-10 fr" style="outline: none;"
+                ng-click="viewController.checkErrorMsg()">
+            <span class="glyphicon glyphicon-search"></span> 查看错误信息
+        </button>
     </div>
 </div>
+<!--错误信息弹窗-->
+<div class="alert-box-cover" ng-show="showAlertBox">
+</div>
+<div class="alert-box card-shadow br-4 apple-card-container" ng-show="showAlertBox">
+    <div class="alert-title apple-card-t-bar">
+        <i class="apple-circle apple-circle-red curp"></i>
+        <i class="apple-circle apple-circle-yellow"></i>
+        <i class="apple-circle apple-circle-green"></i>
+        <span class="glyphicon glyphicon-remove fr fs-16" ng-click="showAlertBox=false;"></span>
+    </div>
+    <div class="alert-body">
+        <textarea name="errMsg" id="errMsg" cols="30" rows="10" readonly ng-model="errMsg"></textarea>
+    </div>
+</div>
+

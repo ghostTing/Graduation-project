@@ -29,6 +29,9 @@
 #solution-edit{
     border: 1px solid #dcdcdc;
 }
+.solution-edit textarea{
+    display: none;
+}
 .answer-edit-bottom{
     height: 50px;
 }

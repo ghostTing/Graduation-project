@@ -77,6 +77,30 @@
     color: #fff;
     background: #92b65c;
 }
+.c-btn-warning{
+    outline: none;
+    cursor: pointer;
+    text-align: center;
+    padding: 0 10px;
+    height: 26px;
+    line-height: 26px;
+    display: inline-block;
+    border: 1px solid #b67814;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    background: #FFFFFF;
+    color: #b67814;
+}
+.c-btn-warning.active{
+    color: #fff;
+    background: #b67814;
+    border: none;
+}
+.c-btn-warning:hover{
+    color: #fff;
+    background: #b67814;
+}
 .c-btn-normal-org {
     border: 0;
     cursor: pointer;

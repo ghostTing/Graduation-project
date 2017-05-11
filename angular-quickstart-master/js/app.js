@@ -38,18 +38,24 @@
             .state(BASIC_DATA.routerConfig.contentProduce.state, {
                 url: BASIC_DATA.routerConfig.contentProduce.url,
                 templateUrl:BASIC_DATA.routerConfig.contentProduce.templateUrl,
-                controller: BASIC_DATA.routerConfig.contentProduce.controller
+                controller: BASIC_DATA.routerConfig.contentProduce.controller,
+                params:{errMsg:''}
             })
             .state(BASIC_DATA.routerConfig.contentProduce.childrenPage.answerProduce.state, {
                 url: BASIC_DATA.routerConfig.contentProduce.childrenPage.answerProduce.url+'/:parentIndex/'+':childIndex/'+':questionIndex',
                 templateUrl: BASIC_DATA.routerConfig.contentProduce.childrenPage.answerProduce.templateUrl,
                 controller: BASIC_DATA.routerConfig.contentProduce.childrenPage.answerProduce.controller,
-                params:{args:{}}
+                params:{arg:{}}
             })
             .state(BASIC_DATA.routerConfig.paperPreview.state, {
                 url: BASIC_DATA.routerConfig.paperPreview.url,
                 templateUrl: BASIC_DATA.routerConfig.paperPreview.templateUrl,
                 controller: BASIC_DATA.routerConfig.paperPreview.controller
+            })
+            .state(BASIC_DATA.routerConfig.auditList.state, {
+                url: BASIC_DATA.routerConfig.auditList.url,
+                templateUrl: BASIC_DATA.routerConfig.auditList.templateUrl,
+                controller: BASIC_DATA.routerConfig.auditList.controller
             })
             .state(BASIC_DATA.routerConfig.contentAudit.state, {
                 url: BASIC_DATA.routerConfig.contentAudit.url,

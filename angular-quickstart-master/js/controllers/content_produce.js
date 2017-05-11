@@ -8,7 +8,7 @@
     angular.module('myApp').controller('contentProduceController', ['$scope', '$http', '$location', '$sce', '$state', '$stateParams', '$rootScope', '$timeout','$cookieStore', function ($scope, $http, $location, $sce, $state, $stateParams, $rootScope, $timeout,$cookieStore) {
         declareModel($scope);
         declare($scope, $sce, $state, $location, $timeout,$cookieStore,$http);
-        init($scope, $http, $sce, $rootScope, $timeout,$cookieStore);
+        init($scope, $http, $sce, $rootScope, $timeout,$cookieStore,$stateParams);
     }]);
     function declareModel($scope) {
         $scope.flag=true;
@@ -24,9 +24,9 @@
             newUeditor: function ($event, $index, question) {
                 var showContentNode, questionItemNode, examPointNode;
                 //判断是否点击的同一个
-                if ($scope.pre == $index) {
+                /*if ($scope.pre == $index) {
                     return false
-                }
+                }*/
                 $scope.hideExplain[$scope.pre]=false;
                 $scope.currentQuestion[$scope.pre] = false;
                 $scope.currentQuestion[$index] = true;
@@ -68,14 +68,14 @@
                 $scope.html = $sce.trustAsHtml($scope.ue.getContent());
                 $scope.isEditing = false;
                 $scope.ue.destroy();
+                $scope.ue=null;
             },
             /*保存*/
             saveQuestion: function ($event, $parent, $index, questionIndex, isJumpToNext) {
-                var biggestParentIndex,biggestChildIndex,LastQuestionIndex,jumpToElementId;
+                /*var biggestParentIndex,biggestChildIndex,LastQuestionIndex,jumpToElementId;
                 biggestParentIndex=$scope.paper.questionHeadline.length-1;
                 biggestChildIndex=$scope.paper.questionHeadline[biggestParentIndex].questionList.length-1;
-                LastQuestionIndex=this.questionIndexCom(biggestParentIndex,biggestChildIndex);
-
+                LastQuestionIndex=this.questionIndexCom(biggestParentIndex,biggestChildIndex);*/
                 if ($scope.ue) {
                     $event.stopPropagation();
                     $scope.hideExplain[questionIndex] = false;
@@ -83,26 +83,23 @@
                     /*保存按钮激活*/
                     $scope.svaeHtml = $scope.ue.getContent();
                     $scope.paper.questionHeadline[$parent.$index].questionList[$index].stem = $sce.trustAsHtml($scope.svaeHtml);
-                    if (!isJumpToNext) {
+                    this.destroyUeditor();
+                    $scope.ue=null;
+                    document.getElementsByClassName('showContent')[questionIndex].style.display='block';
+                    /*if (!isJumpToNext) {
                         this.destroyUeditor();
                         return false
-                    }
-                    if(questionIndex!=LastQuestionIndex){
+                    }*/
+                   /* if(questionIndex!=LastQuestionIndex){
                         jumpToElementId = '#Ueditor' + (questionIndex + 1);
                         $scope.viewController.newUeditor($event, questionIndex + 1);
                         $('body').animate({
                             scrollTop: $(jumpToElementId).offset().top - 350
                         }, 1000);
                     }else {
-                        /*$scope.hideExplain[questionIndex] = true;
-                        jumpToElementId = '#Ueditor0' ;
-                        $scope.viewController.newUeditor($event, 0);
-                        $('body').animate({
-                            scrollTop: $(jumpToElementId).offset().top - 550
-                        }, 1000);*/
                         this.destroyUeditor();
                         document.getElementsByClassName('showContent')[questionIndex].style.display='block';
-                    }
+                    }*/
                     $http({
                         method:'post',
                         url:BASIC_DATA.API_URL+'/task/addOrUpdatePaperItem/'+$scope.taskId,
@@ -110,10 +107,7 @@
                             'parentIndex':$parent.$index,
                             'paperItem':{
                                 'childIndex':$index,
-                                'stem':$scope.svaeHtml,
-                                'examPoint':'',
-                                'answer':'',
-                                'solution':''
+                                'stem':$scope.svaeHtml
                             }
                         }
                     }).then(function(data){
@@ -141,8 +135,7 @@
             answerProduce: function ($event, $parent, $index) {
                 var questionIndex, parentIndex, childIndex;
                 questionIndex = this.questionIndexCom($parent, $index);
-                this.saveQuestion($event, $parent, $index, questionIndex, false);
-                swal({
+                /*swal({
                     title: "保存成功！",
                     text: "2秒后进入解析录入界面",
                     type: "success",
@@ -150,7 +143,7 @@
                     closeOnConfirm: false,
                     timer: '2000',
                     html: false
-                });
+                });*/
                 parentIndex = $parent.$index;
                 childIndex = $index;
                 /*$state.go('answerProduce',{
@@ -160,13 +153,11 @@
                  questionIndex:questionIndex
                  }
                  });*/
-                $timeout(function () {
                     $state.go('answerProduce', {
                         parentIndex: parentIndex,
                         childIndex: childIndex,
                         questionIndex: questionIndex
                     });
-                }, 2000)
 
             },
             /*操作区快速导航*/
@@ -186,7 +177,6 @@
             },
             /*操作区添加 小题*/
             addQuestion: function (parentIndex) {
-                console.log($scope.paper);
                 $http({
                     method:'post',
                     url:BASIC_DATA.API_URL+'/task/addOrUpdatePaperItem/'+$scope.taskId,
@@ -289,19 +279,67 @@
                     $scope.paper=$scope.viewController.transformToSafeHtml(data.data);
                 });
             },
-            /*转化为新人的html绑定到页面去*/
+            /*转化为信任的html绑定到页面去*/
             transformToSafeHtml:function (paper) {
                 for(var i=0;i<paper.questionHeadline.length;i++){
-                    for (var j=0;j<paper.questionHeadline[i].questionList.length;j++)
-                    paper.questionHeadline[i].questionList[j].stem=$sce.trustAsHtml( paper.questionHeadline[i].questionList[j].stem);
+                    for (var j=0;j<paper.questionHeadline[i].questionList.length;j++){
+                        paper.questionHeadline[i].questionList[j].stem=$sce.trustAsHtml( paper.questionHeadline[i].questionList[j].stem);
+                        paper.questionHeadline[i].questionList[j].solution=$sce.trustAsHtml( paper.questionHeadline[i].questionList[j].solution);
+                    }
                 }
                 return paper
+            },
+            finishEditPaper:function () {
+                for (var i=0;i<$scope.paper.questionHeadline.length;i++){
+                    for (var j=0;j<$scope.paper.questionHeadline[i].questionList.length;j++){
+                        if (!$scope.paper.questionHeadline[i].questionList[i].stem||!$scope.paper.questionHeadline[i].questionList[i].examPoint||!$scope.paper.questionHeadline[i].questionList[i].solution||!$scope.paper.questionHeadline[i].questionList[i].answer){
+                            swal({
+                                title: "提交失败",
+                                text: "所有题目的题干和解析必须全部录入完毕",
+                                type: "warning",
+                                confirmButtonColor: "#DD6B55"
+                            });
+                            return false
+                        }
+                    }
+                }
+                $http({
+                    method:'POST',
+                    url:BASIC_DATA.API_URL+'/task/finishEditPaper/'+$scope.taskId
+                }).then(function (data) {
+                    if (data.status==200){
+                        swal({
+                            title: "提交成功！",
+                            text: "2秒后返回任务列表",
+                            type: "success",
+                            confirmButtonColor: "#DD6B55",
+                            closeOnConfirm: false,
+                            timer: '2000',
+                            html: false
+                        });
+                    }
+                },function () {
+                    swal({
+                        title: "出错了",
+                        text: "请确保所有题目题干和解析都录入完毕，再次提交",
+                        type: "error",
+                        confirmButtonColor: "#DD6B55"
+                    });
+                })
+            },
+            checkErrorMsg:function () {
+                $scope.showAlertBox=true;
             }
         }
     }
 
-    function init($scope, $http, $sce, $rootScope, $timeout,$cookieStore) {
+    function init($scope, $http, $sce, $rootScope, $timeout,$cookieStore,$stateParams) {
         $scope.taskId=$cookieStore.get('taskId');
+        if ($stateParams.errMsg){
+            $scope.errMsg=$stateParams.errMsg;
+        }else if ($cookieStore.get('errMsg')){
+            $scope.errMsg=$cookieStore.get('errMsg');
+        }
         /*进入页面 获取paper*/
         $scope.viewController.getPaper();
         /*获取基础信息*/
@@ -322,7 +360,7 @@
                 $('body').animate({
                     scrollTop: $('.showContent').eq(questionIndex).offset().top - 340
                 }, 0);
-            }, 50);
+            }, 200);
 
         }
     }

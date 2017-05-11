@@ -13,12 +13,12 @@
                     <tr>
                         <td class="explain-title" width="120">【考 点】</td>
                         <td>
-                            <input type="text" class="exam-point-input" placeholder="点击编辑考点">
+                            <input type="text" class="exam-point-input" placeholder="点击编辑考点" ng-model="examPoint">
                         </td>
                     </tr>
                     <tr>
                         <td class="explain-title">【答 案】</td>
-                        <td><input type="text" class="answer-input" placeholder="点击编辑答案"></td>
+                        <td><input type="text" class="answer-input" placeholder="点击编辑答案" ng-model="answer"></td>
                     </tr>
                     <tr>
                         <td class="explain-title">【解 析】</td>
@@ -26,8 +26,7 @@
                             <script id="solution-edit" style="height:144px;width:100%"></script>
                             <input type="text" class="solution-input" placeholder="点击编辑答案" readonly
                                    ng-show="showPlaceholder">
-                            <div class="solution-content" ng-show="showSolutionContent">
-
+                            <div class="solution-content" ng-show="showSolutionContent" ng-bind-html="solutionSaveAsHtml">
                             </div>
                         </td>
 
@@ -36,8 +35,8 @@
             </div>
         </div>
         <div class="answer-edit-bottom">
-            <button class="c-btn-normal fr fs-14 mt-10 mr-20" style="outline: none;">
-                <span class="glyphicon glyphicon-floppy-saved" ng-click="savaSolution()"></span>
+            <button class="c-btn-normal fr fs-14 mt-10 mr-20" style="outline: none;" ng-click="viewController.saveSolution()">
+                <span class="glyphicon glyphicon-floppy-saved"></span>
                 保&nbsp;&nbsp;存
             </button>
             <button class="c-btn-normal fr fs-14 mt-10 mr-20" style="outline: none;"

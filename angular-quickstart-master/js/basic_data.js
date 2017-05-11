@@ -53,6 +53,16 @@
                 role: 1,
                 controller: 'paperPreviewController'
             },
+            /*审核列表页*/
+            auditList:{
+                state: 'auditList',
+                moduleName: '审核列表',
+                url: '/auditList',
+                templateUrl: "view/audit_list.html",
+                role: 2,
+                controller: 'auditListController'
+            },
+            /*内容审核页*/
             contentAudit: {
                 state: 'contentAudit',
                 moduleName: '内容审核',
@@ -62,6 +72,7 @@
                 controller: 'contentAuditController'
             }
         },
+
         API_URL: ' http://localhost:8080/question',
         PAPER_TYPE: [
             {

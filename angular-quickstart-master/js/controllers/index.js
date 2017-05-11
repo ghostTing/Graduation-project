@@ -48,7 +48,7 @@
                     $location.path($rootScope.module.taskUpload.state);
                     break;
                 case 2:
-                    $location.path($rootScope.module.contentAudit.state);
+                    $location.path($rootScope.module.auditList.state);
                     break;
             }
             $cookieStore.remove('afterLogin');
