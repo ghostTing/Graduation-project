@@ -1,0 +1,62 @@
+<link rel="stylesheet" href="../style/audit_list.css">
+<div class="container">
+    <div class="fetch-task-wrapper">
+        <button  class="c-btn-normal fs-14 fr" style="outline: none;"
+                 ng-click="viewController.fetchTask()">
+            <span class="glyphicon glyphicon-cloud"></span>
+            获取任务
+        </button>
+    </div>
+
+    <div class="apple-card-container mb-20 item-shadow">
+        <div class="apple-card-t-bar">
+            <i class="apple-circle apple-circle-red"></i>
+            <i class="apple-circle apple-circle-yellow"></i>
+            <i class="apple-circle apple-circle-green"></i>
+        </div>
+        <table class="table bg-fff table-striped table-hover task-list">
+            <thead>
+            <tr>
+                <td width="50">序号</td>
+                <td>名称</td>
+                <td width="50">科目</td>
+                <td width="100">年级</td>
+                <td>时间</td>
+                <td width="150">状态</td>
+                <td width="150">操作</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="task in taskList">
+                <td ng-bind="$index+1"></td>
+                <td ng-bind="task.paperName"></td>
+                <td ng-bind="task.subject"></td>
+                <td ng-bind="task.grade||'-'"></td>
+                <td ng-bind="task.createTime"></td>
+                <td>
+                    <span ng-if="task.status==10">正在制作</span>
+                    <span ng-if="task.status==20">审核中</span>
+                    <span ng-if="task.status==30">错误退回</span>
+                    <span ng-if="task.status==100">已入库</span>
+                </td>
+                <td>
+                    <button ng-if="task.status==10" class="c-btn-normal fs-14" style="outline: none;"
+                            ng-click="goContentProduce(task)">
+                        <span class="glyphicon glyphicon-edit"></span>
+                        继续制作
+                    </button>
+                    <button ng-if="task.status==20" class="c-btn-normal fs-14" style="outline: none;"
+                            ng-click="">
+                        <span class="glyphicon glyphicon-refresh"></span>
+                        刷新状态
+                    </button>
+                    <button ng-if="task.status==30" class="c-btn-warning fs-14" style="outline: none;"
+                            ng-click="goContentProduce(task)">
+                        <span class="glyphicon glyphicon-wrench"></span>
+                        修改
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
