@@ -24,8 +24,8 @@
                         <td class="explain-title">【解 析】</td>
                         <td class="solution-edit" ng-click="viewController.initUeditor()">
                             <script id="solution-edit" style="height:144px;width:100%"></script>
-                            <input type="text" class="solution-input" placeholder="点击编辑答案" readonly
-                                   ng-show="showPlaceholder">
+                            <div class="solution-input"
+                                 ng-show="showPlaceholder" ng-bind-html="solutionHtml"></div>
                             <div class="solution-content" ng-show="showSolutionContent" ng-bind-html="solutionSaveAsHtml">
                             </div>
                         </td>

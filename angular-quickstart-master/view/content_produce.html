@@ -84,7 +84,7 @@
                     <span class="input-group-addon fs-18 fw-600" ng-bind="BASIC_DATA.cnNum[$index]" id="basic-addon4"
                           style="top: 0;border-radius: 0;"></span>
                     <input type="text" class="form-control fs-18 fw-600" ng-model="questionHeadline.questionType"
-                           placeholder="请输入标题，如：选择题" aria-describedby="basic-addon4">
+                           placeholder="请输入标题，如：选择题" aria-describedby="basic-addon4" ng-blur="viewController.editQuestionHeadline($index,questionHeadline);">
                 </div>
             </div>
             <!--题目-->
@@ -154,7 +154,7 @@
                       style="top: 0;border-radius: 0;"></span>
                 <input type="text" class="form-control fs-14 shortcut-form-control"
                        ng-model="questionHeadline.questionType" placeholder="请输入标题，如：选择题"
-                       aria-describedby="basic-addon20">
+                       aria-describedby="basic-addon20" ng-blur="viewController.editQuestionHeadline($index,questionHeadline.questionType);">
                 <span class="poa glyphicon glyphicon-remove remove-question-headline" ng-click="viewController.deleteQuestionHeadline($index)"></span>
             </div>
             <ul class="shortcut-question-list">
