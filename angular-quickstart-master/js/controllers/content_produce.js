@@ -292,7 +292,7 @@
             finishEditPaper:function () {
                 for (var i=0;i<$scope.paper.questionHeadline.length;i++){
                     for (var j=0;j<$scope.paper.questionHeadline[i].questionList.length;j++){
-                        if (!$scope.paper.questionHeadline[i].questionList[i].stem||!$scope.paper.questionHeadline[i].questionList[i].examPoint||!$scope.paper.questionHeadline[i].questionList[i].solution||!$scope.paper.questionHeadline[i].questionList[i].answer){
+                        if (!$scope.paper.questionHeadline[i].questionList[j].stem||!$scope.paper.questionHeadline[i].questionList[j].examPoint||!$scope.paper.questionHeadline[i].questionList[j].solution||!$scope.paper.questionHeadline[i].questionList[j].answer){
                             swal({
                                 title: "提交失败",
                                 text: "所有题目的题干和解析必须全部录入完毕",
@@ -325,10 +325,17 @@
                         type: "error",
                         confirmButtonColor: "#DD6B55"
                     });
-                })
+                    $cookieStore.remove('taskId');
+                    $timeout(function () {
+                        $state.go('taskUpload');
+                    },2000)
+                });
             },
             checkErrorMsg:function () {
                 $scope.showAlertBox=true;
+            },
+            preview:function () {
+                $state.go('paperPreview');
             }
         }
     }

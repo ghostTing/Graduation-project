@@ -61,6 +61,23 @@
     top: 50px;
     right: 150px;
 }
+/*解析录入的样式*/
+.explain {
+    width: 100%;
+}
+
+.explain-table {
+    width: 100%;
+}
+
+.explain-table td {
+    padding: 10px;
+}
+
+.explain-title {
+    text-align: right;
+    vertical-align: top;
+}
 @media all and (max-width: 1400px) {
     .button-right {
         right: 100px;
