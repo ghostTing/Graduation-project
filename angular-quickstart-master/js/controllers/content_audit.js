@@ -2,16 +2,16 @@
  * Created by Administrator on 2017/4/29.
  */
 (function(){
-    angular.module('myApp').controller('contentAuditController',['$scope','$http','$sce','$rootScope','$location','$timeout',function($scope,$http,$sce,$rootScope,$location,$timeout){
+    angular.module('myApp').controller('contentAuditController',['$scope','$http','$sce','$rootScope','$location','$timeout','$cookieStore',function($scope,$http,$sce,$rootScope,$location,$timeout,$cookieStore ){
         declareModel($scope);
-        declare($scope, $sce);
-        init($scope, $http, $sce,$rootScope,$location,$timeout);
+        declare($scope, $sce,$http);
+        init($scope, $http, $sce,$rootScope,$location,$timeout,$cookieStore );
     }]);
     function declareModel($scope) {
         $scope.flag=true;
        $scope.BASIC_DATA=window.BASIC_DATA;
     }
-    function declare($scope,$sce) {
+    function declare($scope,$sce,$http) {
         $scope.viewController={
             /*计算题序*/
             questionIndexCom: function ($parent, $index) {
@@ -114,10 +114,57 @@
                     ulNode.style.marginLeft=getUlMLval+160+'px';
                 }
                 $scope.flag=false;
+            },
+            /*获取基础信息*/
+            getBasicInfo:function () {
+                $http.get(BASIC_DATA.API_URL+'/paper/basicInfo/'+$scope.taskId).then(function (data) {
+                    $scope.basicInfo=data.data;
+                });
+            },
+            /*转化为信任的html绑定到页面去*/
+            transformToSafeHtml:function (paper) {
+                for(var i=0;i<paper.questionHeadline.length;i++){
+                    for (var j=0;j<paper.questionHeadline[i].questionList.length;j++){
+                        paper.questionHeadline[i].questionList[j].stem=$sce.trustAsHtml( paper.questionHeadline[i].questionList[j].stem);
+                        paper.questionHeadline[i].questionList[j].solution=$sce.trustAsHtml( paper.questionHeadline[i].questionList[j].solution);
+                    }
+                }
+                return paper
+            },
+            /*获取试卷*/
+            getPaper:function () {
+                $http.get(BASIC_DATA.API_URL+'/task/editPaper/'+$scope.taskId).then(function (data) {
+                    $scope.paper=$scope.viewController.transformToSafeHtml(data.data);
+                });
+            },
+            submitErrMsg:function () {
+                if ($scope.errMsg){
+                    $http({
+                        method:'POST',
+                        url:BASIC_DATA.API_URL+'/check/saveErrorMsg/'+$scope.taskId,
+                        data:{
+                            errorMsg:$scope.errMsg
+                        }
+                    }).then(function (data) {
+                        if (data.status==200){
+                            swal({
+                                type:'success',
+                                text:'试卷将返回至内容制作者修改',
+                                title:'提交成功！'
+                            });
+                        }
+                    },function (data) {
+                        swal({
+                            type:'error',
+                            text:data.message,
+                            title:'发生错误！'
+                        });
+                    })
+                }
             }
         }
     }
-    function init($scope, $http, $sce,$rootScope,$location,$timeout){
+    function init($scope, $http, $sce,$rootScope,$location,$timeout,$cookieStore){
         if ($rootScope.role!=2){
             swal({
                 type:'error',
@@ -130,47 +177,13 @@
             },3000)
         }
         $rootScope.currentPage('contentAudit');
+        $scope.taskId=$cookieStore.get('taskId');
+        $scope.viewController.getBasicInfo();
+        $scope.viewController.getPaper();
         $('.images').viewer({
             navbar: false,
             rotatable: false,
             zoomRatio:0.2
         });
-        $scope.paper={
-            questionHeadline:[{
-                questionType: '选择题',
-                questionList: [
-                    {
-                        stem: $sce.trustAsHtml('<p>&nbsp;2014 年 2 月共有 28 天，据气象部门统计，这个月北京有雾霾的天数占全月总天数的3/7,盛盛喜欢</p><p>跑步，他在雾霾天每天跑 1 圈，其它时间每天跑 3 圈．那么，盛盛 2014 年 2 月总共跑了______圈</p><p><br/></p>')
-                    },
-                    {
-                        stem: $sce.trustAsHtml('<p>&nbsp;2014 年 2 月共有 28 天，据气象部门统计，这个月北京有雾霾的天数占全月总天数的3/7,盛盛喜欢</p><p>跑步，他在雾霾天每天跑 1 圈，其它时间每天跑 3 圈．那么，盛盛 2014 年 2 月总共跑了______圈</p><p><br/></p>')
-                    },
-                    {
-                        stem: $sce.trustAsHtml('<p>&nbsp;2014 年 2 月共有 28 天，据气象部门统计，这个月北京有雾霾的天数占全月总天数的3/7,盛盛喜欢</p><p>跑步，他在雾霾天每天跑 1 圈，其它时间每天跑 3 圈．那么，盛盛 2014 年 2 月总共跑了______圈</p><p><br/></p>')
-                    },
-                    {
-                        stem: $sce.trustAsHtml('<p>&nbsp;2014 年 2 月共有 28 天，据气象部门统计，这个月北京有雾霾的天数占全月总天数的3/7,盛盛喜欢</p><p>跑步，他在雾霾天每天跑 1 圈，其它时间每天跑 3 圈．那么，盛盛 2014 年 2 月总共跑了______圈</p><p><br/></p>')
-                    }
-                ]
-            },
-                {
-                    questionType: '选择题',
-                    questionList: [
-                        {
-                            stem: $sce.trustAsHtml('<p>&nbsp;2014 年 2 月共有 28 天，据气象部门统计，这个月北京有雾霾的天数占全月总天数的3/7,盛盛喜欢</p><p>跑步，他在雾霾天每天跑 1 圈，其它时间每天跑 3 圈．那么，盛盛 2014 年 2 月总共跑了______圈</p><p><br/></p>')
-                        },
-                        {
-                            stem: $sce.trustAsHtml('<p>&nbsp;2014 年 2 月共有 28 天，据气象部门统计，这个月北京有雾霾的天数占全月总天数的3/7,盛盛喜欢</p><p>跑步，他在雾霾天每天跑 1 圈，其它时间每天跑 3 圈．那么，盛盛 2014 年 2 月总共跑了______圈</p><p><br/></p>')
-                        },
-                        {
-                            stem: $sce.trustAsHtml('<p>&nbsp;2014 年 2 月共有 28 天，据气象部门统计，这个月北京有雾霾的天数占全月总天数的3/7,盛盛喜欢</p><p>跑步，他在雾霾天每天跑 1 圈，其它时间每天跑 3 圈．那么，盛盛 2014 年 2 月总共跑了______圈</p><p><br/></p>')
-                        },
-                        {
-                            stem: $sce.trustAsHtml('<p>&nbsp;2014 年 2 月共有 28 天，据气象部门统计，这个月北京有雾霾的天数占全月总天数的3/7,盛盛喜欢</p><p>跑步，他在雾霾天每天跑 1 圈，其它时间每天跑 3 圈．那么，盛盛 2014 年 2 月总共跑了______圈</p><p><br/></p>')
-                        }
-                    ]
-                }
-            ]
-        };
     }
 })();

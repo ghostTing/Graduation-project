@@ -8,7 +8,7 @@
     angular.module('myApp').controller('contentProduceController', ['$scope', '$http', '$location', '$sce', '$state', '$stateParams', '$rootScope', '$timeout','$cookieStore', function ($scope, $http, $location, $sce, $state, $stateParams, $rootScope, $timeout,$cookieStore) {
         declareModel($scope);
         declare($scope, $sce, $state, $location, $timeout,$cookieStore,$http,$rootScope);
-        init($scope, $http, $sce, $rootScope, $timeout,$cookieStore,$stateParams);
+        init($scope, $http, $sce, $rootScope, $timeout,$cookieStore,$stateParams,$state);
     }]);
     function declareModel($scope) {
         $scope.flag=true;
@@ -359,8 +359,23 @@
         }
     }
 
-    function init($scope, $http, $sce, $rootScope, $timeout,$cookieStore,$stateParams) {
-        $scope.taskId=$cookieStore.get('taskId');
+    function init($scope, $http, $sce, $rootScope, $timeout,$cookieStore,$stateParams,$state) {
+       if($cookieStore.get('taskId')){
+           $scope.taskId=$cookieStore.get('taskId');
+       } else {
+           swal({
+            title: "操作未授权",
+            text: "请上传一个任务或者选择继续制作",
+            type: "error",
+            confirmButtonColor: "#DD6B55",
+            closeOnConfirm: false,
+            timer: '2000',
+            html: false
+            });
+           $timeout(function () {
+               $state.go('taskUpload')
+           },2000)
+       }
         if ($stateParams.errMsg){
             $scope.errMsg=$stateParams.errMsg;
         }else if ($cookieStore.get('errMsg')){

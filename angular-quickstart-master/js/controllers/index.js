@@ -24,6 +24,7 @@
                 $cookieStore.remove("password");
                 $cookieStore.remove("role");
                 $cookieStore.remove("token");
+                $cookieStore.remove("taskId");
             },
             goPage: function (item) {
                 $state.go(item.state);

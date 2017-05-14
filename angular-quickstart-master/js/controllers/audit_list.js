@@ -12,12 +12,16 @@
                 $http.get(BASIC_DATA.API_URL+'/task/check/list').then(function (data) {
                     $scope.taskList=data.data;
                 });
+            },
+            gotoAudit:function (taskId) {
+                $cookieStore.put('taskId',taskId);
+                $state.go('contentAudit');
             }
         }
     }
     function init($scope, $http, $rootScope) {
         $rootScope.currentPage('auditList');
-        $http.get(BASIC_DATA.API_URL+'/task/list',{
+        $http.get(BASIC_DATA.API_URL+'/task/check/list',{
         }).then(function (data) {
             $scope.taskList=data.data;
         });

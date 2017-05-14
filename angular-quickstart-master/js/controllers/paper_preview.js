@@ -5,7 +5,7 @@
     angular.module('myApp').controller('paperPreviewController',['$scope','$http','$sce','$rootScope','$state','$cookieStore','$timeout',function ($scope,$http,$sce,$rootScope,$state,$cookieStore,$timeout) {
         declareModel($scope);
         declare($scope,$http,$state,$sce,$cookieStore,$timeout);
-        init($scope,$http,$sce,$rootScope,$cookieStore);
+        init($scope,$http,$sce,$rootScope,$cookieStore,$state,$timeout);
     }]);
     function declareModel($scope) {
         $scope.BASIC_DATA = window.BASIC_DATA;
@@ -115,9 +115,24 @@
             }
         }
     }
-    function init($scope,$http,$sce,$rootScope,$cookieStore) {
+    function init($scope,$http,$sce,$rootScope,$cookieStore,$state,$timeout) {
         $rootScope.currentPage('paperPreview');
-        $scope.taskId=$cookieStore.get('taskId');
+        if($cookieStore.get('taskId')){
+            $scope.taskId=$cookieStore.get('taskId');
+        } else {
+            swal({
+                title: "操作未授权",
+                text: "请上传一个任务或者选择继续制作",
+                type: "error",
+                confirmButtonColor: "#DD6B55",
+                closeOnConfirm: false,
+                timer: '2000',
+                html: false
+            });
+            $timeout(function () {
+                $state.go('taskUpload')
+            },2000)
+        }
         /*进入页面 获取paper*/
         $scope.viewController.getPaper();
         $scope.viewController.getBasicInfo();
