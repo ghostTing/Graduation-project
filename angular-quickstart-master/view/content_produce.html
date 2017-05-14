@@ -180,7 +180,7 @@
         </button>
         <!--错误信息按钮-->
         <button class="c-btn-warning errorMsg fs-14 mt-10 mb-10 fr" style="outline: none;"
-                ng-click="viewController.checkErrorMsg()">
+                ng-click="viewController.checkErrorMsg()" ng-if="taskStatus==30">
             <span class="glyphicon glyphicon-search"></span> 查看错误信息
         </button>
     </div>

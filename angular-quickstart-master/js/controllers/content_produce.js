@@ -314,15 +314,19 @@
                     url:BASIC_DATA.API_URL+'/task/finishEditPaper/'+$scope.taskId
                 }).then(function (data) {
                     if (data.status==200){
+                        $cookieStore.remove('taskId');
                         swal({
                             title: "提交成功",
-                            text: "2秒后返回任务列表",
+                            text: "1秒后返回任务列表",
                             type: "success",
                             confirmButtonColor: "#DD6B55",
                             closeOnConfirm: false,
-                            timer: '2000',
+                            timer: '1000',
                             html: false
                         });
+                        $timeout(function () {
+                            $state.go('taskUpload');
+                        },1000)
                     }
                 },function () {
                     swal({
@@ -334,10 +338,13 @@
                     $cookieStore.remove('taskId');
                     $timeout(function () {
                         $state.go('taskUpload');
-                    },2000)
+                    },1000)
                 });
             },
             checkErrorMsg:function () {
+                $http.get(BASIC_DATA.API_URL+'/task/getErrorMsg/'+$scope.taskId).then(function (data) {
+                    $scope.errMsg=decodeURI(data.data);
+                });
                 $scope.showAlertBox=true;
             },
             preview:function () {
@@ -362,6 +369,7 @@
     function init($scope, $http, $sce, $rootScope, $timeout,$cookieStore,$stateParams,$state) {
        if($cookieStore.get('taskId')){
            $scope.taskId=$cookieStore.get('taskId');
+           $scope.taskStatus=$cookieStore.get('taskStatus');
        } else {
            swal({
             title: "操作未授权",
@@ -369,12 +377,12 @@
             type: "error",
             confirmButtonColor: "#DD6B55",
             closeOnConfirm: false,
-            timer: '2000',
+            timer: '1000',
             html: false
             });
            $timeout(function () {
                $state.go('taskUpload')
-           },2000)
+           },1000)
        }
         if ($stateParams.errMsg){
             $scope.errMsg=$stateParams.errMsg;

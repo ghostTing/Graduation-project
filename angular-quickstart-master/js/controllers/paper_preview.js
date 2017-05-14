@@ -45,9 +45,11 @@
                         showLoaderOnConfirm: true
                     },
                     function(){
+                        $cookieStore.remove('taskId');
+                        $state.go('taskUpload');
                         setTimeout(function(){
                             swal("提交成功");
-                        }, 2000);
+                        }, 1000);
                     });
             },
             /*转化为信任的html绑定到页面去*/
@@ -86,17 +88,17 @@
                     if (data.status==200){
                         swal({
                             title: "提交成功",
-                            text: "2秒后返回任务列表",
+                            text: "1秒后返回任务列表",
                             type: "success",
                             confirmButtonColor: "#DD6B55",
                             closeOnConfirm: false,
-                            timer: '2000',
+                            timer: '1000',
                             html: false
                         });
                         $cookieStore.remove('taskId');
                         $timeout(function () {
                             $state.go('taskUpload');
-                        },2000);
+                        },1000);
                     }
                 },function () {
                     swal({
@@ -126,12 +128,12 @@
                 type: "error",
                 confirmButtonColor: "#DD6B55",
                 closeOnConfirm: false,
-                timer: '2000',
+                timer: '1000',
                 html: false
             });
             $timeout(function () {
                 $state.go('taskUpload')
-            },2000)
+            },1000)
         }
         /*进入页面 获取paper*/
         $scope.viewController.getPaper();

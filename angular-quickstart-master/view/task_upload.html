@@ -33,17 +33,18 @@
                 <td ng-bind="task.createTime"></td>
                 <td>
                     <span ng-if="task.status==10">正在制作</span>
-                    <span ng-if="task.status==20">审核中</span>
+                    <span ng-if="task.status==20||task.status==21">审核中</span>
                     <span ng-if="task.status==30">错误退回</span>
                     <span ng-if="task.status==100">已入库</span>
                 </td>
                 <td>
+                    <span ng-if="task.status==100">-</span>
                     <button ng-if="task.status==10" class="c-btn-normal fs-14" style="outline: none;"
                     ng-click="goContentProduce(task)">
                     <span class="glyphicon glyphicon-edit"></span>
                     继续制作
                     </button>
-                    <button ng-if="task.status==20" class="c-btn-normal fs-14" style="outline: none;"
+                    <button ng-if="task.status==20||task.status==21" class="c-btn-normal fs-14" style="outline: none;"
                             ng-click="getTaskList()">
                         <span class="glyphicon glyphicon-refresh"></span>
                         刷新状态

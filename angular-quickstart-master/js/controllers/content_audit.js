@@ -2,16 +2,16 @@
  * Created by Administrator on 2017/4/29.
  */
 (function(){
-    angular.module('myApp').controller('contentAuditController',['$scope','$http','$sce','$rootScope','$location','$timeout','$cookieStore',function($scope,$http,$sce,$rootScope,$location,$timeout,$cookieStore ){
+    angular.module('myApp').controller('contentAuditController',['$scope','$http','$sce','$rootScope','$location','$timeout','$cookieStore','$state',function($scope,$http,$sce,$rootScope,$location,$timeout,$cookieStore,$state){
         declareModel($scope);
-        declare($scope, $sce,$http);
+        declare($scope, $sce,$http,$state,$cookieStore);
         init($scope, $http, $sce,$rootScope,$location,$timeout,$cookieStore );
     }]);
     function declareModel($scope) {
         $scope.flag=true;
        $scope.BASIC_DATA=window.BASIC_DATA;
     }
-    function declare($scope,$sce,$http) {
+    function declare($scope,$sce,$http,$state,$cookieStore) {
         $scope.viewController={
             /*计算题序*/
             questionIndexCom: function ($parent, $index) {
@@ -47,14 +47,14 @@
                                 method:'POST',
                                 url:BASIC_DATA.API_URL+'/task/check/saveErrorMsg/'+$scope.taskId,
                                 params:{
-                                    errorMsg:$scope.errMsg
+                                    errorMsg:encodeURI($scope.errMsg)
                                 }
                             }).then(function (data) {
                                 if (data.status==200){
                                     setTimeout(function(){
                                         swal("提交成功");
-
-                                    }, 2000);
+                                        $state.go('auditList');
+                                    }, 1000);
                                 }
                             },function (data) {
                                 swal({
@@ -99,9 +99,17 @@
                         showLoaderOnConfirm: true
                     },
                     function(){
-                        setTimeout(function(){
-                            swal("提交成功");
-                        }, 2000);
+                        $http({
+                            method:'POST',
+                            url:BASIC_DATA.API_URL+'/task/check/store/'+$scope.taskId,
+                        }).then(function () {
+                            setTimeout(function(){
+                                $cookieStore.remove('taskId');
+                                $cookieStore.remove('taskStatus');
+                                $state.go('auditList');
+                                swal("提交成功");
+                            }, 1000);
+                        });
                     });
             },
             /*移动图片*/
@@ -159,16 +167,16 @@
         }
     }
     function init($scope, $http, $sce,$rootScope,$location,$timeout,$cookieStore){
-        if ($rootScope.role!=2){
+        if ($rootScope.role!=2||!$cookieStore.get('taskId')){
             swal({
                 type:'error',
                 text:'操作未授权',
-                timer:'2000',
+                timer:'1000',
                 title:'发生错误'
             });
             $timeout(function () {
-                $location.path(BASIC_DATA.routerConfig.taskUpload.state);
-            },3000)
+                $location.path(BASIC_DATA.routerConfig.auditList.state);
+            },1000)
         }
         $rootScope.currentPage('contentAudit');
         $scope.taskId=$cookieStore.get('taskId');

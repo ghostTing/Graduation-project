@@ -19,7 +19,7 @@
                 },function(data){
                     swal({
                         type:'error',
-                        text:'请完成列表里任务的审核再获取其他任务',
+                        text:data.data.message,
                         title:'发生错误'
                     });
                 });
@@ -27,14 +27,17 @@
             gotoAudit:function (taskId) {
                 $cookieStore.put('taskId',taskId);
                 $state.go('contentAudit');
+            },
+            getTaskList:function () {
+                $http.get(BASIC_DATA.API_URL+'/task/check/list',{
+                }).then(function (data) {
+                    $scope.taskList=data.data;
+                });
             }
         }
     }
     function init($scope, $http, $rootScope) {
         $rootScope.currentPage('auditList');
-        $http.get(BASIC_DATA.API_URL+'/task/check/list',{
-        }).then(function (data) {
-            $scope.taskList=data.data;
-        });
+        $scope.viewController.getTaskList();
     }
 })();

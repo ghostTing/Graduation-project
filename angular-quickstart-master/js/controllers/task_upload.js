@@ -13,10 +13,9 @@
         };
         $scope.goContentProduce=function (task) {
             $cookieStore.put('taskId',task.taskId);
-            if (task.status=30&&task.errMsg){
-                $cookieStore.put('errMsg',task.errorMessage);
-            }
-            $state.go('contentProduce',{errMsg:task.errorMessage});
+            $cookieStore.put('taskStatus',task.status);
+
+            $state.go('contentProduce');
         };
         $scope.getTaskList=function () {
             $http.get(BASIC_DATA.API_URL+'/task/list',{}).then(function (data) {
