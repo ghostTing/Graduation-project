@@ -85,7 +85,7 @@
                 }).then(function (data) {
                     if (data.status==200){
                         swal({
-                            title: "提交成功！",
+                            title: "提交成功",
                             text: "2秒后返回任务列表",
                             type: "success",
                             confirmButtonColor: "#DD6B55",

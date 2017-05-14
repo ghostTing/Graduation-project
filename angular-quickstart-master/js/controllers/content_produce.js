@@ -136,7 +136,7 @@
                 var questionIndex, parentIndex, childIndex;
                 questionIndex = this.questionIndexCom($parent, $index);
                 /*swal({
-                    title: "保存成功！",
+                    title: "保存成功",
                     text: "2秒后进入解析录入界面",
                     type: "success",
                     confirmButtonColor: "#DD6B55",
@@ -315,7 +315,7 @@
                 }).then(function (data) {
                     if (data.status==200){
                         swal({
-                            title: "提交成功！",
+                            title: "提交成功",
                             text: "2秒后返回任务列表",
                             type: "success",
                             confirmButtonColor: "#DD6B55",

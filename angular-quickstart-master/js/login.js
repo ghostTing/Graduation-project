@@ -24,7 +24,7 @@
             finishReg: function () {
                 if (($scope.enterSelected || $scope.auditSelected) && $scope.resUserName.length >= 3 && $scope.regPassword.length >= 3 && $scope.confirmPassword.length >= 3) {
                     if ($scope.regPassword !== $scope.confirmPassword) {
-                        SweetAlert.swal("两次密码输入不一致", "温馨提示：密码区分大小写！");
+                        SweetAlert.swal("两次密码输入不一致", "温馨提示：密码区分大小写");
                     } else {
                         $scope.viewController.regRequest();
                     }
@@ -49,7 +49,7 @@
                     },
                     url: 'http://localhost:8080/question/register'
                 }).then(function () {
-                    swal("Good job!", "注册成功！！", "success");
+                    swal("Good job!", "注册成功", "success");
                 }, function () {
                     swal("用户名已存在");
                 });
@@ -71,7 +71,7 @@
                     $cookieStore.put("password", $scope.password);
                     window.location = '/index.html';
                 }, function () {
-                    swal("用户名或者密码错误！！");
+                    swal("用户名或者密码错误");
                 })
             },
             /*回车键登录*/

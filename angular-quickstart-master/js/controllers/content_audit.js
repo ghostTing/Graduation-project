@@ -42,9 +42,28 @@
                         showLoaderOnConfirm: true
                     },
                     function(){
-                        setTimeout(function(){
-                            swal("提交成功");
-                        }, 2000);
+                        if ($scope.errMsg){
+                            $http({
+                                method:'POST',
+                                url:BASIC_DATA.API_URL+'/task/check/saveErrorMsg/'+$scope.taskId,
+                                params:{
+                                    errorMsg:$scope.errMsg
+                                }
+                            }).then(function (data) {
+                                if (data.status==200){
+                                    setTimeout(function(){
+                                        swal("提交成功");
+
+                                    }, 2000);
+                                }
+                            },function (data) {
+                                swal({
+                                    type:'error',
+                                    text:data.message,
+                                    title:'发生错误'
+                                });
+                            });
+                        }
                     });
                /* swal({
                         title: "确认提交?",
@@ -136,31 +155,6 @@
                 $http.get(BASIC_DATA.API_URL+'/task/editPaper/'+$scope.taskId).then(function (data) {
                     $scope.paper=$scope.viewController.transformToSafeHtml(data.data);
                 });
-            },
-            submitErrMsg:function () {
-                if ($scope.errMsg){
-                    $http({
-                        method:'POST',
-                        url:BASIC_DATA.API_URL+'/check/saveErrorMsg/'+$scope.taskId,
-                        data:{
-                            errorMsg:$scope.errMsg
-                        }
-                    }).then(function (data) {
-                        if (data.status==200){
-                            swal({
-                                type:'success',
-                                text:'试卷将返回至内容制作者修改',
-                                title:'提交成功！'
-                            });
-                        }
-                    },function (data) {
-                        swal({
-                            type:'error',
-                            text:data.message,
-                            title:'发生错误！'
-                        });
-                    })
-                }
             }
         }
     }
@@ -170,7 +164,7 @@
                 type:'error',
                 text:'操作未授权',
                 timer:'2000',
-                title:'发生错误！'
+                title:'发生错误'
             });
             $timeout(function () {
                 $location.path(BASIC_DATA.routerConfig.taskUpload.state);
