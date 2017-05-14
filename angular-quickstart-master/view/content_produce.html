@@ -90,7 +90,7 @@
             <!--题目-->
             <div class="question-item por" style="min-height:200px;width:800px"
                  ng-repeat="question in questionHeadline.questionList">
-                <span class="question-index poa ng-hide" ng-bind="viewController.questionIndexCom($parent,$index)+1"></span>
+                <span class="question-index poa" ng-bind="viewController.questionIndexCom($parent,$index)+1"></span>
                 <span class="glyphicon glyphicon-paperclip fr paperclip"></span>
                 <div class="showContent fs-14" ng-bind-html="question.stem"
                      ng-click="viewController.newUeditor($event,viewController.questionIndexCom($parent,$index),question)"></div>

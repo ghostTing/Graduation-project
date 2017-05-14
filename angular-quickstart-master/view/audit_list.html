@@ -35,7 +35,7 @@
                 <td ng-bind="task.createTime"></td>
                 <td>
                     <span ng-if="task.status==10">正在制作</span>
-                    <span ng-if="task.status==20">审核中</span>
+                    <span ng-if="task.status==20||task.status==21">审核中</span>
                     <span ng-if="task.status==30">错误退回</span>
                     <span ng-if="task.status==100">已入库</span>
                 </td>
