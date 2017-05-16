@@ -3,8 +3,7 @@
     <!--试卷内容-->
     <div class="paper-content card-shadow">
         <!--试卷名称-->
-        <div class="paper-name mb-15">
-            2015 年第九届北京学而思综合能力测评（学而思杯）
+        <div class="paper-name mb-15" ng-bind="basicInfo.paperName">
         </div>
         <!--试卷题目-->
         <div class="question">
@@ -18,6 +17,22 @@
                     <span class="glyphicon glyphicon-filter question-index-tag poa"></span>
                     <span class="poa question-index" ng-bind="viewController.questionIndexCom($parent,$index)+1"></span>
                     <div class="pl-20" ng-bind-html="question.stem"></div>
+                    <div class="explain fs-14 input-group pt-20">
+                        <table class="explain-table">
+                            <tr>
+                                <td width="120" class="explain-title">【考 点】</td>
+                                <td ng-bind="question.examPoint"></td>
+                            </tr>
+                            <tr>
+                                <td class="explain-title">【答 案】</td>
+                                <td ng-bind="question.answer">A</td>
+                            </tr>
+                            <tr>
+                                <td class="explain-title">【解 析】</td>
+                                <td ng-bind-html="question.solution"></td>
+                            </tr>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
@@ -29,7 +44,7 @@
             返回题干制作
         </button>
         <button class="c-btn-normal submit-paper mr-10 fs-14" style="outline: none;"
-                ng-click="viewController.submitPaper()">
+                ng-click="viewController.finishEditPaper()">
             <span class="glyphicon glyphicon-saved"></span> 提交
         </button>
     </div>

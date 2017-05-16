@@ -57,19 +57,19 @@
             <table class="paper-info-table fs-16" width="700">
                 <tr class="tl mb-20">
                     <td>年份：</td>
-                    <td>2015</td>
+                    <td ng-bind="basicInfo.year"></td>
                     <td>地区：</td>
-                    <td>广东_东莞</td>
+                    <td ng-bind="basicInfo.region"></td>
                     <td>学校：</td>
-                    <td>东莞中学</td>
+                    <td ng-bind="basicInfo.school||'-'"></td>
                 </tr>
                 <tr class="tl">
                     <td>年级：</td>
-                    <td>八年级</td>
+                    <td ng-bind="basicInfo.grade||'-'"></td>
                     <td>科目：</td>
-                    <td>数学</td>
+                    <td ng-bind="basicInfo.subject"></td>
                     <td>试卷类型：</td>
-                    <td>期末考试</td>
+                    <td ng-bind="basicInfo.paperType"></td>
                 </tr>
             </table>
         </div>
@@ -87,6 +87,22 @@
                     <span class="glyphicon glyphicon-filter question-index-tag poa"></span>
                     <span class="poa question-index" ng-bind="viewController.questionIndexCom($parent,$index)+1"></span>
                     <div class="pl-20" ng-bind-html="question.stem"></div>
+                    <div class="explain fs-14 input-group pt-20">
+                        <table class="explain-table">
+                            <tr>
+                                <td width="120" class="explain-title">【考 点】</td>
+                                <td ng-bind="question.examPoint"></td>
+                            </tr>
+                            <tr>
+                                <td class="explain-title">【答 案】</td>
+                                <td ng-bind="question.answer">A</td>
+                            </tr>
+                            <tr>
+                                <td class="explain-title">【解 析】</td>
+                                <td ng-bind-html="question.solution"></td>
+                            </tr>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
@@ -109,6 +125,7 @@
         </button>
     </div>
 </div>
+<!--错误信息弹窗-->
 <div class="alert-box-cover" ng-show="showAlertBox">
 </div>
 <div class="alert-box card-shadow br-4 apple-card-container" ng-show="showAlertBox">
@@ -123,7 +140,7 @@
     </div>
     <div class="alert-footer">
         <button class="c-btn-normal submit-paper fs-14 fr mr-10" style="outline: none;"
-                ng-click="viewController.submitErrMsg()">
+                ng-click="viewController.submitErrMsg()" ng-show="errMsg">
             <span class="glyphicon glyphicon-saved"></span> 提&nbsp;交
         </button>
         <button class="c-btn-normal submit-paper fs-14 fr mr-10" style="outline: none;"

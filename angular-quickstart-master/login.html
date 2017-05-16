@@ -15,76 +15,87 @@
     <link rel="stylesheet" href="style/login.css">
 </head>
 <body ng-controller="loginController">
-        <!--背景图-->
-       <!-- <div style="position:absolute;z-index:-1;height:100%;width:100%;top:0;left:0;">
-            <img src="img/login/login_simple_bg.jpg" height="100%" width="100%"/>
-        </div>-->
-        <div class="login-page-logo">
-           <span class="name"> <span class="glyphicon glyphicon-pencil"></span> P E N P A L</span>
-        </div>
-        <div class="login-container card-shadow">
-            <div class="apple-card-t-bar">
-                <i class="apple-circle apple-circle-red"></i>
-                <i class="apple-circle apple-circle-yellow"></i>
-                <i class="apple-circle apple-circle-green"></i>
-            </div>
-            <div class="p-10">
-                <div class="logo">
+<!--背景图-->
+<!-- <div style="position:absolute;z-index:-1;height:100%;width:100%;top:0;left:0;">
+     <img src="img/login/login_simple_bg.jpg" height="100%" width="100%"/>
+ </div>-->
+<div class="login-page-logo">
+    <span class="name"> <span class="glyphicon glyphicon-pencil"></span> P E N P A L</span>
+</div>
+<div class="login-container card-shadow">
+    <div class="apple-card-t-bar">
+        <i class="apple-circle apple-circle-red"></i>
+        <i class="apple-circle apple-circle-yellow"></i>
+        <i class="apple-circle apple-circle-green"></i>
+    </div>
+    <div class="p-10">
+        <div class="logo">
 
+        </div>
+        <!--切换登录和注册tab页-->
+        <ul class="nav nav-tabs">
+            <li role="presentation" class="login-tab" ng-class="{'active':whenLogin}"
+                ng-click="whenLogin=true;whenRegister=false;showLoginform=true;showRegisterForm=false;"><a
+                    href="javascript:">登录</a></li>
+            <li role="presentation" class="register-tab" ng-class="{'active':whenRegister}"
+                ng-click="whenRegister=true;whenLogin=false;showRegisterForm=true;showLoginform=false;"><a
+                    href="javascript:">注册</a></li>
+        </ul>
+        <!--登录表单-->
+        <form class="login-form pb-10" ng-show="showLoginform" ng-keydown="viewController.keyDownLogin($event)">
+            <div class="input-group mb-20 mt-10">
+                <span class="input-group-addon glyphicon glyphicon-user" id="basic-addon1" style="top: 0;"></span>
+                <input type="text" class="form-control" placeholder="用户名" aria-describedby="basic-addon1" id="userName"
+                       ng-model="username">
+            </div>
+            <div class="input-group mb-10">
+                <span class="input-group-addon glyphicon glyphicon-lock" id="basic-addon2" style="top: 0;"></span>
+                <input type="password" class="form-control" placeholder="密码" aria-describedby="basic-addon2"
+                       ng-model="password">
+            </div>
+            <div class="c-btn-normal login-btn" ng-click="viewController.login()">登&nbsp;录</div>
+        </form>
+        <!--注册表单-->
+        <form class="register-form pb-10 ng-hide" ng-show="showRegisterForm">
+            <div class="input-group mb-30 mt-10">
+                <span class="input-group-addon glyphicon glyphicon-user" id="basic-addon3" style="top: 0;"></span>
+                <input type="text" class="form-control" id="regUserName" placeholder="用户名" ng-model="resUserName"
+                       aria-describedby="basic-addon3">
+            </div>
+            <div class="input-group mb-30">
+                <span class="input-group-addon glyphicon glyphicon-lock" id="basic-addon4" style="top: 0;"></span>
+                <input type="password" class="form-control" id="regPassword" placeholder="设置密码" ng-model="regPassword"
+                       aria-describedby="basic-addon4">
+            </div>
+            <div class="input-group mb-20">
+                <span class="input-group-addon glyphicon glyphicon-lock" id="basic-addon5" style="top: 0;"></span>
+                <input type="password" class="form-control" id="confirmPassword" placeholder="确认密码"
+                       ng-model="confirmPassword" aria-describedby="basic-addon5">
+            </div>
+            <div class="form-group">
+                <p class="role-select-tip">请在以下两个角色中选择一个作为你账户的标识</p>
+                <div class="tc">
+                    <span class="role-select mr-30" ng-class="{'active':enterSelected}"
+                          ng-click="enterSelected=true;auditSelected=false;roleCode=1;">题目录入</span>
+                    <span class="role-select" ng-class="{'active':auditSelected}"
+                          ng-click="auditSelected=true;enterSelected=false;roleCode=2;">题目审核</span>
                 </div>
-                <!--切换登录和注册tab页-->
-                <ul class="nav nav-tabs">
-                    <li role="presentation" class="login-tab"  ng-class="{'active':whenLogin}" ng-click="whenLogin=true;whenRegister=false;showLoginform=true;showRegisterForm=false;"><a href="javascript:">登录</a></li>
-                    <li role="presentation" class="register-tab" ng-class="{'active':whenRegister}" ng-click="whenRegister=true;whenLogin=false;showRegisterForm=true;showLoginform=false;"><a href="javascript:">注册</a></li>
-                </ul>
-                <!--登录表单-->
-                <form class="login-form pb-10" ng-show="showLoginform" ng-keydown="viewController.keyDownLogin($event)">
-                    <div class="input-group mb-20 mt-10">
-                        <span class="input-group-addon glyphicon glyphicon-user" id="basic-addon1" style="top: 0;"></span>
-                        <input type="text" class="form-control" placeholder="用户名" aria-describedby="basic-addon1" id="userName" ng-model="username">
-                    </div>
-                    <div class="input-group mb-10">
-                        <span class="input-group-addon glyphicon glyphicon-lock" id="basic-addon2" style="top: 0;"></span>
-                        <input type="password" class="form-control" placeholder="密码" aria-describedby="basic-addon2" ng-model="password">
-                    </div>
-                    <div class="c-btn-normal login-btn" ng-click="viewController.login()">登&nbsp;录</div>
-                </form>
-                <!--注册表单-->
-                <form class="register-form pb-10 ng-hide" ng-show="showRegisterForm">
-                    <div class="input-group mb-30 mt-10">
-                        <span class="input-group-addon glyphicon glyphicon-user" id="basic-addon3" style="top: 0;"></span>
-                        <input type="text" class="form-control" id="regUserName" placeholder="用户名" ng-model="resUserName" aria-describedby="basic-addon3">
-                    </div>
-                    <div class="input-group mb-30">
-                        <span class="input-group-addon glyphicon glyphicon-lock" id="basic-addon4" style="top: 0;"></span>
-                        <input type="password" class="form-control" id="regPassword" placeholder="设置密码" ng-model="regPassword" aria-describedby="basic-addon4">
-                    </div>
-                    <div class="input-group mb-20">
-                        <span class="input-group-addon glyphicon glyphicon-lock" id="basic-addon5" style="top: 0;"></span>
-                        <input type="password" class="form-control" id="confirmPassword" placeholder="确认密码" ng-model="confirmPassword" aria-describedby="basic-addon5">
-                    </div>
-                    <div class="form-group">
-                        <p class="role-select-tip">请在以下两个角色中选择一个作为你账户的标识</p>
-                        <div class="tc">
-                            <span class="role-select mr-30" ng-class="{'active':enterSelected}" ng-click="enterSelected=true;auditSelected=false;roleCode=1;">题目录入</span>
-                            <span class="role-select" ng-class="{'active':auditSelected}" ng-click="auditSelected=true;enterSelected=false;roleCode=2;">题目审核</span>
-                        </div>
-                    </div>
-                    <div class="c-btn-normal register-btn" ng-click="viewController.finishReg()">完成注册</div>
-                </form>
             </div>
+            <div class="c-btn-normal register-btn" ng-click="viewController.finishReg()">完成注册</div>
+        </form>
+    </div>
 
-        </div>
-        <!--bower :JS-->
-        <script src="bower_components/jquery/dist/jquery.js"></script>
-        <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-        <script src="bower_components/angular/angular.js"></script>
-        <script src="bower_components/underscore/underscore.js"></script>
-        <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
-        <script src="bower_components/angular-cookies/angular-cookies.js"></script>
-        <script src="bower_components/angular-sweetalert/SweetAlert.min.js"></script>
-        <script src="bower_components/sweetalert/dist/sweetalert-dev.js"></script>
-        <!--inject your JS-->
-    <script type="text/javascript" src="js/login.js"></script>
+</div>
+<!--bower :JS-->
+<script src="bower_components/jquery/dist/jquery.js"></script>
+<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/underscore/underscore.js"></script>
+<script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+<script src="bower_components/angular-cookies/angular-cookies.js"></script>
+<script src="bower_components/angular-sweetalert/SweetAlert.min.js"></script>
+<script src="bower_components/sweetalert/dist/sweetalert-dev.js"></script>
+<!--inject your JS-->
+<script type="text/javascript" src="js/login.js"></script>
 </body>
 </html>

@@ -5,10 +5,10 @@
  * Created by Administrator on 2017/4/2.
  */
 (function () {
-    angular.module('myApp').controller('contentProduceController', ['$scope', '$http', '$location', '$sce', '$state', '$stateParams', '$rootScope', '$timeout', function ($scope, $http, $location, $sce, $state, $stateParams, $rootScope, $timeout) {
+    angular.module('myApp').controller('contentProduceController', ['$scope', '$http', '$location', '$sce', '$state', '$stateParams', '$rootScope', '$timeout','$cookieStore', function ($scope, $http, $location, $sce, $state, $stateParams, $rootScope, $timeout,$cookieStore) {
         declareModel($scope);
-        declare($scope, $sce, $state, $location, $timeout);
-        init($scope, $http, $sce, $rootScope, $timeout);
+        declare($scope, $sce, $state, $location, $timeout,$cookieStore,$http,$rootScope);
+        init($scope, $http, $sce, $rootScope, $timeout,$cookieStore,$stateParams,$state);
     }]);
     function declareModel($scope) {
         $scope.flag=true;
@@ -19,14 +19,14 @@
         $scope.BASIC_DATA = window.BASIC_DATA;
     }
 
-    function declare($scope, $sce, $state, $location, $timeout) {
+    function declare($scope, $sce, $state, $location, $timeout,$cookieStore,$http,$rootScope) {
         $scope.viewController = {
             newUeditor: function ($event, $index, question) {
                 var showContentNode, questionItemNode, examPointNode;
                 //判断是否点击的同一个
-                if ($scope.pre == $index) {
+                /*if ($scope.pre == $index) {
                     return false
-                }
+                }*/
                 $scope.hideExplain[$scope.pre]=false;
                 $scope.currentQuestion[$scope.pre] = false;
                 $scope.currentQuestion[$index] = true;
@@ -68,42 +68,51 @@
                 $scope.html = $sce.trustAsHtml($scope.ue.getContent());
                 $scope.isEditing = false;
                 $scope.ue.destroy();
+                $scope.ue=null;
             },
             /*保存*/
             saveQuestion: function ($event, $parent, $index, questionIndex, isJumpToNext) {
-                var biggestParentIndex,biggestChildIndex,LastQuestionIndex,jumpToElementId;
+                /*var biggestParentIndex,biggestChildIndex,LastQuestionIndex,jumpToElementId;
                 biggestParentIndex=$scope.paper.questionHeadline.length-1;
                 biggestChildIndex=$scope.paper.questionHeadline[biggestParentIndex].questionList.length-1;
-                LastQuestionIndex=this.questionIndexCom(biggestParentIndex,biggestChildIndex);
-
+                LastQuestionIndex=this.questionIndexCom(biggestParentIndex,biggestChildIndex);*/
                 if ($scope.ue) {
-                    console.log($scope.ue.getContent());
                     $event.stopPropagation();
                     $scope.hideExplain[questionIndex] = false;
                     $scope.btnOnSave[questionIndex] = true;
                     /*保存按钮激活*/
                     $scope.svaeHtml = $scope.ue.getContent();
                     $scope.paper.questionHeadline[$parent.$index].questionList[$index].stem = $sce.trustAsHtml($scope.svaeHtml);
-                    if (!isJumpToNext) {
+                    this.destroyUeditor();
+                    $scope.ue=null;
+                    document.getElementsByClassName('showContent')[questionIndex].style.display='block';
+                    /*if (!isJumpToNext) {
                         this.destroyUeditor();
                         return false
-                    }
-                    if(questionIndex!=LastQuestionIndex){
+                    }*/
+                   /* if(questionIndex!=LastQuestionIndex){
                         jumpToElementId = '#Ueditor' + (questionIndex + 1);
                         $scope.viewController.newUeditor($event, questionIndex + 1);
                         $('body').animate({
                             scrollTop: $(jumpToElementId).offset().top - 350
                         }, 1000);
                     }else {
-                        /*$scope.hideExplain[questionIndex] = true;
-                        jumpToElementId = '#Ueditor0' ;
-                        $scope.viewController.newUeditor($event, 0);
-                        $('body').animate({
-                            scrollTop: $(jumpToElementId).offset().top - 550
-                        }, 1000);*/
                         this.destroyUeditor();
                         document.getElementsByClassName('showContent')[questionIndex].style.display='block';
-                    }
+                    }*/
+                    $http({
+                        method:'post',
+                        url:BASIC_DATA.API_URL+'/task/addOrUpdatePaperItem/'+$scope.taskId,
+                        data:{
+                            'parentIndex':$parent.$index,
+                            'paperItem':{
+                                'childIndex':$index,
+                                'stem':$scope.svaeHtml
+                            }
+                        }
+                    }).then(function(data){
+                        $scope.paper=$scope.viewController.transformToSafeHtml(data.data);
+                    });
                 }
             },
             /*计算题序*/
@@ -126,16 +135,15 @@
             answerProduce: function ($event, $parent, $index) {
                 var questionIndex, parentIndex, childIndex;
                 questionIndex = this.questionIndexCom($parent, $index);
-                this.saveQuestion($event, $parent, $index, questionIndex, false);
-                swal({
-                    title: "保存成功！",
+                /*swal({
+                    title: "保存成功",
                     text: "2秒后进入解析录入界面",
                     type: "success",
                     confirmButtonColor: "#DD6B55",
                     closeOnConfirm: false,
                     timer: '2000',
                     html: false
-                });
+                });*/
                 parentIndex = $parent.$index;
                 childIndex = $index;
                 /*$state.go('answerProduce',{
@@ -145,13 +153,11 @@
                  questionIndex:questionIndex
                  }
                  });*/
-                $timeout(function () {
                     $state.go('answerProduce', {
                         parentIndex: parentIndex,
                         childIndex: childIndex,
                         questionIndex: questionIndex
                     });
-                }, 2000)
 
             },
             /*操作区快速导航*/
@@ -171,21 +177,78 @@
             },
             /*操作区添加 小题*/
             addQuestion: function (parentIndex) {
-                $scope.paper.questionHeadline[parentIndex].questionList.push({
-                    stem: $sce.trustAsHtml('1111111111111111111111')
-                });
-            },
-            /*操作区添加 大题*/
-            addQuestionHeadline:function () {
-                $scope.paper.questionHeadline.push({
-                    questionType:'',
-                    questionList:[
-                        {
-                            stem:''
+                $http({
+                    method:'post',
+                    url:BASIC_DATA.API_URL+'/task/addOrUpdatePaperItem/'+$scope.taskId,
+                    data:{
+                        'parentIndex':parentIndex,
+                        'paperItem':{
+                            'childIndex':$scope.paper.questionHeadline[parentIndex].questionList.length,
+                            'stem':'',
+                            'examPoint':'',
+                            'answer':'',
+                            'solution':''
                         }
-                    ]
+                    }
+                }).then(function(data){
+                    $scope.paper=$scope.viewController.transformToSafeHtml(data.data);
                 });
             },
+            /*编辑区删除小题*/
+            deleteQuestion:function ($parent,$index) {
+                $http({
+                    method:'post',
+                    url:BASIC_DATA.API_URL+'/task/deletePaperItem/'+$scope.taskId,
+                    params:{
+                        'parentIndex':$parent.$index,
+                        'childIndex':$index
+                    }
+                }).then(function(data){
+                    $scope.paper=$scope.viewController.transformToSafeHtml(data.data);
+                });
+            },
+            /*操作区添加 大题 或者修改题型*/
+            editQuestionHeadline:function ($index,questionType) {
+                var parentIndex;
+                if(typeof  $index != 'undefined'){
+                    parentIndex =$index;
+                }else {
+                    parentIndex=$scope.paper.questionHeadline.length;
+                }
+                $http({
+                    method:'post',
+                    url:BASIC_DATA.API_URL+'/task/addOrUpdatePaperDetail/'+$scope.taskId,
+                    data:{
+                        'parentIndex':parentIndex,
+                        'questionType':questionType||''
+                    }
+                }).then(function(data){
+                    $scope.paper=$scope.viewController.transformToSafeHtml(data.data);
+                });
+            },
+            /*操作区删除大题*/
+            deleteQuestionHeadline:function ($index) {
+            if(!$scope.paper.questionHeadline[$index].questionList.length){
+                $http({
+                    method:'post',
+                    url:BASIC_DATA.API_URL+'/task/deletePaperDetail/'+$scope.taskId,
+                    params:{
+                        'parentIndex':$index
+                    }
+                }).then(function(data){
+                    $scope.paper=$scope.viewController.transformToSafeHtml(data.data);
+                });
+            }else {
+                swal({
+                    title: "操作出错",
+                    text: "该题型下有题目，不能直接删除大题",
+                    type: "error",
+                    confirmButtonColor: "#DD6B55",
+                    closeOnConfirm: false,
+                    html: false
+                });
+            }
+        },
             /*移动图片*/
             moveTo:function (derection) {
                 var ulNode,getUlMLval,imgLength;
@@ -215,39 +278,132 @@
                     ulNode.style.marginLeft=getUlMLval+160+'px';
                 }
                 $scope.flag=false;
+            },
+            /*请求获取paper*/
+            getPaper:function(){
+                $http.get(BASIC_DATA.API_URL+'/task/editPaper/'+$scope.taskId).then(function (data) {
+                    $scope.paper=$scope.viewController.transformToSafeHtml(data.data);
+                });
+            },
+            /*转化为信任的html绑定到页面去*/
+            transformToSafeHtml:function (paper) {
+                for(var i=0;i<paper.questionHeadline.length;i++){
+                    for (var j=0;j<paper.questionHeadline[i].questionList.length;j++){
+                        paper.questionHeadline[i].questionList[j].stem=$sce.trustAsHtml( paper.questionHeadline[i].questionList[j].stem);
+                        paper.questionHeadline[i].questionList[j].solution=$sce.trustAsHtml( paper.questionHeadline[i].questionList[j].solution);
+                    }
+                }
+                return paper
+            },
+            finishEditPaper:function () {
+                for (var i=0;i<$scope.paper.questionHeadline.length;i++){
+                    for (var j=0;j<$scope.paper.questionHeadline[i].questionList.length;j++){
+                        if (!$scope.paper.questionHeadline[i].questionList[j].stem||!$scope.paper.questionHeadline[i].questionList[j].examPoint||!$scope.paper.questionHeadline[i].questionList[j].solution||!$scope.paper.questionHeadline[i].questionList[j].answer){
+                            swal({
+                                title: "提交失败",
+                                text: "所有题目的题干和解析必须全部录入完毕",
+                                type: "warning",
+                                confirmButtonColor: "#DD6B55"
+                            });
+                            return false
+                        }
+                    }
+                }
+                $http({
+                    method:'POST',
+                    url:BASIC_DATA.API_URL+'/task/finishEditPaper/'+$scope.taskId
+                }).then(function (data) {
+                    if (data.status==200){
+                        $cookieStore.remove('taskId');
+                        swal({
+                            title: "提交成功",
+                            text: "1秒后返回任务列表",
+                            type: "success",
+                            confirmButtonColor: "#DD6B55",
+                            closeOnConfirm: false,
+                            timer: '1000',
+                            html: false
+                        });
+                        $timeout(function () {
+                            $state.go('taskUpload');
+                        },1000)
+                    }
+                },function () {
+                    swal({
+                        title: "出错了",
+                        text: "请确保所有题目题干和解析都录入完毕，再次提交",
+                        type: "error",
+                        confirmButtonColor: "#DD6B55"
+                    });
+                    $cookieStore.remove('taskId');
+                    $timeout(function () {
+                        $state.go('taskUpload');
+                    },1000)
+                });
+            },
+            checkErrorMsg:function () {
+                $http.get(BASIC_DATA.API_URL+'/task/getErrorMsg/'+$scope.taskId).then(function (data) {
+                    $scope.errMsg=decodeURI(data.data);
+                });
+                $scope.showAlertBox=true;
+            },
+            preview:function () {
+                $state.go('paperPreview');
+            },
+            /*从解析制作中返回*/
+            loadFormAnswerProduce:function () {
+                if (typeof $rootScope.previousState_params.questionIndex != 'undefined') {
+                    var questionIndex;
+                    questionIndex = $scope.viewController.questionIndexCom(parseInt($rootScope.previousState_params.parentIndex), parseInt($rootScope.previousState_params.childIndex));
+                    $timeout(function () {
+                        $scope.currentQuestion[questionIndex] = true;
+                        $('body').animate({
+                            scrollTop: $('.showContent').eq(questionIndex).offset().top - 340
+                        }, 0);
+                    }, 200);
+                }
             }
         }
     }
 
-    function init($scope, $http, $sce, $rootScope, $timeout) {
+    function init($scope, $http, $sce, $rootScope, $timeout,$cookieStore,$stateParams,$state) {
+       if($cookieStore.get('taskId')){
+           $scope.taskId=$cookieStore.get('taskId');
+           $scope.taskStatus=$cookieStore.get('taskStatus');
+       } else {
+           swal({
+            title: "操作未授权",
+            text: "请上传一个任务或者选择继续制作",
+            type: "error",
+            confirmButtonColor: "#DD6B55",
+            closeOnConfirm: false,
+            timer: '1000',
+            html: false
+            });
+           $timeout(function () {
+               $state.go('taskUpload')
+           },1000)
+       }
+        if ($stateParams.errMsg){
+            $scope.errMsg=$stateParams.errMsg;
+        }else if ($cookieStore.get('errMsg')){
+            $scope.errMsg=$cookieStore.get('errMsg');
+        }
+        /*进入页面 获取paper*/
+        $scope.viewController.getPaper();
+        /*获取基础信息*/
+        $http.get(BASIC_DATA.API_URL+'/paper/basicInfo/'+$scope.taskId).then(function (data) {
+            $scope.basicInfo=data.data;
+        });
         $rootScope.currentPage('contentProduce');
         $('.images').viewer({
             navbar: false,
             rotatable: false,
             zoomRatio:0.2
         });
-        $scope.paper={
-            questionHeadline:[{
-                questionType: '',
-                questionList: [
-                    {
-                        stem: ''
-                    }
-                ]
-            }
-            ]
-        };
-        if (typeof $rootScope.previousState_params.questionIndex != 'undefined') {
-            var questionIndex;
-            questionIndex = $scope.viewController.questionIndexCom(parseInt($rootScope.previousState_params.parentIndex), parseInt($rootScope.previousState_params.childIndex));
-            $timeout(function () {
-                $scope.currentQuestion[questionIndex] = true;
-                $('body').animate({
-                    scrollTop: $('.showContent').eq(questionIndex).offset().top - 340
-                }, 0);
-            }, 50);
-
-        }
+        $timeout(function () {
+            $scope.viewController.loadFormAnswerProduce();
+        },100)
     }
 })();
 
