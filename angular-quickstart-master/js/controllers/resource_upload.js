@@ -121,10 +121,22 @@
             /*文件提交后*/
             onFileSubmit:function () {
                 $timeout(function(){
-                    $http.get(BASIC_DATA.API_URL+'/getFileUpload').then(function (data) {
-
-                    })
-                },3000)
+                    $http.get(BASIC_DATA.API_URL+'/task/getImg').then(function (data) {
+                        $scope.imgList=data.data;
+                        $timeout(function () {
+                            var imgList=document.getElementsByClassName('resources-img');
+                            for(var i = 0 ; i<$scope.imgList.length;i++){
+                                imgList[i].src=BASIC_DATA.API_URL+'/'+ $scope.imgList[i];
+                            }
+                            /*配置查看图片大图插件*/
+                            $('.images').viewer({
+                                navbar:false,
+                                rotatable:false
+                            });
+                            $scope.uploadSuccess=true;
+                        },500);
+                    });
+                },1000)
             },
             /*移动图片*/
             moveTo:function (derection) {
@@ -163,11 +175,6 @@
         $('input[name="files"]').fileuploader({
             extensions:['jpg','jpeg','docx','pdf','png'],
             removeConfirmation: false
-        });
-        /*配置查看图片大图插件*/
-        $('.images').viewer({
-            navbar:false,
-            rotatable:false
         });
         /*获取省份*/
         $http.get(BASIC_DATA.API_URL+'/provinces').then(function (data) {

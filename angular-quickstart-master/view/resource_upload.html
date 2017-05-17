@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="../style/task_upload.css">
 <link rel="stylesheet" href="../plug/fileUploader/jquery.fileuploader.css">
     <div class="container">
-        <div class="apple-card-container item-shadow upload-container">
+        <div class="apple-card-container item-shadow upload-container" ng-hide="uploadSuccess">
             <div class="apple-card-t-bar">
                 <i class="apple-circle apple-circle-red"></i>
                 <i class="apple-circle apple-circle-yellow"></i>
@@ -12,9 +12,9 @@
                     <span class="glyphicon glyphicon-folder-open mr-15"></span>点击下面输入框上传源文件
                 </h4>
                 <p class="file-type-tip p-10 br-4 fc-666">
-                    <span class="glyphicon glyphicon-exclamation-sign mr-5"></span>温馨提示：支持DOC，JPG，JPEG，PNG，PDF文件类型的上传，可多选。选择要上传的所有文件后点击提交按钮完成上传
+                    <span class="glyphicon glyphicon-exclamation-sign mr-5"></span>温馨提示：支持JPG，JPEG，PNG文件类型的上传，可多选。选择要上传的所有文件后点击提交按钮完成上传
                 </p>
-                <form name="fileForm"  method="post" action="http://localhost:8080/question/fileupload" enctype="multipart/form-data" target="noJump" ng-submit="viewController.onFileSubmit()">
+                <form name="fileForm"  method="post" action="http://localhost:8080/question/task/fileUpload" enctype="multipart/form-data" target="noJump" ng-submit="viewController.onFileSubmit()">
                     <input type="file" name="files">
                     <input type="submit" class="fileuploader-input-button" style="border: none;">
                     <iframe  id="noJump" name="noJump" style="display: none;">
@@ -22,7 +22,7 @@
                 </form>
             </div>
         </div>
-        <div class="apple-card-container paper-file-container mt-20 mb-20">
+        <div class="apple-card-container paper-file-container mt-20 mb-20" ng-show="uploadSuccess">
             <div class="apple-card-t-bar pl-10 fs-14 resources-preview-header">
                 <span class="glyphicon glyphicon-picture"></span>
                 试卷信息源
@@ -31,13 +31,13 @@
                 <i class="poa glyphicon glyphicon-chevron-left btn-pre fs-16" ng-click="viewController.moveTo('r')"></i>
                 <div class="visible-area">
                     <ul class="images">
-                        <li class="resources-item dib item-shadow" ng-class="{'active':mouseOver[0]}" ng-mouseover="mouseOver[0]=true;" ng-mouseleave="mouseOver[0]=false;">
-                            <div class="img-cover poa" ng-hide="mouseOver[0]">
+                        <li class="resources-item dib item-shadow" ng-repeat="i in imgList" ng-class="{'active':mouseOver[$index]}" ng-mouseover="mouseOver[$index]=true;" ng-mouseleave="mouseOver[$index]=false;">
+                            <div class="img-cover poa" ng-hide="mouseOver[$index]">
                                 <span class="glyphicon glyphicon-fullscreen fs-16 poa fullscreen-icon"></span>
                             </div>
-                            <img src="../img/sample_paper/0001.jpg" class="resources-img">
+                            <img  class="resources-img">
                         </li>
-                        <li class="resources-item dib item-shadow" ng-class="{'active':mouseOver[1]}" ng-mouseover="mouseOver[1]=true;" ng-mouseleave="mouseOver[1]=false;">
+                       <!-- <li class="resources-item dib item-shadow" ng-class="{'active':mouseOver[1]}" ng-mouseover="mouseOver[1]=true;" ng-mouseleave="mouseOver[1]=false;">
                             <div class="img-cover poa" ng-hide="mouseOver[1]">
                                 <span class="glyphicon glyphicon-fullscreen fs-16 poa fullscreen-icon"></span>
                             </div>
@@ -60,14 +60,14 @@
                                 <span class="glyphicon glyphicon-fullscreen fs-16 poa fullscreen-icon"></span>
                             </div>
                             <img src="../img/sample_paper/0001.jpg" class="resources-img">
-                        </li>
+                        </li>-->
 
                     </ul>
                 </div>
                 <i class="poa glyphicon glyphicon-chevron-right btn-next fs-16" ng-click="viewController.moveTo('l')"></i>
             </div>
         </div>
-        <div class="apple-card-container mt-20">
+        <div class="apple-card-container mt-20" ng-show="uploadSuccess">
             <div class="apple-card-t-bar">
                 <i class="apple-circle apple-circle-red"></i>
                 <i class="apple-circle apple-circle-yellow"></i>
@@ -114,7 +114,6 @@
                     </button>
                 </div>
             </div>
-
         </div>
 <!--injiect:plugJS-->
 <script src="../plug/fileUploader/jquery.fileuploader.js"></script>

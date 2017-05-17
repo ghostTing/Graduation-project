@@ -362,6 +362,23 @@
                         }, 0);
                     }, 200);
                 }
+            },
+            getImg:function () {
+                $http.get(BASIC_DATA.API_URL+'/task/getImg/'+$scope.taskId).then(function (data) {
+                    $scope.imgList=data.data;
+                    console.log(data.data);
+                    $timeout(function () {
+                        var imgList=document.getElementsByClassName('resources-img');
+                        for(var i = 0 ; i<$scope.imgList.length;i++){
+                            imgList[i].src=BASIC_DATA.API_URL+'/'+ $scope.imgList[i];
+                        }
+                        $('.images').viewer({
+                            navbar: false,
+                            rotatable: false,
+                            zoomRatio:0.2
+                        });
+                    },500);
+                });
             }
         }
     }
@@ -370,6 +387,8 @@
        if($cookieStore.get('taskId')){
            $scope.taskId=$cookieStore.get('taskId');
            $scope.taskStatus=$cookieStore.get('taskStatus');
+           /*进入页面 获取paper*/
+           $scope.viewController.getPaper();
        } else {
            swal({
             title: "操作未授权",
@@ -389,21 +408,15 @@
         }else if ($cookieStore.get('errMsg')){
             $scope.errMsg=$cookieStore.get('errMsg');
         }
-        /*进入页面 获取paper*/
-        $scope.viewController.getPaper();
         /*获取基础信息*/
         $http.get(BASIC_DATA.API_URL+'/paper/basicInfo/'+$scope.taskId).then(function (data) {
             $scope.basicInfo=data.data;
         });
         $rootScope.currentPage('contentProduce');
-        $('.images').viewer({
-            navbar: false,
-            rotatable: false,
-            zoomRatio:0.2
-        });
         $timeout(function () {
             $scope.viewController.loadFormAnswerProduce();
-        },100)
+        },100);
+        $scope.viewController.getImg();
     }
 })();
 

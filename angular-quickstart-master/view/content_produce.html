@@ -11,13 +11,13 @@
             <i class="poa glyphicon glyphicon-chevron-left btn-pre fs-16" ng-click="viewController.moveTo('r')"></i>
             <div class="visible-area">
                 <ul class="images">
-                    <li class="resources-item dib item-shadow" ng-class="{'active':mouseOver[0]}" ng-mouseover="mouseOver[0]=true;" ng-mouseleave="mouseOver[0]=false;">
-                        <div class="img-cover poa" ng-hide="mouseOver[0]">
+                    <li class="resources-item dib item-shadow" ng-repeat="i in imgList" ng-class="{'active':mouseOver[0]}" ng-mouseover="mouseOver[$index]=true;" ng-mouseleave="mouseOver[$index]=false;">
+                        <div class="img-cover poa" ng-hide="mouseOver[$index]">
                             <span class="glyphicon glyphicon-fullscreen fs-16 poa fullscreen-icon"></span>
                         </div>
-                        <img src="../img/sample_paper/0001.jpg" class="resources-img">
+                        <img class="resources-img">
                     </li>
-                    <li class="resources-item dib item-shadow" ng-class="{'active':mouseOver[1]}" ng-mouseover="mouseOver[1]=true;" ng-mouseleave="mouseOver[1]=false;">
+                   <!-- <li class="resources-item dib item-shadow" ng-class="{'active':mouseOver[1]}" ng-mouseover="mouseOver[1]=true;" ng-mouseleave="mouseOver[1]=false;">
                         <div class="img-cover poa" ng-hide="mouseOver[1]">
                             <span class="glyphicon glyphicon-fullscreen fs-16 poa fullscreen-icon"></span>
                         </div>
@@ -40,7 +40,7 @@
                             <span class="glyphicon glyphicon-fullscreen fs-16 poa fullscreen-icon"></span>
                         </div>
                         <img src="../img/sample_paper/0001.jpg" class="resources-img">
-                    </li>
+                    </li>-->
 
                 </ul>
             </div>

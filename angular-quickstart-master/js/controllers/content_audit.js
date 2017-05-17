@@ -4,14 +4,14 @@
 (function(){
     angular.module('myApp').controller('contentAuditController',['$scope','$http','$sce','$rootScope','$location','$timeout','$cookieStore','$state',function($scope,$http,$sce,$rootScope,$location,$timeout,$cookieStore,$state){
         declareModel($scope);
-        declare($scope, $sce,$http,$state,$cookieStore);
+        declare($scope, $sce,$http,$state,$cookieStore,$timeout);
         init($scope, $http, $sce,$rootScope,$location,$timeout,$cookieStore );
     }]);
     function declareModel($scope) {
         $scope.flag=true;
        $scope.BASIC_DATA=window.BASIC_DATA;
     }
-    function declare($scope,$sce,$http,$state,$cookieStore) {
+    function declare($scope,$sce,$http,$state,$cookieStore,$timeout) {
         $scope.viewController={
             /*计算题序*/
             questionIndexCom: function ($parent, $index) {
@@ -163,6 +163,23 @@
                 $http.get(BASIC_DATA.API_URL+'/task/editPaper/'+$scope.taskId).then(function (data) {
                     $scope.paper=$scope.viewController.transformToSafeHtml(data.data);
                 });
+            },
+            getImg:function () {
+                $http.get(BASIC_DATA.API_URL+'/task/getImg/'+$scope.taskId).then(function (data) {
+                    $scope.imgList=data.data;
+                    console.log(data.data);
+                    $timeout(function () {
+                        var imgList=document.getElementsByClassName('resources-img');
+                        for(var i = 0 ; i<$scope.imgList.length;i++){
+                            imgList[i].src=BASIC_DATA.API_URL+'/'+ $scope.imgList[i];
+                        }
+                        $('.images').viewer({
+                            navbar: false,
+                            rotatable: false,
+                            zoomRatio:0.2
+                        });
+                    },500);
+                });
             }
         }
     }
@@ -180,12 +197,8 @@
         }
         $rootScope.currentPage('contentAudit');
         $scope.taskId=$cookieStore.get('taskId');
+        $scope.viewController.getImg();
         $scope.viewController.getBasicInfo();
         $scope.viewController.getPaper();
-        $('.images').viewer({
-            navbar: false,
-            rotatable: false,
-            zoomRatio:0.2
-        });
     }
 })();
