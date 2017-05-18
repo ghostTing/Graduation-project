@@ -51,6 +51,8 @@
                                 }
                             }).then(function (data) {
                                 if (data.status==200){
+                                    $cookieStore.remove('taskId');
+                                    $cookieStore.remove('taskStatus');
                                     setTimeout(function(){
                                         swal("提交成功");
                                         $state.go('auditList');
@@ -103,9 +105,9 @@
                             method:'POST',
                             url:BASIC_DATA.API_URL+'/task/check/store/'+$scope.taskId,
                         }).then(function () {
+                            $cookieStore.remove('taskId');
+                            $cookieStore.remove('taskStatus');
                             setTimeout(function(){
-                                $cookieStore.remove('taskId');
-                                $cookieStore.remove('taskStatus');
                                 $state.go('auditList');
                                 swal("提交成功");
                             }, 1000);
@@ -178,6 +180,7 @@
                             rotatable: false,
                             zoomRatio:0.2
                         });
+                        $scope.showImgPre=true;
                     },500);
                 });
             }

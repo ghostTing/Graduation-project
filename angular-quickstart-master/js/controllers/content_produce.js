@@ -377,6 +377,7 @@
                             rotatable: false,
                             zoomRatio:0.2
                         });
+                        $scope.showImgPre=true;
                     },500);
                 });
             }
